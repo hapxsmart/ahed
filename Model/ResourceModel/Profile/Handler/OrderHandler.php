@@ -1,20 +1,15 @@
 <?php
 namespace Aheadworks\Sarp2\Model\ResourceModel\Profile\Handler;
 
+use Magento\Framework\Exception\AlreadyExistsException;
+use Magento\Framework\Model\AbstractModel;
+use Magento\Sales\Api\Data\OrderInterface;
 use Aheadworks\Sarp2\Api\Data\ProfileInterface;
 use Aheadworks\Sarp2\Api\Data\ProfileOrderInterface;
 use Aheadworks\Sarp2\Api\Data\ProfileOrderInterfaceFactory;
-use Aheadworks\Sarp2\Api\Data\ProfileOrderSearchResultsInterface;
-use Aheadworks\Sarp2\Api\ProfileOrderRepositoryInterface;
-use Aheadworks\Sarp2\Model\ResourceModel\Profile\Handler\HandlerInterface;
 use Aheadworks\Sarp2\Model\ResourceModel\Profile\Order;
-use Magento\Sales\Api\Data\OrderInterface;
-use Magento\Framework\Api\SearchCriteriaBuilder;
+use Aheadworks\Sarp2\Model\Profile\Order\Checker as OrderChecker;
 
-/**
- * Class OrderHandler
- * @package Aheadworks\Sarp2\Model\ResourceModel\Profile
- */
 class OrderHandler implements HandlerInterface
 {
     /**
@@ -28,71 +23,43 @@ class OrderHandler implements HandlerInterface
     private $profileOrderResource;
 
     /**
-     * @var ProfileOrderRepositoryInterface
+     * @var OrderChecker
      */
-    private $profileOrderRepository;
-
-    /**
-     * @var SearchCriteriaBuilder
-     */
-    private $searchCriteriaBuilder;
+    private $orderChecker;
 
     /**
      * @param ProfileOrderInterfaceFactory $profileOrderFactory
      * @param Order $profileOrderResource
-     * @param ProfileOrderRepositoryInterface $profileOrderRepository
-     * @param SearchCriteriaBuilder $searchCriteriaBuilder
+     * @param OrderChecker $orderChecker
      */
     public function __construct(
         ProfileOrderInterfaceFactory $profileOrderFactory,
         Order $profileOrderResource,
-        ProfileOrderRepositoryInterface $profileOrderRepository,
-        SearchCriteriaBuilder $searchCriteriaBuilder
+        OrderChecker $orderChecker
     ) {
         $this->profileOrderFactory = $profileOrderFactory;
         $this->profileOrderResource = $profileOrderResource;
-        $this->profileOrderRepository = $profileOrderRepository;
-        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
+        $this->orderChecker = $orderChecker;
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
+     *
+     * @throws AlreadyExistsException
      */
     public function process(ProfileInterface $profile)
     {
         /** @var OrderInterface $order */
         $order = $profile->getOrder();
-        if ($order && !$this->isProfileOrderExists($profile->getProfileId(), $order->getEntityId())) {
-            /** @var ProfileOrderInterface $profileOrder */
+        if ($order && !$this->orderChecker->isProfileOrderExists($profile->getProfileId(), $order->getEntityId())) {
+            /** @var ProfileOrderInterface|AbstractModel $profileOrder */
             $profileOrder = $this->profileOrderFactory->create();
-            $profileOrder->setProfileId($profile->getProfileId())
-                ->setOrderId($order->getEntityId());
+            $profileOrder
+                ->setProfileId($profile->getProfileId())
+                ->setOrderId($order->getEntityId())
+                ->setIsInitial(!$this->orderChecker->isAtLeastOneOrderExists($profile->getProfileId()));
+
             $this->profileOrderResource->save($profileOrder);
         }
-    }
-
-    /**
-     * Check if profile order exists
-     *
-     * @param int $profileId
-     * @param int $orderId
-     * @return bool
-     */
-    private function isProfileOrderExists($profileId, $orderId)
-    {
-        $this->searchCriteriaBuilder
-            ->addFilter(ProfileOrderInterface::PROFILE_ID, $profileId)
-            ->addFilter(ProfileOrderInterface::ORDER_ID, $orderId);
-
-        try {
-            /** @var ProfileOrderSearchResultsInterface $searchResults */
-            $searchResults = $this->profileOrderRepository->getList(
-                $this->searchCriteriaBuilder->create()
-            );
-        } catch (\Exception $e) {
-            return false;
-        }
-
-        return ($searchResults->getTotalCount() > 0);
     }
 }

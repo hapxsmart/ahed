@@ -115,6 +115,7 @@ class DefaultConfig implements ConfigProviderInterface
         $output['isHashUsed'] = (bool)$this->getHash();
         $output['storeCode'] = $store->getCode();
         $output['profileId'] = $this->getProfile()->getProfileId();
+        $output['profileHash'] = $this->getProfile()->getHash();
         $output['savePaymentUrl'] = $this->getSavePaymentUrl();
         $output['paymentEditMode'] = true;
         $output['quoteData'] = [];

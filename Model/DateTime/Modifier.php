@@ -32,8 +32,8 @@ class Modifier
      */
     public function copyTime($source, $destination)
     {
-        $sourceDateTime = new \DateTime($source);
-        $destinationDateTime = new \DateTime($destination);
+        $sourceDateTime = new \DateTime($source ?? 'now');
+        $destinationDateTime = new \DateTime($destination ?? 'now');
 
         $timeArray = explode(':', $sourceDateTime->format('H:i:s'));
         $destinationDateTime->setTime($timeArray[0], $timeArray[1], $timeArray[2]);

@@ -29,14 +29,13 @@
     "suggests": {
         "aheadworks/module-sarp2-graph-ql": "1.0.2",
         "aheadworks/module-sarp2-adyen": "1.2.1",
-        "aheadworks/module-sarp2-stripe": "1.0.7",
-        "aheadworks/module-sarp2-authorizenet": "1.0.2",
-        "aheadworks/module-sarp2-braintree": "1.0.3",
-        "aheadworks/module-sarp2-braintree-by-paypal": "1.0.3",
+        "aheadworks/module-sarp2-stripe": "1.0.8",
+        "aheadworks/module-sarp2-braintree": "1.0.4",
+        "aheadworks/module-sarp2-braintree-by-paypal": "1.0.4",
         "aheadworks/module-sarp2-free-payment": "^1.0"
     },
     "type": "magento2-module",
-    "version": "2.18.0",
+    "version": "2.18.1",
     "license": [
         "proprietary"
     ],

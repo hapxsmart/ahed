@@ -1,8 +1,5 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
-    <event name="store_add">
-        <observer name="aw_sarp2_sequence" instance="Aheadworks\Sarp2\Observer\SequenceCreatorObserver" />
-    </event>
     <event name="checkout_submit_all_after">
         <observer name="aw_sarp2_save_order_after_submit" instance="Aheadworks\Sarp2\Observer\SaveOrderAfterSubmitObserver" />
     </event>

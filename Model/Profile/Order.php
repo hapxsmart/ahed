@@ -175,6 +175,22 @@ class Order extends AbstractModel implements ProfileOrderInterface
     /**
      * {@inheritdoc}
      */
+    public function getIsInitial()
+    {
+        return $this->getData(self::IS_INITIAL);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setIsInitial($isInitial)
+    {
+        return $this->setData(self::IS_INITIAL, $isInitial);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function setExtensionAttributes(ProfileOrderExtensionInterface $extensionAttributes)
     {
         return $this->setData(self::EXTENSION_ATTRIBUTES_KEY, $extensionAttributes);

@@ -313,7 +313,8 @@
         "column": {
             "id": true,
             "order_id": true,
-            "profile_id": true
+            "profile_id": true,
+            "is_initial": true
         },
         "index": {
             "AW_SARP2_PROFILE_ORDER_PROFILE_ID": true

@@ -508,6 +508,7 @@
                 comment="Order Id"/>
         <column xsi:type="int" name="profile_id" padding="10" unsigned="true" nullable="false" identity="false"
                 comment="Profile Id"/>
+        <column xsi:type="boolean" name="is_initial" default="false" nullable="false" comment="Is Order Initial"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="id"/>
             <column name="order_id"/>

@@ -54,6 +54,14 @@
     <preference for="Aheadworks\Sarp2\Model\ResourceModel\Collection\ModifierInterface"
                 type="Aheadworks\Sarp2\Model\ResourceModel\Collection\Modifier\Composite" />
 
+    <type name="Magento\SalesSequence\Model\EntityPool">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="aw_sarp2_profile" xsi:type="const">Aheadworks\Sarp2\Model\Profile::ENTITY</item>
+            </argument>
+        </arguments>
+    </type>
+
     <type name="Aheadworks\Sarp2\Engine\Payment\Processor\Handler\AfterPlaceOrder\Composite">
         <arguments>
             <argument name="handlerList" xsi:type="array">

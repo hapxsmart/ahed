@@ -22,6 +22,7 @@ interface ProfileOrderInterface extends ExtensibleDataInterface
     const BASE_CURRENCY_CODE = 'base_currency_code';
     const ORDER_CURRENCY_CODE = 'order_currency_code';
     const ORDER_STATUS = 'order_status';
+    const IS_INITIAL = 'is_initial';
     /**#@-*/
 
     /**
@@ -158,6 +159,21 @@ interface ProfileOrderInterface extends ExtensibleDataInterface
      * @return $this
      */
     public function setOrderStatus($orderStatus);
+
+    /**
+     * Get is order initial
+     *
+     * @return boolean
+     */
+    public function getIsInitial();
+
+    /**
+     * Set is order initial
+     *
+     * @param boolean $isInitial
+     * @return $this
+     */
+    public function setIsInitial($isInitial);
 
     /**
      * Retrieve existing extension attributes object or create a new one

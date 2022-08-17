@@ -133,6 +133,7 @@ class Active implements StatusApplierInterface
 
         foreach ($nextPlanetPayments as $nextPayment) {
             $nextPayment->getSchedule()->setIsReactivated(true);
+            $nextPayment->setScheduledAt($lastFailed->getRetryAt());
             $this->paymentPersistence->save($nextPayment);
         }
 

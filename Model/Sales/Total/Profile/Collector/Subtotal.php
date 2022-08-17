@@ -68,8 +68,10 @@ class Subtotal implements CollectorInterface
                 ->populate($item, $totalsDetails, $currencyOptionConvert, $profileCurrency);
 
             $baseSubtotal += $baseRowTotal;
-            $itemQty += $item->getQty();
-
+            if (!$item->getParentItem()) {
+                $itemQty += $item->getQty();
+            }
+            
             // only for configurable
             if ($item->hasChildItems() && $item->getProductType() != BundleType::TYPE_CODE) {
                 foreach ($item->getChildItems() as &$child) {
