@@ -1,0 +1,43 @@
+<?php
+/* @var $block \Aheadworks\Sarp2\Block\Product\SubscriptionOptions\Renderer\Dropdown */
+// @codingStandardsIgnoreFile
+$optionsBlock = $block->getRenderedBlock();
+$isShowNoPlanRadiobutton = $block->isShowNoPlanRadiobutton();
+?>
+<?php if ($isShowNoPlanRadiobutton): ?>
+    <div class="nested options-list aw-sarp2-subscription__dropdown-switcher"
+         data-mage-init='{"awSarp2SubscriptionDropdownShowHide": {}}'>
+        <div class="field choice">
+            <input type="radio" class="radio product option" id="aw-sarp2-dropdown-show-hide-0"
+                   name="aw-sarp2-dropdown-show-hide" checked="checked" value="0">
+            <label class="label" for="aw-sarp2-dropdown-show-hide-0">
+                <span><?php echo $block->escapeHtml(__('One-off purchase (No subscription)')) ?></span>
+            </label>
+        </div>
+        <div class="field choice">
+            <input type="radio" class="radio product option" id="aw-sarp2-dropdown-show-hide-1"
+                   name="aw-sarp2-dropdown-show-hide" value="1">
+            <label class="label" for="aw-sarp2-dropdown-show-hide-1">
+                <?php echo $optionsBlock->getChildHtml('tooltip.after') ?>
+                <?php echo $optionsBlock->getChildHtml('tooltip.before') ?>
+            </label>
+        </div>
+    </div>
+<?php endif ?>
+
+<div class="aw-sarp2-subscription__wrapper-options">
+    <?php if (!$isShowNoPlanRadiobutton) {
+        echo $optionsBlock->getChildHtml('tooltip.before');
+    } ?>
+    <select class="aw-sarp2-subscription__options-list"
+            name="aw_sarp2_subscription_type"
+            data-validate="{'required':true}">
+        <?php foreach ($optionsBlock->getOptionArray() as $optionId => $optionLabel): ?>
+            <?php if (0 == $optionId && $isShowNoPlanRadiobutton) continue; ?>
+            <?php $htmlId = 'aw-sarp2-subscription-option-' . $optionId ?>
+            <option value="<?= /* @noEscape */ $optionId ?>" id="<?= /* @noEscape */ $htmlId ?>">
+                <?= $optionsBlock->escapeHtml($optionLabel) ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+</div>

@@ -1,0 +1,22 @@
+<?php
+// @codingStandardsIgnoreFile
+/* @var $block \Aheadworks\Sarp2\Block\Customer\Subscriptions\Edit\View\PaymentDetails\AbstractCreditCardRenderer */
+/* @var $token \Aheadworks\Sarp2\Api\Data\PaymentTokenInterface */
+/* @var $tokenDetails array */
+?>
+<div class="credit-card wrapper">
+    <div class="card-number">
+        <span><?= $block->escapeHtml(__('Card Number:')) ?></span>
+        <span><?= $block->escapeHtml(__('****')) ?><?= $block->escapeHtml($block->getCreditCardNumber($tokenDetails)) ?></span>
+    </div>
+    <div class="expiration-date">
+        <span><?= $block->escapeHtml(__('Expiration Date:')) ?></span>
+        <span><?= $block->escapeHtml($block->getExpirationDate($tokenDetails)) ?></span>
+    </div>
+    <div class="card-type">
+        <img src="<?= /* @noEscape */ $block->getIconUrl($block->getCreditCardType($tokenDetails)) ?>"
+             width="<?= /* @noEscape */ $block->getIconWidth($block->getCreditCardType($tokenDetails)) ?>"
+             height="<?= /* @noEscape */ $block->getIconHeight($block->getCreditCardType($tokenDetails)) ?>"
+        >
+    </div>
+</div>

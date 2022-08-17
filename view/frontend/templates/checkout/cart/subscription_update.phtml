@@ -1,0 +1,30 @@
+<?php
+/** @var \Aheadworks\Sarp2\Block\Checkout\Cart\Subscription\Update $block */
+
+// @codingStandardsIgnoreFile
+?>
+<?php if ($block->isAllowed()): ?>
+<div id="aw-sarp2-subscription-update" class="cart-totals">
+    <a href="#" data-post='{"action":"<?= $block->escapeUrl($block->getUpdateUrl()) ?>", "data":{}}' type="button" class="action primary subscription-update">
+        <span><?= /** @noEscape  */ __('Add to Nearest Subscription') ?></span>
+    </a>
+    <table class="data table totals">
+        <tbody>
+            <tr class="totals sub">
+                <th class="mark"><?= /** @noEscape  */ __('Subscription Subtotal') ?></th>
+                <td class="amount">
+                    <span class="price"> <?= /** @noEscape */ $block->getSubscriptionTotal() ?>
+                        <span class="aw-sarp2-tooltip">
+                            <span class="tooltip-toggle"></span>
+                            <span class="tooltip-content">
+                                <?= /** @noEscape  */ __('This total amount includes: upcoming subscription payment and the total amount of products in the cart. Excluding Tax and Shipping Price.') ?>
+                            </span>
+                        </span>
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<?php endif; ?>
+

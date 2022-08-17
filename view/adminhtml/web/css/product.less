@@ -1,0 +1,35 @@
+//
+//  Product edit page
+//  _____________________________________________
+
+.catalog-product-new,
+.catalog-product-edit {
+    .aw-sarp2_subscription-options {
+        .admin__field-service label {
+            white-space: nowrap;
+        }
+        & > .admin__field-control {
+            width: 70%;
+        }
+    }
+}
+
+.aw-sarp2_subscription-options {
+    .admin__control-table-wrapper {
+        overflow: inherit;
+
+        .admin__field-control {
+            &._with-tooltip {
+                display: ~'-webkit-flex';
+                display: ~'-ms-flexbox';
+                display: flex;
+                -webkit-flex-wrap: nowrap;
+                flex-wrap: nowrap;
+
+                .admin__field-tooltip {
+                    margin-left: 5px;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="cart.summary">
+            <block class="Aheadworks\Sarp2\Block\Checkout\Cart\Subscription\Update"
+                   name="aw.sarp.subscription.update" after="checkout.cart.shipping"
+                   template="Aheadworks_Sarp2::checkout/cart/subscription_update.phtml">
+            </block>
+        </referenceContainer>
+        <referenceBlock name="checkout.cart.totals">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="block-totals" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="grand-total" xsi:type="array">
+                                    <item name="component"  xsi:type="string">Aheadworks_Sarp2/js/checkout/view/summary/grand-total</item>
+                                    <item name="config" xsi:type="array">
+                                        <item name="template" xsi:type="string">Aheadworks_Sarp2/cart/totals/grand-total</item>
+                                        <item name="basicCurrencyMessage" xsi:type="string" translate="true">You will be charged for</item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

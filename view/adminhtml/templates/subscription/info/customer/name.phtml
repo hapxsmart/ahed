@@ -1,0 +1,19 @@
+<?php
+// @codingStandardsIgnoreFile
+/** @var $block \Aheadworks\Sarp2\Block\Adminhtml\Subscription\Info\Customer\Name */
+
+$customerId = $block->getData($block::CUSTOMER_ID_DATA_KEY);
+$customerFillName = $block->getData($block::CUSTOMER_FULL_NAME_DATA_KEY);
+?>
+
+<?php if ($block->isLinkAvailable($customerId)): ?>
+    <a href="<?= $block->escapeUrl(
+        $block->getCustomerLink($customerId)
+    ) ?>">
+        <?= $block->escapeHtml($customerFillName) ?>
+    </a>
+<?php else: ?>
+    <span>
+        <?= $block->escapeHtml($customerFillName) ?>
+    </span>
+<?php endif; ?>

@@ -1,0 +1,12 @@
+<div class="admin__field-service">
+    <input type="checkbox"
+           class="admin__control-checkbox"
+           attr="
+                id: $data.uid + '_use-auto',
+                name: 'is_auto_' + $data.index,
+                'data-form-part': $data.ns
+           "
+           ko-checked="isUseAuto"
+           disable="isServiceDisabled">
+    <label translate="'Use plan settings'" attr="for: $data.uid + '_use-auto'" class="admin__field-label"></label>
+</div>

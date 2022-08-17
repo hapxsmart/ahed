@@ -1,0 +1,24 @@
+<?php
+/** @var $block \Aheadworks\Sarp2\Block\Adminhtml\Subscription\Info */
+
+// @codingStandardsIgnoreFile
+?>
+<?php
+    $profile = $block->getProfile();
+?>
+<div class="aw-sarp2_subscription_page">
+    <div class="subscription-page_title_wrapper">
+        <div class="subscription-page_title_title">
+            <h1><?= $block->escapeHtml(__('Subscription #%1', $profile->getIncrementId())) ?></h1>
+        </div>
+        <div class="subscription-page_title_status">
+            <span><?= $block->escapeHtml($block->getStatusLabel()) ?></span>
+        </div>
+    </div>
+    <div class="subscription-page_content_wrapper">
+        <?= $block->getNextOrderAndPlanHtml() ?>
+        <?= $block->getAddressesHtml() ?>
+        <?= $block->getProductsHtml() ?>
+        <?= $block->getOrdersHtml() ?>
+    </div>
+</div>

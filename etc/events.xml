@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="store_add">
+        <observer name="aw_sarp2_sequence" instance="Aheadworks\Sarp2\Observer\SequenceCreatorObserver" />
+    </event>
+    <event name="checkout_submit_all_after">
+        <observer name="aw_sarp2_save_order_after_submit" instance="Aheadworks\Sarp2\Observer\SaveOrderAfterSubmitObserver" />
+    </event>
+    <event name="sales_quote_payment_import_data_before">
+        <observer name="aw_sarp2_payment_import_data_before" instance="Aheadworks\Sarp2\Observer\PaymentDataImportObserver"/>
+    </event>
+    <event name="payment_method_assign_data">
+        <observer name="aw_sarp2_gateway_data_assign" instance="Aheadworks\Sarp2\Observer\PaymentMethodDataAssignObserver" />
+    </event>
+    <event name="payment_method_is_active">
+        <observer name="aw_sarp2_is_payment_method_active" instance="Aheadworks\Sarp2\Observer\PaymentMethodAvailabilityObserver" />
+    </event>
+
+    <!--    //todo: begin legacy mechanism, need replace to IntegratedMethodPool    -->
+    <event name="payment_method_assign_data_aw_bambora_apac">
+        <observer name="aw_sarp2_aw_bambora_apac_gateway_data_assign" instance="Aheadworks\Sarp2\Observer\LegacyPaymentMethodDataAssignObserver" />
+    </event>
+    <event name="payment_method_assign_data_aw_nmi">
+        <observer name="aw_sarp2_aw_nmi_gateway_data_assign" instance="Aheadworks\Sarp2\Observer\LegacyPaymentMethodDataAssignObserver" />
+    </event>
+    <event name="payment_method_assign_data_authorizenet_acceptjs">
+        <observer name="aw_sarp2_authorizenet_payments_data_assign" instance="Aheadworks\Sarp2\Observer\LegacyPaymentMethodDataAssignObserver" />
+    </event>
+    <event name="payment_method_assign_data_aw_sarp_aw_bambora_apac_recurring">
+        <observer name="aw_sarp_bambora_apac_recurring_gateway_data_assign" instance="Aheadworks\Sarp2\Observer\BamboraApacRecurring\DataAssignObserver" />
+    </event>
+    <event name="payment_method_assign_data_aw_sarp_aw_nmi_recurring">
+        <observer name="aw_sarp_nmi_recurring_gateway_data_assign" instance="Aheadworks\Sarp2\Observer\NmiRecurring\DataAssignObserver" />
+    </event>
+    <!--    //todo: end legacy mechanism  -->
+
+    <event name="customer_save_after_data_object">
+        <observer name="aw_sarp2_assign_profile_to_customer" instance="Aheadworks\Sarp2\Observer\AssignProfileToCustomerObserver" />
+    </event>
+    <event name="catalog_product_attribute_update_before">
+        <observer name="aw_sarp2_attribute_update" instance="Aheadworks\Sarp2\Observer\MassUpdateSubscriptionOptionsObserver" />
+    </event>
+    <event name="sales_model_service_quote_submit_before">
+        <observer name="aw_sarp2" instance="Aheadworks\Sarp2\Observer\BeforeQuoteSubmitObserver" />
+    </event>
+
+    <event name="aw_sarp2_convert_quote_item_to_profile_item_after">
+        <observer name="aw_sarp2_copy_bundle_options" instance="Aheadworks\Sarp2\Observer\Bundle\ConvertQuoteItemToProfileItemObserver" />
+        <observer name="aw_sarp2_copy_price_for_one_off_items" instance="Aheadworks\Sarp2\Observer\OneOff\CopyPrice" />
+    </event>
+</config>

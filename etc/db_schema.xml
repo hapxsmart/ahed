@@ -1,0 +1,956 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="aw_sarp2_plan" resource="default" engine="innodb" comment="Plan">
+        <column xsi:type="int" name="plan_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Plan Id"/>
+        <column xsi:type="int" name="definition_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Definition Id"/>
+        <column xsi:type="varchar" name="status" nullable="false" length="255" comment="Status"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Name"/>
+        <column xsi:type="text" name="sort_order" nullable="true" comment="Sort Order"/>
+        <column xsi:type="decimal" name="regular_price_pattern_percent" scale="4" precision="12" unsigned="false"
+                nullable="true" default="100" comment="Regular price percentage of product price"/>
+        <column xsi:type="decimal" name="trial_price_pattern_percent" scale="4" precision="12" unsigned="false"
+                nullable="true" default="100" comment="Trial price percentage of product price"/>
+        <column xsi:type="smallint" name="price_rounding" padding="5" unsigned="true" nullable="false" identity="false"
+                comment="Price Rounding"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="plan_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_078DF2B7EE57BBE50FEB754AEFA2EFD3" table="aw_sarp2_plan"
+                    column="definition_id" referenceTable="aw_sarp2_plan_definition" referenceColumn="definition_id"
+                    onDelete="CASCADE"/>
+    </table>
+    <table name="aw_sarp2_plan_definition" resource="default" engine="innodb" comment="Plan Definition">
+        <column xsi:type="int" name="definition_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Plan Definition Id"/>
+        <column xsi:type="varchar" name="billing_period" nullable="false" length="255" comment="Billing Period"/>
+        <column xsi:type="smallint" name="billing_frequency" padding="5" unsigned="true" nullable="false"
+                identity="false" comment="Billing Frequency"/>
+        <column xsi:type="int" name="total_billing_cycles" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Total Billing Cycles"/>
+        <column xsi:type="varchar" name="start_date_type" nullable="false" length="255" comment="Start Sate Type"/>
+        <column xsi:type="smallint" name="start_date_day_of_month" padding="5" unsigned="true" nullable="true"
+                identity="false" comment="Day Of Month Of Start Date"/>
+        <column xsi:type="boolean" name="is_initial_fee_enabled" nullable="false" comment="Is Initial Fee Enabled"/>
+        <column xsi:type="boolean" name="is_trial_period_enabled" nullable="false" comment="Is Trial Period Enabled"/>
+        <column xsi:type="int" name="trial_total_billing_cycles" padding="10" unsigned="true" nullable="true"
+                identity="false" comment="Trial Total Billing Cycles"/>
+        <column xsi:type="boolean" name="is_membership_model_enabled" nullable="false" default="false" comment="Is Membership Model"/>
+        <column xsi:type="smallint" name="upcoming_billing_email_offset" padding="5" unsigned="true" nullable="true"
+                identity="false" comment="Upcoming billing email offset"/>
+        <column xsi:type="varchar" name="trial_billing_period" nullable="true" length="255"
+                comment="Trial Billing Period"/>
+        <column xsi:type="smallint" name="trial_billing_frequency" padding="5" unsigned="true" nullable="true"
+                identity="false" comment="Trial Billing Frequency"/>
+        <column xsi:type="smallint" name="upcoming_trial_billing_email_offset" padding="5" unsigned="true"
+                nullable="true" identity="false" comment="Upcoming trial billing email offset"/>
+        <column xsi:type="boolean" name="is_extend_enable" nullable="false" default="false" comment="Is Offer Extend enable option"/>
+        <column xsi:type="smallint" name="offer_extend_email_offset" padding="6" unsigned="false" nullable="true"
+                identity="false" comment="Offer Extend email offset"/>
+        <column xsi:type="varchar" name="offer_extend_email_template" nullable="true" length="255"
+                comment="Offer Extend email template"/>
+        <column xsi:type="boolean" name="is_allow_subscription_cancellation" nullable="true"
+                comment="Is Allow Cancellation of Subscription"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="definition_id"/>
+        </constraint>
+    </table>
+    <table name="aw_sarp2_plan_title" resource="default" engine="innodb" comment="Plan Title">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Frontend Title Id"/>
+        <column xsi:type="int" name="plan_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Plan Id"/>
+        <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="false" identity="false"
+                comment="Store Id"/>
+        <column xsi:type="varchar" name="title" nullable="false" length="255" comment="Title"/>
+        <constraint xsi:type="foreign" referenceId="AW_SARP2_PLAN_TITLE_PLAN_ID_AW_SARP2_PLAN_PLAN_ID"
+                    table="aw_sarp2_plan_title" column="plan_id" referenceTable="aw_sarp2_plan"
+                    referenceColumn="plan_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="AW_SARP2_PLAN_TITLE_STORE_ID_STORE_STORE_ID"
+                    table="aw_sarp2_plan_title" column="store_id" referenceTable="store" referenceColumn="store_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <index referenceId="AW_SARP2_PLAN_TITLE_PLAN_ID" indexType="btree">
+            <column name="plan_id"/>
+        </index>
+        <index referenceId="AW_SARP2_PLAN_TITLE_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+    </table>
+    <table name="aw_sarp2_subscription_option" resource="default" engine="innodb" comment="Subscription Option Title">
+        <column xsi:type="int" name="option_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Option Id"/>
+        <column xsi:type="int" name="plan_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Plan Id"/>
+        <column xsi:type="int" name="product_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Product ID"/>
+        <column xsi:type="smallint" name="website_id" padding="5" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Website ID"/>
+        <column xsi:type="decimal" name="initial_fee" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Initial Fee"/>
+        <column xsi:type="decimal" name="trial_price" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Trial Price"/>
+        <column xsi:type="decimal" name="regular_price" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Regular Price"/>
+        <column xsi:type="boolean" name="is_auto_trial_price" nullable="true" default="true"
+                comment="Is Auto Trial Price"/>
+        <column xsi:type="boolean" name="is_auto_regular_price" nullable="true" default="true"
+                comment="Is Auto Regular Price"/>
+        <column xsi:type="boolean" name="is_installments_mode" nullable="false" default="false" comment="Is Installments mode Enabled"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="option_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="AW_SARP2_SUBSCRIPTION_OPTION_PLAN_ID_AW_SARP2_PLAN_PLAN_ID"
+                    table="aw_sarp2_subscription_option" column="plan_id" referenceTable="aw_sarp2_plan"
+                    referenceColumn="plan_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="AW_SARP2_SUBSCRIPTION_OPTION_WEBSITE_ID_STORE_WEBSITE_WEBSITE_ID"
+                    table="aw_sarp2_subscription_option" column="website_id" referenceTable="store_website"
+                    referenceColumn="website_id" onDelete="CASCADE"/>
+        <index referenceId="AW_SARP2_SUBSCRIPTION_OPTION_PRODUCT_ID" indexType="btree">
+            <column name="product_id"/>
+        </index>
+        <index referenceId="AW_SARP2_SUBSCRIPTION_OPTION_WEBSITE_ID" indexType="btree">
+            <column name="website_id"/>
+        </index>
+    </table>
+    <table name="aw_sarp2_profile" resource="default" engine="innodb" comment="Recurring Profile">
+        <column xsi:type="int" name="profile_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Profile Id"/>
+        <column xsi:type="varchar" name="increment_id" nullable="true" length="32" comment="Increment Id"/>
+        <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Store Id"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="0"
+                comment="Updated At"/>
+        <column xsi:type="varchar" name="status" nullable="false" length="255" comment="Status"/>
+        <column xsi:type="int" name="plan_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Plan Id"/>
+        <column xsi:type="varchar" name="plan_name" nullable="false" length="255" comment="Plan Name"/>
+        <column xsi:type="smallint" name="is_virtual" padding="5" unsigned="true" nullable="true" identity="false"
+                default="0" comment="Is Virtual"/>
+        <column xsi:type="smallint" name="plan_definition_id" padding="5" unsigned="true" nullable="false"
+                identity="false" default="0" comment="Plan Definition Id"/>
+        <column xsi:type="timestamp" name="start_date" on_update="false" nullable="true" comment="Start Date"/>
+        <column xsi:type="decimal" name="items_qty" scale="4" precision="12" unsigned="false" nullable="true"
+                default="0" comment="Items Qty"/>
+        <column xsi:type="int" name="customer_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Customer Id"/>
+        <column xsi:type="int" name="customer_tax_class_id" padding="10" unsigned="true" nullable="true"
+                identity="false" comment="Customer Tax Class Id"/>
+        <column xsi:type="int" name="customer_group_id" padding="10" unsigned="true" nullable="true" identity="false"
+                default="0" comment="Customer Group Id"/>
+        <column xsi:type="varchar" name="customer_email" nullable="true" length="128" comment="Customer Email"/>
+        <column xsi:type="datetime" name="customer_dob" on_update="false" nullable="true" comment="Customer Dob"/>
+        <column xsi:type="varchar" name="customer_fullname" nullable="true" length="32" comment="Customer Full Name"/>
+        <column xsi:type="varchar" name="customer_prefix" nullable="true" length="32" comment="Customer Prefix"/>
+        <column xsi:type="varchar" name="customer_firstname" nullable="true" length="128" comment="Customer Firstname"/>
+        <column xsi:type="varchar" name="customer_middlename" nullable="true" length="128"
+                comment="Customer Middlename"/>
+        <column xsi:type="varchar" name="customer_lastname" nullable="true" length="128" comment="Customer Lastname"/>
+        <column xsi:type="varchar" name="customer_suffix" nullable="true" length="32" comment="Customer Suffix"/>
+        <column xsi:type="boolean" name="customer_is_guest" nullable="true" comment="Customer Is Guest"/>
+        <column xsi:type="boolean" name="customer_was_guest" nullable="true" default="false" comment="Customer was guest"/>
+        <column xsi:type="varchar" name="checkout_shipping_method" nullable="true" length="40"
+                comment="Checkout Shipping Method"/>
+        <column xsi:type="varchar" name="checkout_shipping_description" nullable="true" length="255"
+                comment="Checkout Shipping Description"/>
+        <column xsi:type="varchar" name="trial_shipping_method" nullable="true" length="40"
+                comment="Trial Shipping Method"/>
+        <column xsi:type="varchar" name="trial_shipping_description" nullable="true" length="255"
+                comment="Trial Shipping Description"/>
+        <column xsi:type="varchar" name="regular_shipping_method" nullable="true" length="40"
+                comment="Regular Shipping Method"/>
+        <column xsi:type="varchar" name="regular_shipping_description" nullable="true" length="255"
+                comment="Regular Shipping Description"/>
+        <column xsi:type="varchar" name="global_currency_code" nullable="true" length="255"
+                comment="Global Currency Code"/>
+        <column xsi:type="varchar" name="base_currency_code" nullable="true" length="255" comment="Base Currency Code"/>
+        <column xsi:type="varchar" name="profile_currency_code" nullable="true" length="255"
+                comment="Profile Currency Code"/>
+        <column xsi:type="decimal" name="base_to_global_rate" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base To Global Rate"/>
+        <column xsi:type="decimal" name="base_to_profile_rate" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base To Profile Rate"/>
+        <column xsi:type="decimal" name="initial_subtotal" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Initial Subtotal"/>
+        <column xsi:type="decimal" name="base_initial_subtotal" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Base Initial Subtotal"/>
+        <column xsi:type="decimal" name="initial_subtotal_incl_tax" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Initial Subtotal Incl Tax"/>
+        <column xsi:type="decimal" name="base_initial_subtotal_incl_tax" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Base Initial Subtotal Incl Tax"/>
+        <column xsi:type="decimal" name="initial_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Initial Tax Amount"/>
+        <column xsi:type="decimal" name="base_initial_tax_amount" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Base Initial Tax Amount"/>
+        <column xsi:type="decimal" name="initial_grand_total" scale="4" precision="12" unsigned="false" nullable="true"
+                default="0" comment="Initial Grand Total"/>
+        <column xsi:type="decimal" name="base_initial_grand_total" scale="4" precision="12" unsigned="false"
+                nullable="true" default="0" comment="Base Initial Grand Total"/>
+        <column xsi:type="decimal" name="trial_subtotal" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Trial Subtotal"/>
+        <column xsi:type="decimal" name="base_trial_subtotal" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Trial Subtotal"/>
+        <column xsi:type="decimal" name="trial_subtotal_incl_tax" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Trial Subtotal Incl Tax"/>
+        <column xsi:type="decimal" name="base_trial_subtotal_incl_tax" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Base Trial Subtotal Incl Tax"/>
+        <column xsi:type="decimal" name="trial_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Trial Tax Amount"/>
+        <column xsi:type="decimal" name="base_trial_tax_amount" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Base Trial Tax Amount"/>
+        <column xsi:type="decimal" name="trial_shipping_amount" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Trial Shipping Amount"/>
+        <column xsi:type="decimal" name="base_trial_shipping_amount" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Base Trial Shipping Amount"/>
+        <column xsi:type="decimal" name="trial_shipping_amount_incl_tax" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Trial Shipping Amount Incl Tax"/>
+        <column xsi:type="decimal" name="base_trial_shipping_amount_incl_tax" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Base Trial Shipping Amount Incl Tax"/>
+        <column xsi:type="decimal" name="trial_shipping_tax_amount" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Trial Shipping Tax Amount"/>
+        <column xsi:type="decimal" name="trial_grand_total" scale="4" precision="12" unsigned="false" nullable="true"
+                default="0" comment="Trial Grand Total"/>
+        <column xsi:type="decimal" name="base_trial_grand_total" scale="4" precision="12" unsigned="false"
+                nullable="true" default="0" comment="Base Trial Grand Total"/>
+        <column xsi:type="decimal" name="regular_subtotal" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Regular Subtotal"/>
+        <column xsi:type="decimal" name="base_regular_subtotal" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Base Regular Subtotal"/>
+        <column xsi:type="decimal" name="regular_subtotal_incl_tax" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Regular Subtotal Incl Tax"/>
+        <column xsi:type="decimal" name="base_regular_subtotal_incl_tax" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Base Regular Subtotal Incl Tax"/>
+        <column xsi:type="decimal" name="regular_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Regular Tax Amount"/>
+        <column xsi:type="decimal" name="base_regular_tax_amount" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Base Regular Tax Amount"/>
+        <column xsi:type="decimal" name="regular_shipping_amount" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Regular Shipping Amount"/>
+        <column xsi:type="decimal" name="base_regular_shipping_amount" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Base Regular Shipping Amount"/>
+        <column xsi:type="decimal" name="regular_shipping_amount_incl_tax" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Regular Shipping Amount Incl Tax"/>
+        <column xsi:type="decimal" name="base_regular_shipping_amount_incl_tax" scale="4" precision="12"
+                unsigned="false" nullable="true" comment="Base Regular Shipping Amount Incl Tax"/>
+        <column xsi:type="decimal" name="regular_shipping_tax_amount" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Regular Shipping Tax Amount"/>
+        <column xsi:type="decimal" name="base_regular_shipping_tax_amount" scale="4" precision="12" unsigned="false"
+                nullable="true" comment="Base Regular Shipping Tax Amount"/>
+        <column xsi:type="decimal" name="regular_grand_total" scale="4" precision="12" unsigned="false" nullable="true"
+                default="0" comment="Regular Grand Total"/>
+        <column xsi:type="decimal" name="base_regular_grand_total" scale="4" precision="12" unsigned="false"
+                nullable="true" default="0" comment="Base Regular Grand Total"/>
+        <column xsi:type="varchar" name="payment_method" nullable="true" length="255" comment="Payment Method"/>
+        <column xsi:type="int" name="payment_token_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Payment Token Id" onCreate="migrateDataFrom(payment_token_id)"/>
+        <column xsi:type="int" name="last_order_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Last Order Id"/>
+        <column xsi:type="timestamp" name="last_order_date" on_update="false" nullable="true"
+                comment="Last Order Date"/>
+        <column xsi:type="timestamp" name="membership_active_until_date" on_update="false" nullable="true"
+                comment="Membership active until date"/>
+        <column xsi:type="varchar" name="remote_ip" nullable="true" length="32" comment="Remote Ip"/>
+        <column xsi:type="int" name="profile_definition_id" padding="10" unsigned="true" nullable="false"
+                identity="false" default="0" comment="Profile Definition Id"/>
+        <column xsi:type="text" name="hash" nullable="true" comment="Hash"/>
+        <column xsi:type="decimal" name="initial_fee" scale="4" precision="12" unsigned="false" nullable="false"
+                default="0" comment="Initial Fee Subtotal"/>
+        <column xsi:type="decimal" name="base_initial_fee" scale="4" precision="12" unsigned="false" nullable="false"
+                default="0" comment="Base Initial Fee Subtotal"/>
+        <column xsi:type="varchar" name="initial_shipping_method" nullable="true" length="40"
+                comment="Initial Grand Total Including Period Grand Total"/>
+        <column xsi:type="varchar" name="initial_shipping_description" nullable="true" length="255"
+                comment="Initial Grand Total Including Period Grand Total"/>
+        <column xsi:type="decimal" name="initial_shipping_amount" scale="4" precision="12" unsigned="false"
+                nullable="false" default="0" comment="Initial Shipping Amount"/>
+        <column xsi:type="decimal" name="base_initial_shipping_amount" scale="4" precision="12" unsigned="false"
+                nullable="false" default="0" comment="Base Initial Shipping Amount"/>
+        <column xsi:type="decimal" name="initial_shipping_amount_incl_tax" scale="4" precision="12" unsigned="false"
+                nullable="false" default="0" comment="Initial Shipping Amount Incl Tax"/>
+        <column xsi:type="decimal" name="base_initial_shipping_amount_incl_tax" scale="4" precision="12"
+                unsigned="false" nullable="false" default="0" comment="Base Initial Shipping Amount Incl Tax"/>
+        <column xsi:type="decimal" name="initial_shipping_tax_amount" scale="4" precision="12" unsigned="false"
+                nullable="false" default="0" comment="Initial Shipping Tax Amount"/>
+        <column xsi:type="decimal" name="base_trial_shipping_tax_amount" scale="4" precision="12" unsigned="false"
+                nullable="false" default="0" comment="Base Initial Shipping Tax Amount"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="profile_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="AW_SARP2_PROFILE_STORE_ID_STORE_STORE_ID" table="aw_sarp2_profile"
+                    column="store_id" referenceTable="store" referenceColumn="store_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="AW_SARP2_PROFILE_CUSTOMER_ID_CUSTOMER_ENTITY_ENTITY_ID"
+                    table="aw_sarp2_profile" column="customer_id" referenceTable="customer_entity"
+                    referenceColumn="entity_id" onDelete="SET NULL"/>
+        <index referenceId="AW_SARP2_PROFILE_CUSTOMER_ID" indexType="btree">
+            <column name="customer_id"/>
+        </index>
+    </table>
+    <table name="aw_sarp2_profile_item" resource="default" engine="innodb" comment="Recurring Profile Item">
+        <column xsi:type="int" name="item_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Item Id"/>
+        <column xsi:type="int" name="profile_id" padding="10" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Profile Id"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="0"
+                comment="Updated At"/>
+        <column xsi:type="int" name="product_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Product Id"/>
+        <column xsi:type="varchar" name="product_type" nullable="true" length="255" comment="Product Type"/>
+        <column xsi:type="text" name="product_options" nullable="true" comment="Product Options Serialized"/>
+        <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="true" identity="false"
+                comment="Store Id"/>
+        <column xsi:type="int" name="parent_item_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Parent Item Id"/>
+        <column xsi:type="int" name="replacement_item_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Replacement Item Id"/>
+        <column xsi:type="smallint" name="is_virtual" padding="5" unsigned="true" nullable="true" identity="false"
+                comment="Is Virtual"/>
+        <column xsi:type="varchar" name="sku" nullable="true" length="255" comment="Sku"/>
+        <column xsi:type="varchar" name="name" nullable="true" length="255" comment="Name"/>
+        <column xsi:type="text" name="description" nullable="true" comment="Description"/>
+        <column xsi:type="smallint" name="is_qty_decimal" padding="5" unsigned="true" nullable="true" identity="false"
+                comment="Is Qty Decimal"/>
+        <column xsi:type="decimal" name="weight" scale="4" precision="12" unsigned="false" nullable="true" default="0"
+                comment="Weight"/>
+        <column xsi:type="decimal" name="qty" scale="4" precision="12" unsigned="false" nullable="false" default="0"
+                comment="Qty"/>
+        <column xsi:type="smallint" name="is_free_shipping" padding="5" unsigned="true" nullable="false"
+                identity="false" default="0" comment="Free Shipping Flag"/>
+        <column xsi:type="decimal" name="initial_fee" scale="4" precision="12" unsigned="false" nullable="false"
+                default="0" comment="Initial Fee"/>
+        <column xsi:type="decimal" name="base_initial_fee" scale="4" precision="12" unsigned="false" nullable="false"
+                default="0" comment="Base Initial Fee"/>
+        <column xsi:type="decimal" name="initial_fee_incl_tax" scale="4" precision="12" unsigned="false"
+                nullable="false" default="0" comment="Initial Fee Incl Tax" disabled="true"/>
+        <column xsi:type="decimal" name="base_initial_fee_incl_tax" scale="4" precision="12" unsigned="false"
+                nullable="false" default="0" comment="Base Initial Fee Incl Tax" disabled="true"/>
+        <column xsi:type="decimal" name="initial_row_total" scale="4" precision="12" unsigned="false" nullable="false"
+                default="0" comment="Initial Row Total"/>
+        <column xsi:type="decimal" name="base_initial_row_total" scale="4" precision="12" unsigned="false"
+                nullable="false" default="0" comment="Base Initial Row Total"/>
+        <column xsi:type="decimal" name="initial_row_total_incl_tax" scale="4" precision="12" unsigned="false"
+                nullable="false" default="0" comment="Initial Row Total Incl Tax"/>
+        <column xsi:type="decimal" name="base_initial_row_total_incl_tax" scale="4" precision="12" unsigned="false"
+                nullable="false" default="0" comment="Base Initial Row Total Incl Tax"/>
+        <column xsi:type="decimal" name="initial_fee_tax_amount" scale="4" precision="12" unsigned="false"
+                nullable="true" default="0" comment="Initial Fee Tax Amount" disabled="true"/>
+        <column xsi:type="decimal" name="base_initial_fee_tax_amount" scale="4" precision="12" unsigned="false"
+                nullable="true" default="0" comment="Base Initial Fee Tax Amount" disabled="true"/>
+        <column xsi:type="decimal" name="initial_fee_tax_percent" scale="4" precision="12" unsigned="false"
+                nullable="true" default="0" comment="Initial Fee Tax Percent" disabled="true"/>
+        <column xsi:type="decimal" name="trial_price" scale="4" precision="12" unsigned="false" nullable="false"
+                default="0" comment="Trial Price"/>
+        <column xsi:type="decimal" name="base_trial_price" scale="4" precision="12" unsigned="false" nullable="false"
+                default="0" comment="Base Trial Price"/>
+        <column xsi:type="decimal" name="trial_price_incl_tax" scale="4" precision="12" unsigned="false"
+                nullable="false" default="0" comment="Trial Price Incl Tax"/>
+        <column xsi:type="decimal" name="base_trial_price_incl_tax" scale="4" precision="12" unsigned="false"
+                nullable="false" default="0" comment="Base Trial Price Incl Tax"/>
+        <column xsi:type="decimal" name="trial_row_total" scale="4" precision="12" unsigned="false" nullable="false"
+                default="0" comment="Trial Row Total"/>
+        <column xsi:type="decimal" name="base_trial_row_total" scale="4" precision="12" unsigned="false"
+                nullable="false" default="0" comment="Base Trial Row Total"/>
+        <column xsi:type="decimal" name="trial_row_total_incl_tax" scale="4" precision="12" unsigned="false"
+                nullable="false" default="0" comment="Trial Row Total Incl Tax"/>
+        <column xsi:type="decimal" name="base_trial_row_total_incl_tax" scale="4" precision="12" unsigned="false"
+                nullable="false" default="0" comment="Base Trial Row Total Incl Tax"/>
+        <column xsi:type="decimal" name="trial_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                default="0" comment="Trial Tax Amount"/>
+        <column xsi:type="decimal" name="base_trial_tax_amount" scale="4" precision="12" unsigned="false"
+                nullable="true" default="0" comment="Base Trial Tax Amount"/>
+        <column xsi:type="decimal" name="trial_tax_percent" scale="4" precision="12" unsigned="false" nullable="true"
+                default="0" comment="Trial Tax Percent"/>
+        <column xsi:type="decimal" name="regular_price" scale="4" precision="12" unsigned="false" nullable="false"
+                default="0" comment="Regular Price"/>
+        <column xsi:type="decimal" name="base_regular_price" scale="4" precision="12" unsigned="false" nullable="false"
+                default="0" comment="Base Regular Price"/>
+        <column xsi:type="decimal" name="regular_price_incl_tax" scale="4" precision="12" unsigned="false"
+                nullable="false" default="0" comment="Regular Price Incl Tax"/>
+        <column xsi:type="decimal" name="base_regular_price_incl_tax" scale="4" precision="12" unsigned="false"
+                nullable="false" default="0" comment="Base Regular Price Incl Tax"/>
+        <column xsi:type="decimal" name="regular_row_total" scale="4" precision="12" unsigned="false" nullable="false"
+                default="0" comment="Regular Row Total"/>
+        <column xsi:type="decimal" name="base_regular_row_total" scale="4" precision="12" unsigned="false"
+                nullable="false" default="0" comment="Base Regular Row Total"/>
+        <column xsi:type="decimal" name="regular_row_total_incl_tax" scale="4" precision="12" unsigned="false"
+                nullable="false" default="0" comment="Regular Row Total Incl Tax"/>
+        <column xsi:type="decimal" name="base_regular_row_total_incl_tax" scale="4" precision="12" unsigned="false"
+                nullable="false" default="0" comment="Base Regular Row Total Incl Tax"/>
+        <column xsi:type="decimal" name="regular_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                default="0" comment="Regular Tax Amount"/>
+        <column xsi:type="decimal" name="base_regular_tax_amount" scale="4" precision="12" unsigned="false"
+                nullable="true" default="0" comment="Base Regular Tax Amount"/>
+        <column xsi:type="decimal" name="regular_tax_percent" scale="4" precision="12" unsigned="false" nullable="true"
+                default="0" comment="Regular Tax Percent"/>
+        <column xsi:type="decimal" name="row_weight" scale="4" precision="12" unsigned="false" nullable="true"
+                default="0" comment="Row Weight"/>
+        <column xsi:type="decimal" name="initial_price" scale="4" precision="12" unsigned="false" nullable="false"
+                default="0" comment="Initial Price"/>
+        <column xsi:type="decimal" name="base_initial_price" scale="4" precision="12" unsigned="false" nullable="false"
+                default="0" comment="Base Initial Price"/>
+        <column xsi:type="decimal" name="initial_price_incl_tax" scale="4" precision="12" unsigned="false"
+                nullable="false" default="0" comment="Initial Price Incl Tax"
+                onCreate="migrateDataFrom(initial_fee_incl_tax)"/>
+        <column xsi:type="decimal" name="base_initial_price_incl_tax" scale="4" precision="12" unsigned="false"
+                nullable="false" default="0" comment="Base Initial Price Incl Tax"
+                onCreate="migrateDataFrom(base_initial_fee_incl_tax)"/>
+        <column xsi:type="decimal" name="initial_price_tax_amount" scale="4" precision="12" unsigned="false"
+                nullable="false" default="0" comment="Initial Price Tax Amount"
+                onCreate="migrateDataFrom(initial_fee_tax_amount)"/>
+        <column xsi:type="decimal" name="base_initial_price_tax_amount" scale="4" precision="12" unsigned="false"
+                nullable="false" default="0" comment="Initial Price Tax Amount"
+                onCreate="migrateDataFrom(base_initial_fee_tax_amount)"/>
+        <column xsi:type="decimal" name="initial_price_tax_percent" scale="4" precision="12" unsigned="false"
+                nullable="true" default="0" comment="Initial Price Tax Percent"
+                onCreate="migrateDataFrom(initial_fee_tax_percent)"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="item_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_D6C2C9A268FA6F732C93633DCC481D11" table="aw_sarp2_profile_item"
+                    column="parent_item_id" referenceTable="aw_sarp2_profile_item" referenceColumn="item_id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="AW_SARP2_PROFILE_ITEM_PROFILE_ID_AW_SARP2_PROFILE_PROFILE_ID"
+                    table="aw_sarp2_profile_item" column="profile_id" referenceTable="aw_sarp2_profile"
+                    referenceColumn="profile_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="AW_SARP2_PROFILE_ITEM_STORE_ID_STORE_STORE_ID"
+                    table="aw_sarp2_profile_item" column="store_id" referenceTable="store" referenceColumn="store_id"
+                    onDelete="SET NULL"/>
+        <index referenceId="AW_SARP2_PROFILE_ITEM_PARENT_ITEM_ID" indexType="btree">
+            <column name="parent_item_id"/>
+        </index>
+        <index referenceId="AW_SARP2_PROFILE_ITEM_PRODUCT_ID" indexType="btree">
+            <column name="product_id"/>
+        </index>
+        <index referenceId="AW_SARP2_PROFILE_ITEM_PROFILE_ID" indexType="btree">
+            <column name="profile_id"/>
+        </index>
+        <index referenceId="AW_SARP2_PROFILE_ITEM_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+    </table>
+    <table name="aw_sarp2_profile_address" resource="default" engine="innodb" comment="Recurring Profile Address">
+        <column xsi:type="int" name="address_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Address Id"/>
+        <column xsi:type="int" name="profile_id" padding="10" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Quote Id"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="0"
+                comment="Updated At"/>
+        <column xsi:type="int" name="customer_address_id" padding="11" unsigned="false" nullable="true" identity="false"
+                comment="Customer Address Id"/>
+        <column xsi:type="int" name="quote_address_id" padding="11" unsigned="false" nullable="true" identity="false"
+                comment="Quote Address Id"/>
+        <column xsi:type="int" name="region_id" padding="11" unsigned="false" nullable="true" identity="false"
+                comment="Region Id"/>
+        <column xsi:type="int" name="customer_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Customer Id"/>
+        <column xsi:type="varchar" name="fax" nullable="true" length="255" comment="Fax"/>
+        <column xsi:type="varchar" name="region" nullable="true" length="255" comment="Region"/>
+        <column xsi:type="varchar" name="postcode" nullable="true" length="255" comment="Postcode"/>
+        <column xsi:type="varchar" name="lastname" nullable="true" length="255" comment="Lastname"/>
+        <column xsi:type="varchar" name="street" nullable="true" length="255" comment="Street"/>
+        <column xsi:type="varchar" name="city" nullable="true" length="255" comment="City"/>
+        <column xsi:type="varchar" name="email" nullable="true" length="255" comment="Email"/>
+        <column xsi:type="varchar" name="telephone" nullable="true" length="255" comment="Phone Number"/>
+        <column xsi:type="varchar" name="country_id" nullable="true" length="2" comment="Country Id"/>
+        <column xsi:type="varchar" name="firstname" nullable="true" length="255" comment="Firstname"/>
+        <column xsi:type="varchar" name="address_type" nullable="true" length="255" comment="Address Type"/>
+        <column xsi:type="varchar" name="prefix" nullable="true" length="255" comment="Prefix"/>
+        <column xsi:type="varchar" name="middlename" nullable="true" length="255" comment="Middlename"/>
+        <column xsi:type="varchar" name="suffix" nullable="true" length="255" comment="Suffix"/>
+        <column xsi:type="varchar" name="company" nullable="true" length="255" comment="Company"/>
+        <column xsi:type="decimal" name="weight" scale="4" precision="12" unsigned="false" nullable="false" default="0"
+                comment="Weight"/>
+        <column xsi:type="smallint" name="is_free_shipping" padding="5" unsigned="true" nullable="false"
+                identity="false" default="0" comment="Free Shipping Flag"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="address_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="AW_SARP2_PROFILE_ADDRESS_PROFILE_ID_AW_SARP2_PROFILE_PROFILE_ID"
+                    table="aw_sarp2_profile_address" column="profile_id" referenceTable="aw_sarp2_profile"
+                    referenceColumn="profile_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="AW_SARP2_PROFILE_ADDRESS_CUSTOMER_ID_CUSTOMER_ENTITY_ENTITY_ID"
+                    table="aw_sarp2_profile_address" column="customer_id" referenceTable="customer_entity"
+                    referenceColumn="entity_id" onDelete="SET NULL"/>
+        <index referenceId="AW_SARP2_PROFILE_ADDRESS_PROFILE_ID" indexType="btree">
+            <column name="profile_id"/>
+        </index>
+        <index referenceId="AW_SARP2_PROFILE_ADDRESS_CUSTOMER_ID" indexType="btree">
+            <column name="customer_id"/>
+        </index>
+    </table>
+    <table name="aw_sarp2_payment_token" resource="default" engine="innodb" comment="Payment Token">
+        <column xsi:type="int" name="token_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Token Id"/>
+        <column xsi:type="varchar" name="payment_method" nullable="false" length="128" comment="Payment Method Code"/>
+        <column xsi:type="varchar" name="type" nullable="false" length="128" comment="Token Type"/>
+        <column xsi:type="varchar" name="token_value" nullable="false" length="255" comment="Token Value"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="expires_at" on_update="false" nullable="true" comment="Expires At"/>
+        <column xsi:type="boolean" name="is_active" default="true" nullable="false" comment="Is Active Flag"/>
+        <column xsi:type="text" name="details" nullable="true" comment="Token Details"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="token_id"/>
+        </constraint>
+    </table>
+    <table name="aw_sarp2_profile_order" resource="default" engine="innodb" comment="Recurring Profile Order">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="Id"/>
+        <column xsi:type="int" name="order_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Order Id"/>
+        <column xsi:type="int" name="profile_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Profile Id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+            <column name="order_id"/>
+            <column name="profile_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="AW_SARP2_PROFILE_ORDER_PROFILE_ID_AW_SARP2_PROFILE_PROFILE_ID"
+                    table="aw_sarp2_profile_order" column="profile_id" referenceTable="aw_sarp2_profile"
+                    referenceColumn="profile_id" onDelete="CASCADE"/>
+        <index referenceId="AW_SARP2_PROFILE_ORDER_PROFILE_ID" indexType="btree">
+            <column name="profile_id"/>
+        </index>
+    </table>
+    <table name="aw_sarp2_core_schedule" resource="default" engine="innodb" comment="Core Schedule">
+        <column xsi:type="int" name="schedule_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Core Schedule Id"/>
+        <column xsi:type="int" name="profile_id" padding="10" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Profile Id"/>
+        <column xsi:type="varchar" name="period" nullable="false" length="255" comment="Payments Period"/>
+        <column xsi:type="smallint" name="frequency" padding="5" unsigned="true" nullable="false" identity="false"
+                comment="Payments Frequency"/>
+        <column xsi:type="boolean" name="is_initial_paid" nullable="true" comment="Is Initial Payment Paid"/>
+        <column xsi:type="int" name="trial_count" padding="10" unsigned="true" nullable="true" identity="false"
+                default="0" comment="Trial Payments Count"/>
+        <column xsi:type="int" name="trial_total_count" padding="10" unsigned="true" nullable="true" identity="false"
+                default="0" comment="Trial Payments Total Count"/>
+        <column xsi:type="int" name="regular_count" padding="10" unsigned="true" nullable="true" identity="false"
+                default="0" comment="Regular Payments Count"/>
+        <column xsi:type="int" name="regular_total_count" padding="10" unsigned="true" nullable="true" identity="false"
+                default="0" comment="Regular Payments Total Count"/>
+        <column xsi:type="text" name="payment_data" nullable="true" comment="Payment Data"/>
+        <column xsi:type="boolean" name="is_reactivated" nullable="true" comment="Is Reactivated"/>
+        <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="false" identity="false"
+                comment="Store Id"/>
+        <column xsi:type="boolean" name="is_membership_model" nullable="false" default="false" comment="Is Membership Model"/>
+        <column xsi:type="int" name="membership_count" padding="10" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Membership Count"/>
+        <column xsi:type="int" name="membership_total_count" padding="10" unsigned="true" nullable="false"
+                identity="false" default="0" comment="Membership Total Count"/>
+        <column xsi:type="varchar" name="trial_period" nullable="true" length="255" comment="Trial Period"/>
+        <column xsi:type="smallint" name="trial_frequency" padding="5" unsigned="true" nullable="true" identity="false"
+                comment="Trial Frequency"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="schedule_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="AW_SARP2_CORE_SCHEDULE_PROFILE_ID_AW_SARP2_PROFILE_PROFILE_ID"
+                    table="aw_sarp2_core_schedule" column="profile_id" referenceTable="aw_sarp2_profile"
+                    referenceColumn="profile_id" onDelete="CASCADE"/>
+        <index referenceId="AW_SARP2_CORE_SCHEDULE_PROFILE_ID" indexType="btree">
+            <column name="profile_id"/>
+        </index>
+    </table>
+    <table name="aw_sarp2_core_schedule_item" resource="default" engine="innodb" comment="Core Schedule Item">
+        <column xsi:type="int" name="item_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Core Schedule Item Id"/>
+        <column xsi:type="int" name="parent_item_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Core Schedule Parent Item"/>
+        <column xsi:type="int" name="schedule_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Schedule Id"/>
+        <column xsi:type="varchar" name="type" nullable="false" length="255" comment="Schedule Item Type"/>
+        <column xsi:type="varchar" name="payment_period" nullable="true" length="255" comment="Payment Period"/>
+        <column xsi:type="varchar" name="payment_status" nullable="false" length="255" comment="Payment Status"/>
+        <column xsi:type="timestamp" name="scheduled_at" on_update="true" nullable="true" default="CURRENT_TIMESTAMP"
+                comment="Scheduled At"/>
+        <column xsi:type="timestamp" name="paid_at" on_update="false" nullable="true" comment="Paid At"/>
+        <column xsi:type="timestamp" name="retry_at" on_update="false" nullable="true" comment="Retry At"/>
+        <column xsi:type="int" name="retries_count" padding="10" unsigned="true" nullable="true" identity="false"
+                default="0" comment="Retries Count"/>
+        <column xsi:type="decimal" name="total_scheduled" scale="4" precision="12" unsigned="false" nullable="true"
+                default="0" comment="Total Scheduled Amount"/>
+        <column xsi:type="decimal" name="base_total_scheduled" scale="4" precision="12" unsigned="false" nullable="true"
+                default="0" comment="Base Total Scheduled Amount"/>
+        <column xsi:type="decimal" name="total_paid" scale="4" precision="12" unsigned="false" nullable="true"
+                default="0" comment="Total Paid Amount"/>
+        <column xsi:type="decimal" name="base_total_paid" scale="4" precision="12" unsigned="false" nullable="true"
+                default="0" comment="Base Total Paid Amount"/>
+        <column xsi:type="int" name="order_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Order Id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="item_id"/>
+            <column name="schedule_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_5C2C71534B9F149B53341DB7626B0E6E"
+                    table="aw_sarp2_core_schedule_item" column="schedule_id" referenceTable="aw_sarp2_core_schedule"
+                    referenceColumn="schedule_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FK_A904902EB87556C6F6535F8F6D69ADEC"
+                    table="aw_sarp2_core_schedule_item" column="parent_item_id"
+                    referenceTable="aw_sarp2_core_schedule_item" referenceColumn="item_id" onDelete="CASCADE"/>
+        <index referenceId="AW_SARP2_CORE_SCHEDULE_ITEM_PARENT_ITEM_ID" indexType="btree">
+            <column name="parent_item_id"/>
+        </index>
+    </table>
+    <table name="aw_sarp2_core_notification" resource="default" engine="innodb" comment="Core Notification">
+        <column xsi:type="int" name="notification_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Notification Id"/>
+        <column xsi:type="varchar" name="type" nullable="false" length="255" comment="Notification Type"/>
+        <column xsi:type="varchar" name="status" nullable="false" length="255" comment="Notification Status"/>
+        <column xsi:type="varchar" name="email" nullable="true" length="128" comment="Email"/>
+        <column xsi:type="varchar" name="name" nullable="true" length="32" comment="Name"/>
+        <column xsi:type="timestamp" name="scheduled_at" on_update="false" nullable="true" default="CURRENT_TIMESTAMP"
+                comment="Scheduled At"/>
+        <column xsi:type="timestamp" name="send_at" on_update="false" nullable="true" comment="Send At"/>
+        <column xsi:type="text" name="notification_data" nullable="true" comment="Notification Data"/>
+        <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="false" identity="false"
+                comment="Store Id"/>
+        <column xsi:type="int" name="profile_id" padding="10" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Profile Id"/>
+        <column xsi:type="int" name="order_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Order Id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="notification_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="AW_SARP2_CORE_NOTIFICATION_STORE_ID_STORE_STORE_ID"
+                    table="aw_sarp2_core_notification" column="store_id" referenceTable="store"
+                    referenceColumn="store_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="AW_SARP2_CORE_NTFC_PROFILE_ID_AW_SARP2_PROFILE_PROFILE_ID"
+                    table="aw_sarp2_core_notification" column="profile_id" referenceTable="aw_sarp2_profile"
+                    referenceColumn="profile_id" onDelete="CASCADE"/>
+    </table>
+    <table name="aw_sarp2_profile_definition" resource="default" engine="innodb" comment="Profile Definition">
+        <column xsi:type="int" name="definition_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Profile Definition Id"/>
+        <column xsi:type="varchar" name="billing_period" nullable="false" length="255" comment="Billing Period"/>
+        <column xsi:type="smallint" name="billing_frequency" padding="5" unsigned="true" nullable="false"
+                identity="false" comment="Billing Frequency"/>
+        <column xsi:type="int" name="total_billing_cycles" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Total Billing Cycles"/>
+        <column xsi:type="varchar" name="start_date_type" nullable="false" length="255" comment="Start Sate Type"/>
+        <column xsi:type="smallint" name="start_date_day_of_month" padding="5" unsigned="true" nullable="true"
+                identity="false" comment="Day Of Month Of Start Date"/>
+        <column xsi:type="boolean" name="is_initial_fee_enabled" nullable="false" comment="Is Initial Fee Enabled"/>
+        <column xsi:type="boolean" name="is_trial_period_enabled" nullable="false" comment="Is Trial Period Enabled"/>
+        <column xsi:type="int" name="trial_total_billing_cycles" padding="10" unsigned="true" nullable="true"
+                identity="false" comment="Trial Total Billing Cycles"/>
+        <column xsi:type="boolean" name="is_membership_model_enabled" nullable="false" default="false" comment="Is Membership Model"/>
+        <column xsi:type="smallint" name="upcoming_billing_email_offset" padding="5" unsigned="true" nullable="true"
+                identity="false" comment="Upcoming billing email offset"/>
+        <column xsi:type="varchar" name="trial_billing_period" nullable="true" length="255"
+                comment="Trial Billing Period"/>
+        <column xsi:type="smallint" name="trial_billing_frequency" padding="5" unsigned="true" nullable="true"
+                identity="false" comment="Trial Billing Frequency"/>
+        <column xsi:type="smallint" name="upcoming_trial_billing_email_offset" padding="5" unsigned="true"
+                nullable="true" identity="false" comment="Upcoming trial billing email offset"/>
+        <column xsi:type="boolean" name="is_extend_enable" nullable="false" default="false" comment="Is Offer Extend enable option"/>
+        <column xsi:type="smallint" name="offer_extend_email_offset" padding="6" unsigned="false" nullable="true"
+                identity="false" comment="Offer Extend email offset"/>
+        <column xsi:type="varchar" name="offer_extend_email_template" nullable="true" length="255"
+                comment="Offer Extend email template"/>
+        <column xsi:type="boolean" name="is_allow_subscription_cancellation" nullable="true"
+                comment="Is Allow Cancellation of Subscription"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="definition_id"/>
+        </constraint>
+    </table>
+    <table name="aw_sarp2_payment_sampler" resource="default" engine="innodb" comment="Payment Sampler">
+        <column xsi:type="int" name="sampler_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Payment Sampler Id"/>
+        <column xsi:type="varchar" name="method" nullable="false" length="128" comment="Payment Method Code"/>
+        <column xsi:type="varchar" name="status" nullable="false" length="255" comment="Status"/>
+        <column xsi:type="varchar" name="last_transaction_id" nullable="true" length="255"
+                comment="Last Transaction Id"/>
+        <column xsi:type="smallint" name="store_id" padding="5" unsigned="true" nullable="false" identity="false"
+                comment="Store Id"/>
+        <column xsi:type="int" name="customer_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Customer Id"/>
+        <column xsi:type="int" name="quote_id" padding="10" unsigned="true" nullable="true" identity="false"
+                comment="Quote Id"/>
+        <column xsi:type="decimal" name="amount" scale="4" precision="12" unsigned="false" nullable="true" default="0"
+                comment="Sample Amount"/>
+        <column xsi:type="decimal" name="amount_placed" scale="4" precision="12" unsigned="false" nullable="true"
+                default="0" comment="Placed Amount"/>
+        <column xsi:type="decimal" name="amount_reverted" scale="4" precision="12" unsigned="false" nullable="true"
+                default="0" comment="Reverted Amount"/>
+        <column xsi:type="varchar" name="currency_code" nullable="true" length="255" comment="Currency Code"/>
+        <column xsi:type="varchar" name="remote_ip" nullable="true" length="32" comment="Remote Ip"/>
+        <column xsi:type="text" name="additional_information" nullable="true" comment="Additional Information"/>
+        <column xsi:type="int" name="profile_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Profile Id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="sampler_id"/>
+        </constraint>
+    </table>
+    <table name="aw_sarp2_access_token" resource="default" engine="innodb" comment="Access Token">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="Id"/>
+        <column xsi:type="varchar" name="token_value" nullable="false" length="255" comment="Token Value"/>
+        <column xsi:type="int" name="profile_id" padding="10" unsigned="true" nullable="false" identity="false"
+                default="0" comment="Profile Id"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="timestamp" name="expires_at" on_update="false" nullable="true" comment="Expires At"/>
+        <column xsi:type="varchar" name="allowed_resource" nullable="true" length="255" comment="Allowed resource"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="AW_SARP2_ACCESS_TOKEN_PROFILE_ID_AW_SARP2_PROFILE_PROFILE_ID"
+                    table="aw_sarp2_access_token" column="profile_id" referenceTable="aw_sarp2_profile"
+                    referenceColumn="profile_id" onDelete="CASCADE"/>
+    </table>
+    <table name="quote" resource="checkout" comment="Sales Flat Quote">
+        <column xsi:type="decimal" name="aw_sarp_initial_subtotal" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Initial Subtotal"/>
+        <column xsi:type="decimal" name="base_aw_sarp_initial_subtotal" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Initial Subtotal"/>
+        <column xsi:type="decimal" name="aw_sarp_trial_subtotal" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Trial Subtotal"/>
+        <column xsi:type="decimal" name="base_aw_sarp_trial_subtotal" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Trial Subtotal"/>
+        <column xsi:type="decimal" name="aw_sarp_regular_subtotal" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Regular Subtotal"/>
+        <column xsi:type="decimal" name="base_aw_sarp_regular_subtotal" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Regular Subtotal"/>
+        <column xsi:type="decimal" name="aw_sarp_initial_grand_total" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Initial Grand Total"/>
+        <column xsi:type="decimal" name="base_aw_sarp_initial_grand_total" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Initial Grand Total"/>
+        <column xsi:type="decimal" name="aw_sarp_trial_grand_total" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Trial Grand Total"/>
+        <column xsi:type="decimal" name="base_aw_sarp_trial_grand_total" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Trial Grand Total"/>
+        <column xsi:type="decimal" name="aw_sarp_regular_grand_total" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Regular Grand Total"/>
+        <column xsi:type="decimal" name="base_aw_sarp_regular_grand_total" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Regular Grand Total"/>
+    </table>
+    <table name="quote_address" resource="checkout" comment="Sales Flat Quote Address">
+        <column xsi:type="decimal" name="aw_sarp_initial_subtotal" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Initial Subtotal"/>
+        <column xsi:type="decimal" name="base_aw_sarp_initial_subtotal" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Initial Subtotal"/>
+        <column xsi:type="decimal" name="aw_sarp_initial_subtotal_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Initial Subtotal Incl Tax"/>
+        <column xsi:type="decimal" name="base_aw_sarp_initial_subtotal_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Initial Subtotal Incl Tax"/>
+        <column xsi:type="decimal" name="aw_sarp_initial_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Initial Tax Amount"/>
+        <column xsi:type="decimal" name="base_aw_sarp_initial_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Initial Tax Amount"/>
+        <column xsi:type="decimal" name="aw_sarp_initial_grand_total" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Initial Grand Total"/>
+        <column xsi:type="decimal" name="base_aw_sarp_initial_grand_total" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Initial Grand Total"/>
+        <column xsi:type="decimal" name="aw_sarp_trial_subtotal" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Trial Subtotal"/>
+        <column xsi:type="decimal" name="base_aw_sarp_trial_subtotal" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Trial Subtotal"/>
+        <column xsi:type="decimal" name="aw_sarp_regular_subtotal" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Regular Subtotal"/>
+        <column xsi:type="decimal" name="base_aw_sarp_regular_subtotal" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Regular Subtotal"/>
+        <column xsi:type="decimal" name="aw_sarp_trial_subtotal_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Trial Subtotal Incl Tax"/>
+        <column xsi:type="decimal" name="base_aw_sarp_trial_subtotal_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Trial Subtotal Incl Tax"/>
+        <column xsi:type="decimal" name="aw_sarp_regular_subtotal_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Regular Subtotal Incl Tax"/>
+        <column xsi:type="decimal" name="base_aw_sarp_regular_subtotal_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Regular Subtotal Incl Tax"/>
+        <column xsi:type="decimal" name="aw_sarp_trial_shipping_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Trial Shipping Amount"/>
+        <column xsi:type="decimal" name="base_aw_sarp_trial_shipping_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Trial Shipping Amount"/>
+        <column xsi:type="decimal" name="aw_sarp_regular_shipping_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Regular Shipping Amount"/>
+        <column xsi:type="decimal" name="base_aw_sarp_regular_shipping_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Regular Shipping Amount"/>
+        <column xsi:type="decimal" name="aw_sarp_trial_shipping_amount_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Trial Shipping Amount Incl Tax"/>
+        <column xsi:type="decimal" name="base_aw_sarp_trial_shipping_amount_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Trial Shipping Amount Incl Tax"/>
+        <column xsi:type="decimal" name="aw_sarp_regular_shipping_amount_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Regular Shipping Amount Incl Tax"/>
+        <column xsi:type="decimal" name="base_aw_sarp_regular_shipping_amount_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Regular Shipping Amount Incl Tax"/>
+        <column xsi:type="decimal" name="aw_sarp_trial_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Trial Tax Amount"/>
+        <column xsi:type="decimal" name="base_aw_sarp_trial_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Trial Tax Amount"/>
+        <column xsi:type="decimal" name="aw_sarp_regular_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Regular Tax Amount"/>
+        <column xsi:type="decimal" name="base_aw_sarp_regular_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Regular Tax Amount"/>
+        <column xsi:type="decimal" name="aw_sarp_trial_shipping_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Trial Shipping Tax Amount"/>
+        <column xsi:type="decimal" name="base_aw_sarp_trial_shipping_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Trial Shipping Tax Amount"/>
+        <column xsi:type="decimal" name="aw_sarp_regular_shipping_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Regular Shipping Tax Amount"/>
+        <column xsi:type="decimal" name="base_aw_sarp_regular_shipping_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Regular Shipping Tax Amount"/>
+        <column xsi:type="decimal" name="aw_sarp_trial_grand_total" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Trial Grand Total"/>
+        <column xsi:type="decimal" name="base_aw_sarp_trial_grand_total" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Trial Grand Total"/>
+        <column xsi:type="decimal" name="aw_sarp_regular_grand_total" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Regular Grand Total"/>
+        <column xsi:type="decimal" name="base_aw_sarp_regular_grand_total" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Regular Grand Total"/>
+    </table>
+    <table name="quote_item" resource="checkout" comment="Sales Flat Quote Item">
+        <column xsi:type="decimal" name="aw_sarp_initial_fee" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Initial Fee"/>
+        <column xsi:type="decimal" name="base_aw_sarp_initial_fee" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Initial Fee"/>
+        <column xsi:type="decimal" name="aw_sarp_initial_fee_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Initial Fee Incl Tax"/>
+        <column xsi:type="decimal" name="base_aw_sarp_initial_fee_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Initial Fee Incl Tax"/>
+        <column xsi:type="decimal" name="aw_sarp_initial_row_total" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Initial Row Total"/>
+        <column xsi:type="decimal" name="base_aw_sarp_initial_row_total" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Initial Row Total"/>
+        <column xsi:type="decimal" name="aw_sarp_initial_row_total_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Initial Row Total Incl Tax"/>
+        <column xsi:type="decimal" name="base_aw_sarp_initial_row_total_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Initial Row Total Incl Tax"/>
+        <column xsi:type="decimal" name="aw_sarp_initial_fee_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Initial Fee Tax Amount"/>
+        <column xsi:type="decimal" name="base_aw_sarp_initial_fee_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Initial Fee Tax Amount"/>
+        <column xsi:type="decimal" name="aw_sarp_initial_fee_tax_percent" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Initial Fee Tax Percent"/>
+        <column xsi:type="decimal" name="aw_sarp_trial_price" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Trial Price"/>
+        <column xsi:type="decimal" name="base_aw_sarp_trial_price" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Trial Price"/>
+        <column xsi:type="decimal" name="aw_sarp_regular_price" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Regular Price"/>
+        <column xsi:type="decimal" name="base_aw_sarp_regular_price" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Regular Price"/>
+        <column xsi:type="decimal" name="aw_sarp_trial_price_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Trial Price Incl Tax"/>
+        <column xsi:type="decimal" name="base_aw_sarp_trial_price_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Trial Price Incl Tax"/>
+        <column xsi:type="decimal" name="aw_sarp_regular_price_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Regular Price Incl Tax"/>
+        <column xsi:type="decimal" name="base_aw_sarp_regular_price_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Regular Price Incl Tax"/>
+        <column xsi:type="decimal" name="aw_sarp_trial_row_total" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Trial Row Total"/>
+        <column xsi:type="decimal" name="base_aw_sarp_trial_row_total" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Trial Row Total"/>
+        <column xsi:type="decimal" name="aw_sarp_regular_row_total" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Regular Row Total"/>
+        <column xsi:type="decimal" name="base_aw_sarp_regular_row_total" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Regular Row Total"/>
+        <column xsi:type="decimal" name="aw_sarp_trial_row_total_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Trial Row Total Incl Tax"/>
+        <column xsi:type="decimal" name="base_aw_sarp_trial_row_total_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Trial Row Total Incl Tax"/>
+        <column xsi:type="decimal" name="aw_sarp_regular_row_total_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Regular Row Total Incl Tax"/>
+        <column xsi:type="decimal" name="base_aw_sarp_regular_row_total_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Regular Row Total Incl Tax"/>
+        <column xsi:type="decimal" name="aw_sarp_trial_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Trial Tax Amount"/>
+        <column xsi:type="decimal" name="base_aw_sarp_trial_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Trial Tax Amount"/>
+        <column xsi:type="decimal" name="aw_sarp_regular_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Regular Tax Amount"/>
+        <column xsi:type="decimal" name="base_aw_sarp_regular_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Regular Tax Amount"/>
+        <column xsi:type="decimal" name="aw_sarp_trial_tax_percent" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Trial Tax Percent"/>
+        <column xsi:type="decimal" name="aw_sarp_regular_tax_percent" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Regular Tax Percent"/>
+        <column xsi:type="boolean" name="aw_sarp_is_price_incl_initial_fee_amount" nullable="true"
+                comment="Aw Sarp Is Price Incl Initial Fee Amount"/>
+        <column xsi:type="boolean" name="aw_sarp_is_price_incl_trial_amount" nullable="true"
+                comment="Aw Sarp Is Price Incl Trial Amount"/>
+        <column xsi:type="boolean" name="aw_sarp_is_price_incl_regular_amount" nullable="true"
+                comment="Aw Sarp Is Price Incl Regular Amount"/>
+    </table>
+    <table name="quote_address_item" resource="checkout" comment="Sales Flat Quote Address Item">
+        <column xsi:type="decimal" name="aw_sarp_initial_fee" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Initial Fee"/>
+        <column xsi:type="decimal" name="base_aw_sarp_initial_fee" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Initial Fee"/>
+        <column xsi:type="decimal" name="aw_sarp_initial_fee_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Initial Fee Incl Tax"/>
+        <column xsi:type="decimal" name="base_aw_sarp_initial_fee_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Initial Fee Incl Tax"/>
+        <column xsi:type="decimal" name="aw_sarp_initial_row_total" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Initial Row Total"/>
+        <column xsi:type="decimal" name="base_aw_sarp_initial_row_total" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Initial Row Total"/>
+        <column xsi:type="decimal" name="aw_sarp_initial_row_total_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Initial Row Total Incl Tax"/>
+        <column xsi:type="decimal" name="base_aw_sarp_initial_row_total_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Initial Row Total Incl Tax"/>
+        <column xsi:type="decimal" name="aw_sarp_initial_fee_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Initial Fee Tax Amount"/>
+        <column xsi:type="decimal" name="base_aw_sarp_initial_fee_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Initial Fee Tax Amount"/>
+        <column xsi:type="decimal" name="aw_sarp_initial_fee_tax_percent" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Initial Fee Tax Percent"/>
+        <column xsi:type="decimal" name="aw_sarp_trial_price" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Trial Price"/>
+        <column xsi:type="decimal" name="base_aw_sarp_trial_price" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Trial Price"/>
+        <column xsi:type="decimal" name="aw_sarp_regular_price" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Regular Price"/>
+        <column xsi:type="decimal" name="base_aw_sarp_regular_price" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Regular Price"/>
+        <column xsi:type="decimal" name="aw_sarp_trial_price_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Trial Price Incl Tax"/>
+        <column xsi:type="decimal" name="base_aw_sarp_trial_price_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Trial Price Incl Tax"/>
+        <column xsi:type="decimal" name="aw_sarp_regular_price_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Regular Price Incl Tax"/>
+        <column xsi:type="decimal" name="base_aw_sarp_regular_price_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Regular Price Incl Tax"/>
+        <column xsi:type="decimal" name="aw_sarp_trial_row_total" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Trial Row Total"/>
+        <column xsi:type="decimal" name="base_aw_sarp_trial_row_total" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Trial Row Total"/>
+        <column xsi:type="decimal" name="aw_sarp_regular_row_total" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Regular Row Total"/>
+        <column xsi:type="decimal" name="base_aw_sarp_regular_row_total" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Regular Row Total"/>
+        <column xsi:type="decimal" name="aw_sarp_trial_row_total_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Trial Row Total Incl Tax"/>
+        <column xsi:type="decimal" name="base_aw_sarp_trial_row_total_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Trial Row Total Incl Tax"/>
+        <column xsi:type="decimal" name="aw_sarp_regular_row_total_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Regular Row Total Incl Tax"/>
+        <column xsi:type="decimal" name="base_aw_sarp_regular_row_total_incl_tax" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Regular Row Total Incl Tax"/>
+        <column xsi:type="decimal" name="aw_sarp_trial_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Trial Tax Amount"/>
+        <column xsi:type="decimal" name="base_aw_sarp_trial_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Trial Tax Amount"/>
+        <column xsi:type="decimal" name="aw_sarp_regular_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Regular Tax Amount"/>
+        <column xsi:type="decimal" name="base_aw_sarp_regular_tax_amount" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Base Aw Sarp Regular Tax Amount"/>
+        <column xsi:type="decimal" name="aw_sarp_trial_tax_percent" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Trial Tax Percent"/>
+        <column xsi:type="decimal" name="aw_sarp_regular_tax_percent" scale="4" precision="12" unsigned="false" nullable="true"
+                comment="Aw Sarp Regular Tax Percent"/>
+        <column xsi:type="boolean" name="aw_sarp_is_price_incl_initial_fee_amount" nullable="true"
+                comment="Aw Sarp Is Price Incl Initial Fee Amount"/>
+        <column xsi:type="boolean" name="aw_sarp_is_price_incl_trial_amount" nullable="true"
+                comment="Aw Sarp Is Price Incl Trial Amount"/>
+        <column xsi:type="boolean" name="aw_sarp_is_price_incl_regular_amount" nullable="true"
+                comment="Aw Sarp Is Price Incl Regular Amount"/>
+    </table>
+</schema>

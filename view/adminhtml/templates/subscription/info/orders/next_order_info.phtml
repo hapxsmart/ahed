@@ -1,0 +1,18 @@
+<?php
+/** @var $block \Aheadworks\Sarp2\Block\Adminhtml\Subscription\Info\NextOrderInfo */
+
+// @codingStandardsIgnoreFile
+?>
+<?php if ($block->isNextOrderInfoAvailable()): ?>
+    <table class="next-order_details">
+        <tbody>
+            <tr>
+                <th class="next-order_title">
+                    <span class="title"><?= $block->escapeHtml(__('Next Order')) ?></span>
+                </th>
+                <td class="next-order_date"><?= /* @noEscape */ $block->getNextOrderDateInfo() ?></td>
+                <td><?= $block->getNextOrderAmountHtml() ?></td>
+            </tr>
+        </tbody>
+    </table>
+<?php endif; ?>

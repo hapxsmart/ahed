@@ -1,0 +1,16 @@
+<?php
+// @codingStandardsIgnoreFile
+/** @var \Aheadworks\Sarp2\Pricing\Render\CatalogSubscriptionPriceBox $block */
+
+/** @var \Aheadworks\Sarp2\Pricing\Price\CatalogSubscriptionPrice $catalogSubscriptionPriceModel */
+$catalogSubscriptionPriceModel = $block->getPriceType('aw_sarp2_catalog_subscription_price');
+$idSuffix = $block->getIdSuffix() ? $block->getIdSuffix() : '';
+$period = $catalogSubscriptionPriceModel->getPeriod();
+?>
+<?= /* @noEscape */ $block->renderAmount($catalogSubscriptionPriceModel->getAmount(), [
+    'display_label'     => __('Subscription Price'),
+    'price_id'          => $block->getPriceId('product-price-' . $idSuffix),
+    'price_type'        => 'awSarp2CatalogSubscriptionPrice',
+    'include_container' => true
+]); ?>
+<?php if ($period): ?><span class="aw-period"><span class="separator">/</span><?= $block->escapeHtml($period) ?></span><?php endif; ?>

@@ -1,0 +1,4 @@
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+?>
+<?= $block->escapeHtml(__('You successfully added the products to your next subscription delivery. You can review and edit it in <a href="%1">My account</a>.', $block->getData('url')), ['a']);

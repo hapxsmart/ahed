@@ -1,0 +1,49 @@
+<?php
+/* @var $block \Aheadworks\Sarp2\Block\Adminhtml\Subscription\Info\Orders\Pager */
+
+// @codingStandardsIgnoreFile
+?>
+<div class="admin__data-grid-pager">
+    <?php $curPage = $block->getCurrentPage() ?>
+    <?php $lastPage = $block->getLastPage() ?>
+
+    <?php if ($curPage > 1): ?>
+        <button title="<?php echo $block->escapeHtml(__('Previous page')) ?>"
+                class="action-previous"
+                type="button"
+                data-role="previous-button">
+            <span><?php echo $block->escapeHtml(__('Previous page')) ?></span>
+        </button>
+    <?php else: ?>
+        <button type="button" class="action-previous disabled"><span><?php echo $block->escapeHtml(__('Previous page')) ?></span></button>
+    <?php endif; ?>
+
+    <input type="text"
+           id="orders-current-page"
+           value="<?php /* @noEscape */ echo $curPage ?>"
+           data-role="current-page"
+           class="admin__control-text"
+    />
+
+    <label class="admin__control-support-text" for="orders-current-page">
+        <?php /* @noEscape */ echo __('of %1', '<span>' . $block->getLastPage() . '</span>') ?>
+    </label>
+    <?php if ($curPage < $lastPage): ?>
+        <button title="<?php echo $block->escapeHtml(__('Next page')) ?>"
+                type="button"
+                class="action-next"
+                data-role="next-button">
+            <span><?php echo $block->escapeHtml(__('Next page')) ?></span>
+        </button>
+    <?php else: ?>
+        <button type="button" class="action-next disabled"><span><?php echo $block->escapeHtml(__('Next page')) ?></span></button>
+    <?php endif; ?>
+    <script>
+        require(['jquery', 'awSarp2Pager'], function($, awPager) {
+            awPager({
+                currentPage: <?php /* @noEscape */ echo $block->getCurrentPage() ?>,
+                lastPage: <?php /* @noEscape */ echo $block->getLastPage() ?>
+            });
+        });
+    </script>
+</div>

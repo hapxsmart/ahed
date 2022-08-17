@@ -1,0 +1,15 @@
+<?php
+/* @var $block \Aheadworks\Sarp2\Block\Product\SubscriptionOptions\SubscribeAndSaveTooltip */
+
+// @codingStandardsIgnoreFile
+?>
+<div class="subscribe-and-save">
+    <span class="title"><?= /* @noEscape */ $block->getSubscriptionAndSaveText() ?></span>
+    <?php if ($block->isShowTooltip()): ?>
+        <span class="tooltip">
+            <span class="tooltip-toggle"><span class="icon"></span></span>
+            <span class="tooltip-content"><?= /* @noEscape */ $block->getSubscriptionAndSaveTooltip() ?></span>
+        </span>
+    <?php endif; ?>
+</div>
+

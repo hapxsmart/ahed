@@ -1,0 +1,41 @@
+<?php
+/* @var $block \Aheadworks\Sarp2\Block\Customer\Subscriptions\Edit\NextPaymentDate */
+
+// @codingStandardsIgnoreFile
+?>
+<?php
+    $nextPaymentDate = $block->getNextPaymentDate();
+    $saveNextPaymentDateTitle = __('Save');
+?>
+<div class="aw-sarp2__next-payment-date-form">
+    <form class="form validate"
+          action="<?= $block->escapeUrl($block->getSaveUrl()) ?>"
+          method="post"
+          id="form-validate"
+          data-mage-init='{"validation":{}}'>
+        <fieldset class="fieldset">
+            <?= $block->getBlockHtml('formkey') ?>
+            <div class="field next-payment-date">
+                <label class="label" for="next-payment-date">
+                    <span><?php echo $block->escapeHtml(__('Next Payment Date')) ?></span>
+                </label>
+                <div class="control next-payment-date">
+                    <input type="text"
+                           name="next-payment-date"
+                           class="input-text"
+                           data-mage-init='{"awSarp2Calendar": {
+                                                "earliestDate": "<?= /* @noEscape */ $block->getEarliestDate() ?>",
+                                                "calendarDateFormat": "<?= /* @noEscape */ $block->getJsCalendarDateFormat() ?>",
+                                                "momentDateFormat": "<?= /* @noEscape */ $block->getMomentJsDateFormat() ?>"
+                                           }}'
+                           value="<?php /* @noEscape */ echo $nextPaymentDate ?>" />
+                </div>
+            </div>
+            <button type="submit"
+                    class="action primary"
+                    title="<?= $block->escapeHtml($saveNextPaymentDateTitle) ?>">
+                <span><?= $block->escapeHtml($saveNextPaymentDateTitle) ?></span>
+            </button>
+        </fieldset>
+    </form>
+</div>

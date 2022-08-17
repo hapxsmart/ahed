@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/layout_generic.xsd">
+    <body>
+        <referenceBlock name="product.composite.fieldset">
+            <block class="Aheadworks\Sarp2\Block\Adminhtml\Order\Create\Product\Composite\Fieldset\SubscriptionOptions"
+                   name="aw.sarp2.product.composite.fieldset.subscription.options"
+                   template="Aheadworks_Sarp2::order/create/product/composite/fieldset/subscription_options.phtml"/>
+        </referenceBlock>
+    </body>
+</layout>

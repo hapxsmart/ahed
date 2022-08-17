@@ -1,0 +1,9 @@
+<?php
+/* @var $block \Aheadworks\Sarp2\Block\Email\Profile\Items\DefaultItems */
+
+// @codingStandardsIgnoreFile
+?>
+<?php
+    $item = $block->getItem();
+?>
+<li><span><?= $block->escapeHtml($item->getName()) ?> (<?= $block->escapeHtml($block->getPlanTitle($item)) ?>)</span></li>

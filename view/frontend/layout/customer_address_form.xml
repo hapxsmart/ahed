@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="page.main.title">
+            <action method="setCssClass">
+                <argument name="cssClass" xsi:type="string">aw-sarp2__title</argument>
+            </action>
+            <block class="Aheadworks\Sarp2\Block\BackLink"
+                   name="customer.account.link.back"
+                   cacheable="false">
+                <arguments>
+                    <argument name="display_if_param_in_url" xsi:type="string">redirectToSarp2ProfileId</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

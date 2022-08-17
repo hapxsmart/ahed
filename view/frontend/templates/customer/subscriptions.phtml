@@ -1,0 +1,138 @@
+<?php
+/* @var $block \Aheadworks\Sarp2\Block\Customer\Subscriptions */
+
+// @codingStandardsIgnoreFile
+?>
+<?php
+/** @var \Aheadworks\Sarp2\ViewModel\Subscription\Details\ForProfile $detailsViewModel */
+$detailsViewModel = $block->getData('detailsViewModel');
+
+$profiles = $block->getProfiles();
+?>
+<?php if ($profiles && count($profiles)): ?>
+    <div class="table-wrapper aw-sarp2-customer-subscriptions">
+        <table class="data table">
+            <caption class="table-caption"><?php echo $block->escapeHtml(__('Subscriptions')) ?></caption>
+            <thead>
+                <tr>
+                    <th scope="col" class="col profile-id"><?php echo $block->escapeHtml(__('Profile ID')) ?></th>
+                    <th scope="col" class="col status"><?php echo $block->escapeHtml(__('Status')) ?></th>
+                    <th scope="col" class="col products"><?php echo $block->escapeHtml(__('Product(s)')) ?></th>
+                    <th scope="col" class="col subscription-plan"><?php echo $block->escapeHtml(__('Payment Schedule')) ?></th>
+                    <th scope="col" class="col trial-payment-due-date"><?php echo $block->escapeHtml(__('Trial Plan Due Date')) ?></th>
+                    <th scope="col" class="col next-payment-date"><?php echo $block->escapeHtml(__('Last Payment Date')) ?></th>
+                    <th scope="col" class="col next-payment-date"><?php echo $block->escapeHtml(__('Next Payment Date')) ?></th>
+                    <th scope="col" class="col next-payment-amount"><?php echo $block->escapeHtml(__('Next Payment Amount')) ?></th>
+                    <th scope="col" class="col actions"><?php echo $block->escapeHtml(__('Actions')) ?></th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php
+                /* @var $profile \Aheadworks\Sarp2\Api\Data\ProfileInterface */
+            ?>
+            <?php foreach ($profiles as $profile): ?>
+                <tr>
+                    <td data-th="<?php echo $block->escapeHtml(__('Profile ID')) ?>" class="col profile-id">
+                        <?php /* @noEscape */ echo $profile->getIncrementId() ?>
+                    </td>
+                    <td data-th="<?php echo $block->escapeHtml(__('Status')) ?>" class="col status">
+                        <span><?php echo $block->escapeHtml($block->getStatusLabel($profile->getStatus())) ?></span>
+                        <?php if ($block->isShowInvalidTokenTooltip($profile)): ?>
+                            <span class="payment-token-fail">
+                                <a href="#" class="tooltip-toggle highlight"></a>
+                                <span class="tooltip-content highlight">
+                                    <?php echo $block->escapeHtml(__('Please update payment details.')) ?>
+                                </span>
+                            </span>
+                        <?php endif; ?>
+                    </td>
+                    <td data-th="<?php echo $block->escapeHtml(__('Product(s)')) ?>" class="col products">
+                        <ul>
+                        <?php foreach ($profile->getItems() as $item): ?>
+                            <li>
+                                <?php if ($block->isProductExists($item['product_id']) && $block->hasProductUrl($item['product_id'])): ?>
+                                    <a href="<?php echo $block->escapeUrl($block->getProductUrl($item['product_id'])) ?>">
+                                        <span><?php echo $block->escapeHtml($item['name']) ?></span>
+                                    </a>
+                                <?php else: ?>
+                                    <?php echo $block->escapeHtml($item['name']) ?>
+                                <?php endif; ?>
+                            </li>
+                        <?php endforeach; ?>
+                        </ul>
+                    </td>
+                    <td data-th="<?php echo $block->escapeHtml(__('Payment Schedule')) ?>" class="col subscription-plan">
+                        <?php echo $block->escapeHtml($block->getPlanName($profile)) ?>
+                    </td>
+                    <td data-th="<?php echo $block->escapeHtml(__('Trial Plan Due Date')) ?>" class="col trial-due-date">
+                        <?php if ($detailsViewModel->isShowTrialDetails($profile, true)) {
+                            /* @noEscape */ echo $detailsViewModel->getRegularStartDate($profile);
+                        } ?>
+                    </td>
+                    <td data-th="<?php echo $block->escapeHtml(__('Last Payment Date')) ?>" class="col last-payment-date">
+                        <?php /* @noEscape */ echo $block->getLastPaymentDateInfo($profile) ?>
+                    </td>
+                    <td data-th="<?php echo $block->escapeHtml(__('Next Payment Date')) ?>" class="col next-payment-date">
+                        <?php /* @noEscape */ echo $block->getNextPaymentDateInfo($profile) ?>
+                    </td>
+                    <td data-th="<?php echo $block->escapeHtml(__('Next Payment Amount')) ?>" class="col next-payment-amount">
+                        <?php /* @noEscape */ echo $block->getNextPaymentAmountHtml($profile) ?>
+                    </td>
+                    <td data-th="<?php echo $block->escapeHtml(__('Actions')) ?>" class="col actions">
+                        <?php if ($block->isEditActionAvailable($profile->getProfileId())): ?>
+                            <a href="<?php echo $block->escapeUrl($block->getEditUrl($profile->getProfileId())) ?>" class="action edit">
+                                <span><?php echo $block->escapeHtml(__('Edit')) ?></span>
+                            </a>
+                        <?php endif; ?>
+                        <?php if ($block->isRenewActionAvailable($profile->getProfileId())): ?>
+                            <a data-role="aw-sarp2-renew-button-<?php echo $block->escapeHtml($profile->getProfileId()) ?>" href="#"
+                               class="action renew">
+                                <span><?php echo $block->escapeHtml(__('Renew')) ?></span>
+                            </a>
+                            <script type="text/x-magento-init">
+                            {
+                                "[data-role=aw-sarp2-renew-button-<?php echo $block->escapeHtml($profile->getProfileId()) ?>]": {
+                                    "awSarp2ButtonControl": {
+                                        "newLocation": "<?php echo $block->escapeUrl($block->getRenewUrl($profile->getProfileId())) ?>",
+                                        "confirm": {
+                                            "enabled": true,
+                                            "message": "<?php echo $block->escapeHtml(__('Are you sure you want to renew this subscription?')) ?>"
+                                        }
+                                    }
+                                }
+                            }
+                            </script>
+                        <?php endif; ?>
+                        <?php if ($block->isExtendActionAvailable($profile->getProfileId())): ?>
+                            <a data-role="aw-sarp2-extend-button-<?php echo $block->escapeHtml($profile->getProfileId()) ?>" href="#"
+                               class="action extend">
+                                <span><?php echo $block->escapeHtml(__('Extend')) ?></span>
+                            </a>
+                            <script type="text/x-magento-init">
+                            {
+                                "[data-role=aw-sarp2-extend-button-<?php echo $block->escapeHtml($profile->getProfileId()) ?>]": {
+                                    "awSarp2ButtonControl": {
+                                        "newLocation": "<?php echo $block->escapeUrl($block->getExtendUrl($profile->getProfileId())) ?>",
+                                        "confirm": {
+                                            "enabled": true,
+                                            "message": "<?php echo $block->escapeHtml(__('Are you sure you want to extend this subscription?')) ?>"
+                                        }
+                                    }
+                                }
+                            }
+                            </script>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+    <?php if ($block->getChildHtml('pager')): ?>
+        <div class="toolbar bottom"><?php /* @noEscape */ echo $block->getChildHtml('pager') ?></div>
+    <?php endif ?>
+<?php else: ?>
+    <div class="message info empty">
+        <span><?php echo $block->escapeHtml(__('You have created no subscriptions.')) ?></span>
+    </div>
+<?php endif ?>

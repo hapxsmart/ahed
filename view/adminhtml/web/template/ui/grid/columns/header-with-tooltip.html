@@ -1,0 +1,18 @@
+<th class="data-grid-th data-grid-th_with-tooltip" click="sort"
+    css="
+        _sortable: sortable,
+        _draggable: draggable,
+        _ascend: sorting === 'asc',
+        _descend: sorting === 'desc'">
+    <span class="data-grid-cell-content" translate="label"></span>
+    <div class="aw-sarp2-tooltip"
+         data-role="tooltip"
+         data-bind="
+            attr: {
+                'data-content': $t('Actual order totals displayed. They may also contain non-subscription items and/or the other subscriptions, when charged together with the current one.')
+            },
+            mageInit: {'awSarp2Tooltip':{}
+         }">
+        <a class="aw-sarp2-tooltip-action" href="#" data-role="tooltip-action"></a>
+    </div>
+</th>

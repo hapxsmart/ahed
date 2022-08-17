@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="aw_sarp2_is_used_advanced_pricing" xsi:type="array">
+                    <item name="class" xsi:type="string">Aheadworks\Sarp2\Ui\DataProvider\Product\Form\Modifier\IsUsedAdvancedPricing</item>
+                    <item name="sortOrder" xsi:type="number">23</item>
+                </item>
+                <item name="aw-sarp2-subscription-options" xsi:type="array">
+                    <item name="class" xsi:type="string">Aheadworks\Sarp2\Ui\DataProvider\Product\Form\Modifier\SubscriptionOptions</item>
+                    <item name="sortOrder" xsi:type="number">25</item>
+                </item>
+                <item name="aw-sarp2-subscription-options-child-of-configurable" xsi:type="array">
+                    <item name="class" xsi:type="string">Aheadworks\Sarp2\Ui\DataProvider\Product\Form\Modifier\ChildOfConfigurableSubscriptionOptions</item>
+                    <item name="sortOrder" xsi:type="number">27</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Catalog\Controller\Adminhtml\Product\Initialization\Helper">
+        <plugin name="awSarp2ProductSubOptions" type="Aheadworks\Sarp2\Model\Product\Type\Plugin\ProductSubOptions"/>
+    </type>
+    <type name="Magento\Framework\Data\Form\Element\Fieldset">
+        <plugin name="awSarp2OFieldset" type="Aheadworks\Sarp2\Plugin\Framework\Data\Form\Element\FieldsetPlugin"/>
+    </type>
+    <type name="Magento\Payment\Ui\Component\Listing\Column\Method\Options">
+        <plugin name="awSarp2OrderGridPaymentColumn" type="Aheadworks\Sarp2\Plugin\Payment\Ui\Listing\PaymentMethodOptionsPlugin"/>
+    </type>
+
+    <virtualType name="WebsiteOptionsRenderer" type="Aheadworks\Sarp2\Block\Adminhtml\Product\SubscriptionOptions\DynamicRows\Select">
+        <arguments>
+            <argument name="optionSource" xsi:type="object">Aheadworks\Sarp2\Model\Product\Attribute\Source\WebsiteId</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="PlanOptionsRenderer" type="Aheadworks\Sarp2\Block\Adminhtml\Product\SubscriptionOptions\DynamicRows\Select">
+        <arguments>
+            <argument name="optionSource" xsi:type="object">Aheadworks\Sarp2\Model\Product\Attribute\Source\ScopedPlan</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Restrict recurring payments in backend order creation form  -->
+    <type name="Magento\Payment\Model\Checks\SpecificationFactory">
+        <arguments>
+            <argument name="mapping" xsi:type="array">
+                <item name="country" xsi:type="object">Magento\Payment\Model\Checks\CanUseForCountry</item>
+                <item name="currency" xsi:type="object">Magento\Payment\Model\Checks\CanUseForCurrency</item>
+                <item name="checkout" xsi:type="object">Magento\Payment\Model\Checks\CanUseCheckout</item>
+                <item name="internal" xsi:type="object">Magento\Payment\Model\Checks\CanUseInternal</item>
+                <item name="total" xsi:type="object">Magento\Payment\Model\Checks\TotalMinMax</item>
+                <item name="zero_total" xsi:type="object">Magento\Payment\Model\Checks\ZeroTotal</item>
+                <item name="check_recurring" xsi:type="object">Aheadworks\Sarp2\Model\Payment\Checks\Recurring</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Sales\Block\Adminhtml\Order\Create\Billing\Method\Form">
+        <arguments>
+            <argument name="additionalChecks" xsi:type="array">
+                <item name="aw_sarp2_recurring" xsi:type="string">check_recurring</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Catalog\Model\Product\CopyConstructor\Composite">
+        <arguments>
+            <argument name="constructors" xsi:type="array">
+                <item name="aw_sarp2_options" xsi:type="string">Aheadworks\Sarp2\Model\Product\Subscription\Option\CopyConstructor</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Aheadworks\Sarp2\Controller\Adminhtml\Subscription\Save\Plan">
+        <arguments>
+            <argument name="dataOperation" xsi:type="object">Aheadworks\Sarp2\Model\Profile\Data\Operation\ChangePlan</argument>
+        </arguments>
+    </type>
+    <type name="Aheadworks\Sarp2\Controller\Adminhtml\Subscription\Save\NextPaymentDate">
+        <arguments>
+            <argument name="dataOperation" xsi:type="object">Aheadworks\Sarp2\Model\Profile\Data\Operation\ChangeNextPaymentDate</argument>
+        </arguments>
+    </type>
+    <type name="Aheadworks\Sarp2\Controller\Adminhtml\Subscription\Save\Item">
+        <arguments>
+            <argument name="dataOperation" xsi:type="object">Aheadworks\Sarp2\Model\Profile\Data\Operation\ChangeItem</argument>
+        </arguments>
+    </type>
+    <type name="Aheadworks\Sarp2\Controller\Adminhtml\Subscription\Save\RemoveItem">
+        <arguments>
+            <argument name="dataOperation" xsi:type="object">Aheadworks\Sarp2\Model\Profile\Data\Operation\RemoveItem</argument>
+        </arguments>
+    </type>
+    <type name="Aheadworks\Sarp2\Controller\Adminhtml\Subscription\Save\Address">
+        <arguments>
+            <argument name="dataOperation" xsi:type="object">Aheadworks\Sarp2\Model\Profile\Data\Operation\ChangeAddress</argument>
+        </arguments>
+    </type>
+
+    <type name="Aheadworks\Sarp2\Ui\Component\Form\Profile\Product\AttributeProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="configurable" xsi:type="object">Aheadworks\Sarp2\Ui\Component\Form\Profile\Product\Configurable</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!--  Create subscription from backend  -->
+    <type name="Magento\Sales\Block\Adminhtml\Order\Create\Items\Grid">
+        <plugin name="awSarp2OrderCreateGridCustomPrice" type="Aheadworks\Sarp2\Plugin\Block\Adminhtml\Order\Create\Items\GridPlugin"/>
+    </type>
+</config>

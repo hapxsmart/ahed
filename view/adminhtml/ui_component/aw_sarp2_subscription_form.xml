@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">aw_sarp2_subscription_form.aw_sarp2_subscription_form_data_source</item>
+            <item name="deps" xsi:type="string">aw_sarp2_subscription_form.aw_sarp2_subscription_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Subscription</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">aw_sarp2_subscription_form</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Aheadworks\Sarp2\Block\Adminhtml\Button\Back</item>
+            <item name="cancel" xsi:type="string">Aheadworks\Sarp2\Block\Adminhtml\Subscription\Edit\CancelButton</item>
+            <item name="renew" xsi:type="string">Aheadworks\Sarp2\Block\Adminhtml\Subscription\Edit\RenewButton</item>
+            <item name="extend" xsi:type="string">Aheadworks\Sarp2\Block\Adminhtml\Subscription\Edit\ExtendButton</item>
+        </item>
+    </argument>
+    <dataSource name="aw_sarp2_subscription_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Aheadworks\Sarp2\Model\Profile\DataProvider</argument>
+            <argument name="name" xsi:type="string">aw_sarp2_subscription_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">profile_id</argument>
+            <argument name="requestFieldName" xsi:type="string">profile_id</argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <container name="profile_info">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="sortOrder" xsi:type="number">0</item>
+            </item>
+        </argument>
+        <htmlContent name="html_content">
+            <argument name="block" xsi:type="object">Aheadworks\Sarp2\Block\Adminhtml\Subscription\Info</argument>
+        </htmlContent>
+    </container>
+</form>

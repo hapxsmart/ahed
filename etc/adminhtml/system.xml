@@ -1,0 +1,214 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="aheadworks" translate="label" sortOrder="300">
+            <label>Aheadworks Extensions</label>
+        </tab>
+        <section id="aw_sarp2" translate="label" type="text" sortOrder="151" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Subscriptions and Recurring Payments 2</label>
+            <tab>aheadworks</tab>
+            <resource>Aheadworks_Sarp2::config_aw_sarp</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <field id="default_shipping_method" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Shipping Method For Subscription Orders</label>
+                    <source_model>Aheadworks\Sarp2\Model\Config\Source\ShippingMethod</source_model>
+                    <comment>This method will be used if a shipping method from initial order can't be applied.</comment>
+                </field>
+                <field id="log_enabled" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Extension Log</label>
+                    <source_model>Aheadworks\Sarp2\Model\Config\Source\YesRecommendedNo</source_model>
+                </field>
+                <field id="is_used_advanced_pricing" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1">
+                    <label>Use Product Advanced Pricing</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Use special, group, and tier prices as a base for subscription price.</comment>
+                </field>
+                <field id="recalculation_of_totals" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Recalculation of Totals</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>Enables application of lowest possible price on recurrent orders.</comment>
+                </field>
+            </group>
+            <group id="engine" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Engine</label>
+                <field id="use_bundled_payments" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Merge same-day subscriptions</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Applies to subscriptions of shippable products which the same shipping addresses. In case of different shipping methods, the one set as "Shipping Method For Subscription Orders" will be used. Make sure to set up default shipping method for subscription orders (the option above).</comment>
+                </field>
+                <field id="max_retries_count" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <source_model>\Aheadworks\Sarp2\Model\Config\Source\AttemptsCount</source_model>
+                    <label>Number Of Attempts To Charge Failed Subscription</label>
+                    <validate>integer validate-greater-than-zero</validate>
+                    <comment>An attempt will be made one time per day. If all attempts fail, the subscription will be canceled.</comment>
+                </field>
+            </group>
+            <group id="product_page" translate="label" type="text" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Product Page</label>
+                <field id="subscription_options_renderer" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1">
+                    <label>Show Subscription Plan Selector As</label>
+                    <source_model>Aheadworks\Sarp2\Model\Plan\Source\ListRenderer</source_model>
+                </field>
+                <field id="subscribe_and_save" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1">
+                    <label>Subscribe And Save Text</label>
+                    <comment>Can't be empty if the upper option is Dropdown</comment>
+                </field>
+                <field id="subscribe_and_save_tooltip" translate="label comment" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1">
+                    <label>Tooltip for Subscribe And Save</label>
+                    <comment>Will be displayed on the product pages. HTML is supported.</comment>
+                </field>
+                <field id="alternative_subscription_period_details_view" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1">
+                    <label>Subscription plan description on product page</label>
+                    <source_model>Aheadworks\Sarp2\Model\Config\Source\ClassicAdvanced</source_model>
+                </field>
+                <!-- todo: M2SARP2-990 Hide "As Low As" price in release 2.12 -->
+                <!--<field id="is_used_subscription_price_in_as_low_as" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1">
+                    <label>Use subscription price in “As Low As”</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Calculates the lowest price subscription price and if it’s lower than the cheapest one-off option, displays it as “As low as $NN/PERIOD“ on product and category page.</comment>
+                </field>-->
+            </group>
+            <group id="email_settings" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Email Settings</label>
+                <field id="email_identity" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email Sender</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                </field>
+                <field id="successful_billing_email_enabled" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Successful Billing Email</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="successful_billing_email_template" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Billing Successful Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <depends>
+                        <field id="successful_billing_email_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="failed_billing_email_enabled" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Failed Billing Email</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="failed_billing_email_template" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Billing Failed Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <depends>
+                        <field id="failed_billing_email_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="failed_billing_email_bcc" translate="label comment" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Send BCC To Admin</label>
+                    <validate>no-whitespace</validate>
+                    <comment>All emails about billing failure will be copied to this address. Separate several addresses with commas. Leave empty to disable.</comment>
+                    <depends>
+                        <field id="failed_billing_email_enabled">1</field>
+                    </depends>
+                    <backend_model>Aheadworks\Sarp2\Model\Config\Backend\Email</backend_model>
+                </field>
+                <field id="failed_billing_admin_email" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Send Failure Alert To Admin</label>
+                    <validate>validate-email</validate>
+                    <comment>If empty, the email address from Send BCC To Admin will be used.</comment>
+                    <backend_model>Aheadworks\Sarp2\Model\Config\Backend\Email</backend_model>
+                </field>
+                <field id="failed_billing_admin_email_template" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Failure Alerts For Admin Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                <field id="subscription_created_email_template" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Subscription Created Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                <field id="subscription_cancelled_admin_email_enabled" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Subscription Cancelled by Admin Email</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="subscription_cancelled_admin_email_template" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Subscription Cancelled by Admin Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <depends>
+                        <field id="subscription_cancelled_admin_email_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="subscription_cancelled_customer_email_enabled" translate="label" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Subscription Cancelled by Customer Email</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="subscription_cancelled_customer_email_template" translate="label" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Subscription Cancelled by Customer Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <depends>
+                        <field id="subscription_cancelled_customer_email_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="upcoming_billing_email_days_offset" translate="label" type="text" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Send Reminder About Next Billing, Days</label>
+                    <validate>integer validate-zero-or-greater</validate>
+                </field>
+                <field id="upcoming_billing_email_template" translate="label" type="select" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Next Billing Email Reminder Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <depends>
+                        <field id="upcoming_billing_email_days_offset" negative="1"><![CDATA[]]></field>
+                    </depends>
+                </field>
+                <field id="send_secure_link_to" translate="label" type="select" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Send Secure Link to</label>
+                    <source_model>Aheadworks\Sarp2\Model\Config\Source\SendSecureLinkTo</source_model>
+                </field>
+            </group>
+            <group id="subscription_editing" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1">
+                <label>Subscription Editing</label>
+                <field id="can_switch_to_another_plan" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1">
+                    <label>Switch To Another Plan</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="can_change_shipping_address" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1">
+                    <label>Change Shipping Address</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="can_edit_next_payment_date" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1">
+                    <label>Allow Editing Next Payment Date</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="earliest_next_payment_date" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Earliest Next Payment Date, Days</label>
+                    <comment>Set the offset in days. Setting to 0 is not recommended. Set to 1 to allow choosing "tomorrow"...</comment>
+                    <validate>validate-digits validate-zero-or-greater</validate>
+                    <depends>
+                        <field id="can_edit_next_payment_date">1</field>
+                    </depends>
+                </field>
+                <field id="can_edit_next_payment_date_for_membership" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1">
+                    <label>Allow next payment date editing for membership</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="can_edit_next_payment_date">1</field>
+                    </depends>
+                </field>
+                <field id="can_edit_product_item" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1">
+                    <label>Allow editing product options and quantity</label>
+                    <comment>The changes will be applied to all subsequent orders</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="can_one_time_edit_product_item" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1">
+                    <label>Allow one-time editing of product options and quantity</label>
+                    <comment>When enabled, a customer will be prompted to select whether the changes should be applied permanently or to the next order only.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="can_edit_product_item">1</field>
+                    </depends>
+                </field>
+                <field id="can_cancel_subscription" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1">
+                    <label>Allow Customer To Cancel Subscription</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="can_add_to_nearest_subscription" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1">
+                    <label>Allow Adding Products To Nearest Subscription</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

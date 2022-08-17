@@ -1,0 +1,15 @@
+<?php
+/* @var $block \Aheadworks\Sarp2\Block\Email\Order\Items */
+
+// @codingStandardsIgnoreFile
+?>
+<?php
+    $order = $block->getOrder();
+?>
+<?php if ($order): ?>
+    <ul style="list-style: none;">
+    <?php foreach ($order->getAllItems() as $item): ?>
+        <?php echo $block->getItemHtml($item) ?>
+    <?php endforeach; ?>
+    </ul>
+<?php endif; ?>

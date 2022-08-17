@@ -1,0 +1,86 @@
+<?php
+/** @var $block \Aheadworks\Sarp2\Block\Adminhtml\Plan\Titles */
+
+// @codingStandardsIgnoreFile
+?>
+<div class="admin__field">
+    <table id="storefront_titles_table" class="admin__control-table aw-sarp2_plan__titles">
+        <thead>
+            <tr>
+                <th class="col-store-view"><?php echo $block->escapeHtml(__('Store View')) ?></th>
+                <th class="col-title"><?php echo $block->escapeHtml(__('Title')) ?></th>
+                <th class="col-delete">&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody data-role="rows-container"></tbody>
+        <?php if (!$block->isSingleStoreEnabled()): ?>
+            <tfoot>
+            <tr>
+                <td colspan="4" class="col-actions-add">
+                    <button title="<?php echo $block->escapeHtml(__('Add')) ?>"
+                            type="button"
+                            class="add"
+                            data-role="add-button">
+                        <span><?php echo $block->escapeHtml(__('Add')) ?></span>
+                    </button>
+                </td>
+            </tr>
+            </tfoot>
+        <?php endif; ?>
+        <script data-role="row-template" type="text/x-magento-template">
+            <tr data-role="row" data-index="<%- data.index %>">
+                <td class="col-store-view">
+                    <select class="required-entry"
+                            name="titles[<%- data.index %>][store_id]"
+                            data-form-part="aw_sarp2_plan_form"
+                            data-role="store-view-select"
+                            data-index="<%- data.index %>">
+                        <?php foreach ($block->getStoresOptions() as $optGroup): ?>
+                            <?php if (is_array($optGroup['value'])): ?>
+                                <optgroup label="<?php echo $block->escapeHtml(__($optGroup['label'])) ?>"></optgroup>
+                                <?php foreach ($optGroup['value'] as $storeViewOption): ?>
+                                    <option value="<?php /* @noEscape */ echo $storeViewOption['value'] ?>"><?php echo $block->escapeHtml(__($storeViewOption['label'])) ?></option>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <option value="<?php /* @noEscape */ echo $optGroup['value'] ?>"><?php echo $block->escapeHtml(__($optGroup['label'])) ?></option>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </select>
+                </td>
+                <td class="col-title">
+                    <input class="required-entry"
+                           type="text"
+                           name="titles[<%- data.index %>][title]"
+                           value="<%- data.title %>"
+                           data-role="title"
+                           data-index="<%- data.index %>"
+                           data-form-part="aw_sarp2_plan_form"/>
+                </td>
+                <td class="col-delete">
+                    <input class="delete-flag"
+                           type="hidden"
+                           name="titles[<%- data.index %>][removed]"
+                           value="0"
+                           data-form-part="aw_sarp2_plan_form"
+                           data-role="delete-flag"
+                           data-index="<%- data.index %>"
+                    />
+                    <button title="<?php echo $block->escapeHtml(__('Delete')) ?>"
+                            type="button"
+                            class="delete"
+                            data-role="delete-button"
+                            data-index="<%- data.index %>">
+                        <span><?php echo $block->escapeHtml(__('Delete')) ?></span>
+                    </button>
+                </td>
+            </tr>
+        </script>
+    </table>
+    <script>
+        require(['jquery', 'awSarp2Titles'], function($, storefrontTitles) {
+            storefrontTitles({
+                optionValues: <?php /* @noEscape */ echo $block->jsonEncode($block->getTitles()) ?>
+            }, $('#storefront_titles_table'));
+        });
+    </script>
+</div>

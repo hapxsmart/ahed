@@ -1,0 +1,11 @@
+<?php
+/** @var $block \Aheadworks\Sarp2\Block\Adminhtml\Product\SubscriptionOptions\Notice */
+
+// @codingStandardsIgnoreFile
+?>
+<span>
+    <?php /* @noEscape */ echo __(
+        'No subscription plans are available for current scope. Click %1 to create one.',
+        '<a href="' . $block->getPlansUrl() . '">' . __('here') . '</a>'
+    ) ?>
+</span>

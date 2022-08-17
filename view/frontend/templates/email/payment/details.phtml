@@ -1,0 +1,15 @@
+<?php
+/* @var $block \Magento\Framework\View\Element\Template */
+
+// @codingStandardsIgnoreFile
+
+$details = $block->getDetails() ?? [];
+
+if ($details): ?>
+    <p>Payment details:</p>
+    <ul style="list-style: none;">
+        <?php foreach ($details as $key => $value): ?>
+            <li><span><?= $block->escapeHtml($key) ?>:</span> <span><?= $block->escapeHtml($value) ?></span></li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>

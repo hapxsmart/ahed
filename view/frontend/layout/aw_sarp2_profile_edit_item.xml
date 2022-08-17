@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <link src="Magento_Checkout::js/view/configure/product-customer-data.js"/>
+    </head>
+    <update handle="catalog_product_view"/>
+    <body>
+        <referenceBlock name="product.info.form.options">
+            <block class="Aheadworks\Sarp2\Block\Customer\Subscriptions\Edit\ProductItem"
+                   name="aw_sarp2.profile.edit.item"
+                   template="Aheadworks_Sarp2::customer/subscriptions/edit/item/product_item_edit.phtml"
+                   cacheable="false"/>
+        </referenceBlock>
+        <referenceBlock name="product.info.addtocart">
+            <arguments>
+                <argument name="viewModel" xsi:type="object">Aheadworks\Sarp2\ViewModel\Customer\Subscription\Edit\Item\UpdateButton</argument>
+            </arguments>
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Aheadworks_Sarp2::customer/subscriptions/edit/item/update_subscription_button.phtml</argument>
+            </action>
+        </referenceBlock>
+        <referenceBlock name="product.info.addtocart.additional">
+            <arguments>
+                <argument name="viewModel" xsi:type="object">Aheadworks\Sarp2\ViewModel\Customer\Subscription\Edit\Item\UpdateButton</argument>
+            </arguments>
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Aheadworks_Sarp2::customer/subscriptions/edit/item/update_subscription_button.phtml</argument>
+            </action>
+        </referenceBlock>
+        <!-- Remove blocks -->
+        <referenceBlock name="aw_sarp2.product.subscription-options" remove="true"/>
+        <referenceBlock name="product.info.review" remove="true"/>
+        <referenceContainer name="product.info.extrahint" remove="true"/>
+        <referenceContainer name="content.aside" remove="true"/>
+        <referenceContainer name="product.info.social" remove="true"/>
+    </body>
+</page>

@@ -1,0 +1,44 @@
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+  #aw-sarp2-subscription-update {
+    .aw-sarp2-tooltip {
+      .lib-tooltip(bottom);
+
+      .tooltip-toggle {
+        position: relative;
+        margin-left: 20px;
+      }
+
+      .tooltip-toggle:before {
+        content: '\e623';
+        display: inline;
+        font-family: 'luma-icons';
+        font-size: 18px;
+        color: #656565;
+        position: absolute;
+        top: 50%;
+        left: -16px;
+        transform: translateY(-50%);
+      }
+
+      .tooltip-content {
+        white-space: normal;
+        left: unset;
+        right: -20px;
+      }
+
+      .tooltip-content:after {
+        left: unset;
+        right: 20px;
+      }
+
+      .tooltip-content:before {
+        left: unset;
+        right: 19px;
+      }
+    }
+  }
+}

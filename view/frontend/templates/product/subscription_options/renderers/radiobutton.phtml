@@ -1,0 +1,33 @@
+<?php
+/* @var $block \Aheadworks\Sarp2\Block\Product\SubscriptionOptions\Renderer\Radiobutton */
+// @codingStandardsIgnoreFile
+$optionsBlock = $block->getRenderedBlock();
+?>
+<div class="aw-sarp2-subscription__wrapper-options">
+    <?php if (!$optionsBlock->isFirstOptionNoPlan()) echo $optionsBlock->getChildHtml('tooltip.before') ?>
+
+    <div class="aw-sarp2-subscription__options-list">
+        <?php foreach ($optionsBlock->getOptionArray() as $optionId => $optionLabel): ?>
+            <?php $htmlId = 'aw-sarp2-subscription-option-' . $optionId ?>
+            <div class="field choice">
+                <input type="radio"
+                       class="radio product option"
+                       data-validate="{'validate-one-required-by-name':true}"
+                       id="<?= /* @noEscape */ $htmlId ?>"
+                       name="aw_sarp2_subscription_type"
+                    <?php if (0 == $optionId): ?>
+                        checked="checked"
+                    <?php endif ?>
+                       value="<?= /* @noEscape */ $optionId ?>"
+                       aria-required="true">
+                <label class="label" for="<?= /* @noEscape */ $htmlId ?>">
+                    <span><?= $optionsBlock->escapeHtml($optionLabel) ?></span>
+                </label>
+            </div>
+
+            <?php if ($optionsBlock->isFirstOptionNoPlan() && (int)$optionId == 0) echo $optionsBlock->getChildHtml('tooltip.before') ?>
+        <?php endforeach; ?>
+    </div>
+
+<?php echo $optionsBlock->getChildHtml('tooltip.after') ?>
+</div>

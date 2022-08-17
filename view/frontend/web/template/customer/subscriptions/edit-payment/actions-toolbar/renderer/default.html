@@ -1,0 +1,12 @@
+<div class="primary" ifnot="isInContext()">
+    <button id="profile_save_payment_button"
+            class="action primary"
+            type="submit"
+            data-bind="
+                click: savePaymentDetails,
+                attr: {'title': $t('Save Payment')},
+                enable: isSaveActionAllowed
+                ">
+        <span data-bind="i18n: 'Save Payment'"></span>
+    </button>
+</div>

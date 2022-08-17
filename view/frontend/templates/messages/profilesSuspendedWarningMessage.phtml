@@ -1,0 +1,4 @@
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+?>
+<?= $block->escapeHtml(__('Some of the subscriptions do not have a payment information and will be canceled. Review payment data <a href="%1">here</a>.', $block->getData('url')), ['a']);

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="product.info.form.options">
+            <block class="Aheadworks\Sarp2\Block\Product\SubscriptionOptions"
+                   name="aw_sarp2.product.subscription-options"
+                   as="aw_sarp2_product_subscription_options"
+                   after="product_options_wrapper">
+                <block class="Magento\Framework\View\Element\RendererList" name="aw_sarp2.product.subscription-options.renders" as="renderer.list">
+                    <block class="Aheadworks\Sarp2\Block\Product\SubscriptionOptions\Renderer\Radiobutton" name="aw_sarp2.product.subscription-options.radiobutton"/>
+                    <block class="Aheadworks\Sarp2\Block\Product\SubscriptionOptions\Renderer\Dropdown" name="aw_sarp2.product.subscription-options.dropdown"/>
+                </block>
+                <container name="tooltip.before">
+                    <block class="Aheadworks\Sarp2\Block\Product\SubscriptionOptions\SubscribeAndSaveTooltip"
+                           name="aw_sarp2.product.subscription-options.tooltip"
+                           as="subscription.tooltip" />
+                </container>
+                <container name="tooltip.after"/>
+            </block>
+            <container name="aw_sarp2.product.js" as="aw_sarp2_product_js" label="Product Page Custom Js Container" after="-" />
+
+            <block name="tier-price-template-container"
+                   class="Aheadworks\Sarp2\Block\Product\TierPriceTemplate">
+                <block name="tier-price-template" template="Magento_ConfigurableProduct::product/price/tier_price.phtml"/>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

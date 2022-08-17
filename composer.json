@@ -1,0 +1,51 @@
+{
+    "name": "aheadworks/module-sarp2",
+    "description": "Advanced Subscription Products for Magento 2",
+    "require": {
+        "magento/module-backend": ">100.0",
+        "magento/module-catalog": ">100.0",
+        "magento/module-checkout": ">100.0",
+        "magento/module-config": ">100.0",
+        "magento/module-configurable-product": ">100.0",
+        "magento/module-bundle": ">100.0",
+        "magento/module-customer": ">100.0",
+        "magento/module-directory": ">100.0",
+        "magento/module-downloadable": ">100.0",
+        "magento/module-instant-purchase": ">100.0",
+        "magento/module-multishipping": ">100.0",
+        "magento/module-payment": ">100.0",
+        "magento/module-paypal": ">100.0",
+        "magento/module-quote": ">100.0",
+        "magento/module-sales": ">100.0",
+        "magento/module-vault": ">100.0",
+        "magento/module-checkout-agreements": ">100.0",
+        "magento/module-sales-sequence": ">100.0",
+        "magento/module-tax": ">100.0",
+        "magento/module-theme": ">100.0",
+        "magento/module-ui": ">100.0",
+        "magento/module-weee": ">100.0",
+        "magento/framework": ">100.0"
+    },
+    "suggests": {
+        "aheadworks/module-sarp2-graph-ql": "1.0.2",
+        "aheadworks/module-sarp2-adyen": "1.2.1",
+        "aheadworks/module-sarp2-stripe": "1.0.7",
+        "aheadworks/module-sarp2-authorizenet": "1.0.2",
+        "aheadworks/module-sarp2-braintree": "1.0.3",
+        "aheadworks/module-sarp2-braintree-by-paypal": "1.0.3",
+        "aheadworks/module-sarp2-free-payment": "^1.0"
+    },
+    "type": "magento2-module",
+    "version": "2.18.0",
+    "license": [
+        "proprietary"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Aheadworks\\Sarp2\\": ""
+        }
+    }
+}

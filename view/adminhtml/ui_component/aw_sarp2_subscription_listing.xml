@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">aw_sarp2_subscription_listing.aw_sarp2_subscription_listing_data_source</item>
+            <item name="deps" xsi:type="string">aw_sarp2_subscription_listing.aw_sarp2_subscription_listing_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">aw_sarp2_subscription_columns</item>
+        <item name="buttons" xsi:type="array">
+            <item name="add" xsi:type="array">
+                <item name="name" xsi:type="string">add</item>
+                <item name="label" xsi:type="string" translate="true">Create New Subscription</item>
+                <item name="class" xsi:type="string">primary</item>
+                <item name="url" xsi:type="string">sales/order_create/index</item>
+            </item>
+        </item>
+    </argument>
+    <dataSource name="aw_sarp2_subscription_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">AwSarp2SubscriptionGridDataProvider</argument>
+            <argument name="name" xsi:type="string">aw_sarp2_subscription_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">profile_id</argument>
+            <argument name="requestFieldName" xsi:type="string">profile_id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">profile_id</item>
+                    </item>
+                    <item name="filter_url_params" xsi:type="array">
+                        <item name="customer" xsi:type="array">
+                            <item name="0" xsi:type="string">customer_id</item>
+                            <item name="1" xsi:type="string">customer_email</item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="sticky" xsi:type="boolean">false</item>
+            </item>
+        </argument>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="templates" xsi:type="array">
+                        <item name="filters" xsi:type="array">
+                            <item name="select" xsi:type="array">
+                                <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>
+                                <item name="template" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+            <filterSelect name="store_id">
+                <argument name="optionsProvider" xsi:type="configurableObject">
+                    <argument name="class" xsi:type="string">Magento\Cms\Ui\Component\Listing\Column\Cms\Options</argument>
+                </argument>
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="provider" xsi:type="string">${ $.parentName }</item>
+                        <item name="imports" xsi:type="array">
+                            <item name="visible" xsi:type="string">componentType = column, index = ${ $.index }:visible</item>
+                        </item>
+                        <item name="dataScope" xsi:type="string">store_id</item>
+                        <item name="label" xsi:type="string" translate="true">Store View</item>
+                        <item name="captionValue" xsi:type="string">0</item>
+                    </item>
+                </argument>
+            </filterSelect>
+        </filters>
+        <massaction name="listing_massaction">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/tree-massactions</item>
+                </item>
+            </argument>
+            <action name="status">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="type" xsi:type="string">status</item>
+                        <item name="label" xsi:type="string" translate="true">Change status</item>
+                    </item>
+                </argument>
+                <argument name="actions" xsi:type="array">
+                    <item name="0" xsi:type="array">
+                        <item name="type" xsi:type="string">suspend</item>
+                        <item name="label" xsi:type="string" translate="true">Suspend</item>
+                        <item name="url" xsi:type="url" path="aw_sarp2/subscription/massSuspend"/>
+                    </item>
+                    <item name="1" xsi:type="array">
+                        <item name="type" xsi:type="string">activate</item>
+                        <item name="label" xsi:type="string" translate="true">Activate</item>
+                        <item name="url" xsi:type="url" path="aw_sarp2/subscription/massActivate"/>
+                    </item>
+                    <item name="2" xsi:type="array">
+                        <item name="type" xsi:type="string">cancel</item>
+                        <item name="label" xsi:type="string" translate="true">Cancel</item>
+                        <item name="url" xsi:type="url" path="aw_sarp2/subscription/massCancel"/>
+                    </item>
+                </argument>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="aw_sarp2_subscription_columns" class="Aheadworks\Sarp2\Ui\Component\Listing\Columns">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="fieldSwitcher" xsi:type="array">
+                    <item name="0" xsi:type="array">
+                        <item name="display" xsi:type="string">customer_page</item>
+                        <item name="action" xsi:type="array">
+                            <item name="name" xsi:type="string">componentDisabled</item>
+                            <item name="value" xsi:type="boolean">true</item>
+                            <item name="columns" xsi:type="array">
+                                <item name="0" xsi:type="string">customer_fullname</item>
+                                <item name="1" xsi:type="string">customer_email</item>
+                                <item name="2" xsi:type="string">customer_group_id</item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </item>
+        </argument>
+        <selectionsColumn name="ids"
+                          component="Aheadworks_Sarp2/js/ui/grid/columns/multiselect/additional-filtering">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">profile_id</item>
+                    <item name="additionalFilteringKeys" xsi:type="array">
+                        <item name="0" xsi:type="string">customer_id</item>
+                        <item name="1" xsi:type="string">customer_email</item>
+                    </item>
+                </item>
+            </argument>
+        </selectionsColumn>
+        <column name="profile_id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">ID</item>
+                    <item name="filter" xsi:type="string">textRange</item>
+                    <item name="sorting" xsi:type="string">desc</item>
+                </item>
+            </argument>
+        </column>
+        <column name="increment_id" class="Aheadworks\Sarp2\Ui\Component\Listing\Column\Link">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Aheadworks_Sarp2/js/ui/grid/columns/link</item>
+                    <item name="label" xsi:type="string" translate="true">Subscription Profile ID</item>
+                    <item name="linkUrl" xsi:type="string">aw_sarp2/subscription/view</item>
+                    <item name="indexField" xsi:type="string">profile_id</item>
+                    <item name="requestField" xsi:type="string">profile_id</item>
+                </item>
+            </argument>
+        </column>
+        <column name="customer_fullname" class="Aheadworks\Sarp2\Ui\Component\Listing\Column\CustomerName">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Aheadworks_Sarp2/js/ui/grid/columns/link</item>
+                    <item name="label" xsi:type="string" translate="true">Customer</item>
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="linkUrl" xsi:type="string">customer/index/edit</item>
+                    <item name="indexField" xsi:type="string">customer_id</item>
+                    <item name="requestField" xsi:type="string">id</item>
+                </item>
+            </argument>
+        </column>
+        <column name="customer_email">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Email</item>
+                    <item name="filter" xsi:type="string">text</item>
+                </item>
+            </argument>
+        </column>
+        <column name="customer_group_id">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Aheadworks\Sarp2\Model\Profile\Source\CustomerGroup</item>
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
+                    <item name="label" xsi:type="string" translate="true">Group</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="filter" xsi:type="string">select</item>
+                </item>
+            </argument>
+        </column>
+        <column name="plan_name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Subscription Plan</item>
+                    <item name="filter" xsi:type="string">text</item>
+                </item>
+            </argument>
+        </column>
+        <column name="status">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Aheadworks\Sarp2\Model\Profile\Source\Status</item>
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
+                    <item name="label" xsi:type="string" translate="true">Status</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="filter" xsi:type="string">select</item>
+                </item>
+            </argument>
+        </column>
+        <column name="store_id" class="Magento\Store\Ui\Component\Listing\Column\Store">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                    <item name="label" xsi:type="string" translate="true">Store View</item>
+                </item>
+            </argument>
+        </column>
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">date</item>
+                    <item name="filter" xsi:type="string">dateRange</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
+                    <item name="label" xsi:type="string" translate="true">Created At</item>
+                </item>
+            </argument>
+        </column>
+        <column name="start_date" class="Magento\Ui\Component\Listing\Columns\Date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">date</item>
+                    <item name="filter" xsi:type="string">dateRange</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
+                    <item name="label" xsi:type="string" translate="true">Start Date</item>
+                    <item name="dateFormat" xsi:type="string">MMM d, y</item>
+                </item>
+            </argument>
+        </column>
+        <column name="last_order_id" class="Aheadworks\Sarp2\Ui\Component\Listing\Column\OrderId">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Aheadworks_Sarp2/js/ui/grid/columns/link</item>
+                    <item name="label" xsi:type="string" translate="true">Last Order</item>
+                    <item name="linkUrl" xsi:type="string">sales/order/view</item>
+                    <item name="indexField" xsi:type="string">last_order_id</item>
+                    <item name="requestField" xsi:type="string">order_id</item>
+                </item>
+            </argument>
+        </column>
+        <column name="last_order_date" class="Magento\Ui\Component\Listing\Columns\Date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">date</item>
+                    <item name="filter" xsi:type="string">dateRange</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
+                    <item name="label" xsi:type="string" translate="true">Last Order Date</item>
+                </item>
+            </argument>
+        </column>
+        <column name="last_order_grand_total" class="Aheadworks\Sarp2\Ui\Component\Listing\Column\Price">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Last Order Grand Total</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                    <item name="headerTmpl" xsi:type="string">Aheadworks_Sarp2/ui/grid/columns/header-with-tooltip</item>
+                </item>
+            </argument>
+        </column>
+        <column name="next_order_date" class="Magento\Ui\Component\Listing\Columns\Date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">date</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                    <item name="filterable" xsi:type="boolean">false</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
+                    <item name="label" xsi:type="string" translate="true">Next Order Date</item>
+                </item>
+            </argument>
+        </column>
+        <column name="next_order_grand_total" class="Aheadworks\Sarp2\Ui\Component\Listing\Column\Price">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Next Order Grand Total</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+        </column>
+        <column name="products" class="Aheadworks\Sarp2\Ui\Component\Listing\Column\Products">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Products</item>
+                    <item name="sortable" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+        </column>
+    </columns>
+</listing>

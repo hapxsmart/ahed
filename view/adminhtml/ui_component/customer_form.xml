@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <fieldset name="aw_sarp2_content" class="Aheadworks\Sarp2\Ui\Component\Form\Customer\SubscriptionsFieldset">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Subscriptions</item>
+            </item>
+        </argument>
+        <insertListing name="aw_sarp2_subscription_listing">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="cssclass" xsi:type="string">aw_sarp2_subscription_listing</item>
+                    <item name="autoRender" xsi:type="boolean">true</item>
+                    <item name="externalProvider" xsi:type="string">${ $.ns }.aw_sarp2_subscription_listing_data_source</item>
+                    <item name="ns" xsi:type="string">aw_sarp2_subscription_listing</item>
+                    <item name="externalFilterMode" xsi:type="boolean">true</item>
+                    <item name="imports" xsi:type="array">
+                        <item name="id" xsi:type="string">${ $.provider }:data.customer.entity_id</item>
+                        <item name="email" xsi:type="string">${ $.provider }:data.customer.email</item>
+                    </item>
+                    <item name="exports" xsi:type="array">
+                        <item name="id" xsi:type="string">${ $.externalProvider }:params.customer_id</item>
+                        <item name="email" xsi:type="string">${ $.externalProvider }:params.customer_email</item>
+                    </item>
+                </item>
+            </argument>
+        </insertListing>
+    </fieldset>
+</form>

@@ -1,0 +1,597 @@
+{
+    "aw_sarp2_plan": {
+        "column": {
+            "plan_id": true,
+            "definition_id": true,
+            "status": true,
+            "name": true,
+            "sort_order": true,
+            "regular_price_pattern_percent": true,
+            "trial_price_pattern_percent": true,
+            "price_rounding": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_078DF2B7EE57BBE50FEB754AEFA2EFD3": true
+        }
+    },
+    "aw_sarp2_plan_definition": {
+        "column": {
+            "definition_id": true,
+            "billing_period": true,
+            "billing_frequency": true,
+            "total_billing_cycles": true,
+            "start_date_type": true,
+            "start_date_day_of_month": true,
+            "is_initial_fee_enabled": true,
+            "is_trial_period_enabled": true,
+            "trial_total_billing_cycles": true,
+            "is_membership_model_enabled": true,
+            "upcoming_billing_email_offset": true,
+            "trial_billing_period": true,
+            "trial_billing_frequency": true,
+            "upcoming_trial_billing_email_offset": true,
+            "is_extend_enable": true,
+            "offer_extend_email_offset": true,
+            "offer_extend_email_template": true,
+            "is_allow_subscription_cancellation": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "aw_sarp2_plan_title": {
+        "column": {
+            "id": true,
+            "plan_id": true,
+            "store_id": true,
+            "title": true
+        },
+        "index": {
+            "AW_SARP2_PLAN_TITLE_PLAN_ID": true,
+            "AW_SARP2_PLAN_TITLE_STORE_ID": true
+        },
+        "constraint": {
+            "AW_SARP2_PLAN_TITLE_PLAN_ID_AW_SARP2_PLAN_PLAN_ID": true,
+            "AW_SARP2_PLAN_TITLE_STORE_ID_STORE_STORE_ID": true,
+            "PRIMARY": true
+        }
+    },
+    "aw_sarp2_subscription_option": {
+        "column": {
+            "option_id": true,
+            "plan_id": true,
+            "product_id": true,
+            "website_id": true,
+            "initial_fee": true,
+            "trial_price": true,
+            "regular_price": true,
+            "is_auto_trial_price": true,
+            "is_auto_regular_price": true,
+            "is_installments_mode": true
+        },
+        "index": {
+            "AW_SARP2_SUBSCRIPTION_OPTION_PRODUCT_ID": true,
+            "AW_SARP2_SUBSCRIPTION_OPTION_WEBSITE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AW_SARP2_SUBSCRIPTION_OPTION_PLAN_ID_AW_SARP2_PLAN_PLAN_ID": true,
+            "AW_SARP2_SUBSCRIPTION_OPTION_WEBSITE_ID_STORE_WEBSITE_WEBSITE_ID": true
+        }
+    },
+    "aw_sarp2_profile": {
+        "column": {
+            "profile_id": true,
+            "increment_id": true,
+            "store_id": true,
+            "created_at": true,
+            "updated_at": true,
+            "status": true,
+            "plan_id": true,
+            "plan_name": true,
+            "is_virtual": true,
+            "plan_definition_id": true,
+            "start_date": true,
+            "items_qty": true,
+            "customer_id": true,
+            "customer_tax_class_id": true,
+            "customer_group_id": true,
+            "customer_email": true,
+            "customer_dob": true,
+            "customer_fullname": true,
+            "customer_prefix": true,
+            "customer_firstname": true,
+            "customer_middlename": true,
+            "customer_lastname": true,
+            "customer_suffix": true,
+            "customer_is_guest": true,
+            "customer_was_guest": true,
+            "checkout_shipping_method": true,
+            "checkout_shipping_description": true,
+            "trial_shipping_method": true,
+            "trial_shipping_description": true,
+            "regular_shipping_method": true,
+            "regular_shipping_description": true,
+            "global_currency_code": true,
+            "base_currency_code": true,
+            "profile_currency_code": true,
+            "base_to_global_rate": true,
+            "base_to_profile_rate": true,
+            "initial_subtotal": true,
+            "base_initial_subtotal": true,
+            "initial_subtotal_incl_tax": true,
+            "base_initial_subtotal_incl_tax": true,
+            "initial_tax_amount": true,
+            "base_initial_tax_amount": true,
+            "initial_grand_total": true,
+            "base_initial_grand_total": true,
+            "trial_subtotal": true,
+            "base_trial_subtotal": true,
+            "trial_subtotal_incl_tax": true,
+            "base_trial_subtotal_incl_tax": true,
+            "trial_tax_amount": true,
+            "base_trial_tax_amount": true,
+            "trial_shipping_amount": true,
+            "base_trial_shipping_amount": true,
+            "trial_shipping_amount_incl_tax": true,
+            "base_trial_shipping_amount_incl_tax": true,
+            "trial_shipping_tax_amount": true,
+            "trial_grand_total": true,
+            "base_trial_grand_total": true,
+            "regular_subtotal": true,
+            "base_regular_subtotal": true,
+            "regular_subtotal_incl_tax": true,
+            "base_regular_subtotal_incl_tax": true,
+            "regular_tax_amount": true,
+            "base_regular_tax_amount": true,
+            "regular_shipping_amount": true,
+            "base_regular_shipping_amount": true,
+            "regular_shipping_amount_incl_tax": true,
+            "base_regular_shipping_amount_incl_tax": true,
+            "regular_shipping_tax_amount": true,
+            "base_regular_shipping_tax_amount": true,
+            "regular_grand_total": true,
+            "base_regular_grand_total": true,
+            "payment_method": true,
+            "payment_token_id": true,
+            "last_order_id": true,
+            "last_order_date": true,
+            "membership_active_until_date": true,
+            "remote_ip": true,
+            "profile_definition_id": true,
+            "hash": true,
+            "initial_fee": true,
+            "base_initial_fee": true,
+            "initial_shipping_method": true,
+            "initial_shipping_description": true,
+            "initial_shipping_amount": true,
+            "base_initial_shipping_amount": true,
+            "initial_shipping_amount_incl_tax": true,
+            "base_initial_shipping_amount_incl_tax": true,
+            "initial_shipping_tax_amount": true,
+            "base_trial_shipping_tax_amount": true
+        },
+        "index": {
+            "AW_SARP2_PROFILE_CUSTOMER_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AW_SARP2_PROFILE_STORE_ID_STORE_STORE_ID": true,
+            "AW_SARP2_PROFILE_CUSTOMER_ID_CUSTOMER_ENTITY_ENTITY_ID": true
+        }
+    },
+    "aw_sarp2_profile_item": {
+        "column": {
+            "item_id": true,
+            "profile_id": true,
+            "created_at": true,
+            "updated_at": true,
+            "product_id": true,
+            "product_type": true,
+            "product_options": true,
+            "store_id": true,
+            "parent_item_id": true,
+            "replacement_item_id": true,
+            "is_virtual": true,
+            "sku": true,
+            "name": true,
+            "description": true,
+            "is_qty_decimal": true,
+            "weight": true,
+            "qty": true,
+            "is_free_shipping": true,
+            "initial_fee": true,
+            "base_initial_fee": true,
+            "initial_fee_incl_tax": true,
+            "base_initial_fee_incl_tax": true,
+            "initial_row_total": true,
+            "base_initial_row_total": true,
+            "initial_row_total_incl_tax": true,
+            "base_initial_row_total_incl_tax": true,
+            "initial_fee_tax_amount": true,
+            "base_initial_fee_tax_amount": true,
+            "initial_fee_tax_percent": true,
+            "trial_price": true,
+            "base_trial_price": true,
+            "trial_price_incl_tax": true,
+            "base_trial_price_incl_tax": true,
+            "trial_row_total": true,
+            "base_trial_row_total": true,
+            "trial_row_total_incl_tax": true,
+            "base_trial_row_total_incl_tax": true,
+            "trial_tax_amount": true,
+            "base_trial_tax_amount": true,
+            "trial_tax_percent": true,
+            "regular_price": true,
+            "base_regular_price": true,
+            "regular_price_incl_tax": true,
+            "base_regular_price_incl_tax": true,
+            "regular_row_total": true,
+            "base_regular_row_total": true,
+            "regular_row_total_incl_tax": true,
+            "base_regular_row_total_incl_tax": true,
+            "regular_tax_amount": true,
+            "base_regular_tax_amount": true,
+            "regular_tax_percent": true,
+            "row_weight": true,
+            "initial_price": true,
+            "base_initial_price": true,
+            "initial_price_incl_tax": true,
+            "base_initial_price_incl_tax": true,
+            "initial_price_tax_amount": true,
+            "base_initial_price_tax_amount": true,
+            "initial_price_tax_percent": true
+        },
+        "index": {
+            "AW_SARP2_PROFILE_ITEM_PARENT_ITEM_ID": true,
+            "AW_SARP2_PROFILE_ITEM_PRODUCT_ID": true,
+            "AW_SARP2_PROFILE_ITEM_PROFILE_ID": true,
+            "AW_SARP2_PROFILE_ITEM_STORE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_D6C2C9A268FA6F732C93633DCC481D11": true,
+            "AW_SARP2_PROFILE_ITEM_PROFILE_ID_AW_SARP2_PROFILE_PROFILE_ID": true,
+            "AW_SARP2_PROFILE_ITEM_STORE_ID_STORE_STORE_ID": true
+        }
+    },
+    "aw_sarp2_profile_address": {
+        "column": {
+            "address_id": true,
+            "profile_id": true,
+            "created_at": true,
+            "updated_at": true,
+            "customer_address_id": true,
+            "quote_address_id": true,
+            "region_id": true,
+            "customer_id": true,
+            "fax": true,
+            "region": true,
+            "postcode": true,
+            "lastname": true,
+            "street": true,
+            "city": true,
+            "email": true,
+            "telephone": true,
+            "country_id": true,
+            "firstname": true,
+            "address_type": true,
+            "prefix": true,
+            "middlename": true,
+            "suffix": true,
+            "company": true,
+            "weight": true,
+            "is_free_shipping": true
+        },
+        "index": {
+            "AW_SARP2_PROFILE_ADDRESS_PROFILE_ID": true,
+            "AW_SARP2_PROFILE_ADDRESS_CUSTOMER_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AW_SARP2_PROFILE_ADDRESS_PROFILE_ID_AW_SARP2_PROFILE_PROFILE_ID": true,
+            "AW_SARP2_PROFILE_ADDRESS_CUSTOMER_ID_CUSTOMER_ENTITY_ENTITY_ID": true
+        }
+    },
+    "aw_sarp2_payment_token": {
+        "column": {
+            "token_id": true,
+            "payment_method": true,
+            "type": true,
+            "token_value": true,
+            "created_at": true,
+            "expires_at": true,
+            "is_active": true,
+            "details": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "aw_sarp2_profile_order": {
+        "column": {
+            "id": true,
+            "order_id": true,
+            "profile_id": true
+        },
+        "index": {
+            "AW_SARP2_PROFILE_ORDER_PROFILE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AW_SARP2_PROFILE_ORDER_PROFILE_ID_AW_SARP2_PROFILE_PROFILE_ID": true
+        }
+    },
+    "aw_sarp2_core_schedule": {
+        "column": {
+            "schedule_id": true,
+            "profile_id": true,
+            "period": true,
+            "frequency": true,
+            "is_initial_paid": true,
+            "trial_count": true,
+            "trial_total_count": true,
+            "regular_count": true,
+            "regular_total_count": true,
+            "payment_data": true,
+            "is_reactivated": true,
+            "store_id": true,
+            "is_membership_model": true,
+            "membership_count": true,
+            "membership_total_count": true,
+            "trial_period": true,
+            "trial_frequency": true
+        },
+        "index": {
+            "AW_SARP2_CORE_SCHEDULE_PROFILE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AW_SARP2_CORE_SCHEDULE_PROFILE_ID_AW_SARP2_PROFILE_PROFILE_ID": true
+        }
+    },
+    "aw_sarp2_core_schedule_item": {
+        "column": {
+            "item_id": true,
+            "parent_item_id": true,
+            "schedule_id": true,
+            "type": true,
+            "payment_period": true,
+            "payment_status": true,
+            "scheduled_at": true,
+            "paid_at": true,
+            "retry_at": true,
+            "retries_count": true,
+            "total_scheduled": true,
+            "base_total_scheduled": true,
+            "total_paid": true,
+            "base_total_paid": true,
+            "order_id": true
+        },
+        "index": {
+            "AW_SARP2_CORE_SCHEDULE_ITEM_PARENT_ITEM_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "FK_5C2C71534B9F149B53341DB7626B0E6E": true,
+            "FK_A904902EB87556C6F6535F8F6D69ADEC": true
+        }
+    },
+    "aw_sarp2_core_notification": {
+        "column": {
+            "notification_id": true,
+            "type": true,
+            "status": true,
+            "email": true,
+            "name": true,
+            "scheduled_at": true,
+            "send_at": true,
+            "notification_data": true,
+            "store_id": true,
+            "profile_id": true,
+            "order_id": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AW_SARP2_CORE_NOTIFICATION_STORE_ID_STORE_STORE_ID": true,
+            "AW_SARP2_CORE_NTFC_PROFILE_ID_AW_SARP2_PROFILE_PROFILE_ID": true
+        }
+    },
+    "aw_sarp2_profile_definition": {
+        "column": {
+            "definition_id": true,
+            "billing_period": true,
+            "billing_frequency": true,
+            "total_billing_cycles": true,
+            "start_date_type": true,
+            "start_date_day_of_month": true,
+            "is_initial_fee_enabled": true,
+            "is_trial_period_enabled": true,
+            "trial_total_billing_cycles": true,
+            "is_membership_model_enabled": true,
+            "upcoming_billing_email_offset": true,
+            "trial_billing_period": true,
+            "trial_billing_frequency": true,
+            "upcoming_trial_billing_email_offset": true,
+            "is_extend_enable": true,
+            "offer_extend_email_offset": true,
+            "offer_extend_email_template": true,
+            "is_allow_subscription_cancellation": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "aw_sarp2_payment_sampler": {
+        "column": {
+            "sampler_id": true,
+            "method": true,
+            "status": true,
+            "last_transaction_id": true,
+            "store_id": true,
+            "customer_id": true,
+            "quote_id": true,
+            "amount": true,
+            "amount_placed": true,
+            "amount_reverted": true,
+            "currency_code": true,
+            "remote_ip": true,
+            "additional_information": true,
+            "profile_id": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "aw_sarp2_access_token": {
+        "column": {
+            "id": true,
+            "token_value": true,
+            "profile_id": true,
+            "created_at": true,
+            "expires_at": true,
+            "allowed_resource": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "AW_SARP2_ACCESS_TOKEN_PROFILE_ID_AW_SARP2_PROFILE_PROFILE_ID": true
+        }
+    },
+    "quote": {
+        "column": {
+            "aw_sarp_initial_subtotal": true,
+            "base_aw_sarp_initial_subtotal": true,
+            "aw_sarp_trial_subtotal": true,
+            "base_aw_sarp_trial_subtotal": true,
+            "aw_sarp_regular_subtotal": true,
+            "base_aw_sarp_regular_subtotal": true,
+            "aw_sarp_initial_grand_total": true,
+            "base_aw_sarp_initial_grand_total": true,
+            "aw_sarp_trial_grand_total": true,
+            "base_aw_sarp_trial_grand_total": true,
+            "aw_sarp_regular_grand_total": true,
+            "base_aw_sarp_regular_grand_total": true
+        }
+    },
+    "quote_address": {
+        "column": {
+            "aw_sarp_initial_subtotal": true,
+            "base_aw_sarp_initial_subtotal": true,
+            "aw_sarp_initial_subtotal_incl_tax": true,
+            "base_aw_sarp_initial_subtotal_incl_tax": true,
+            "aw_sarp_initial_tax_amount": true,
+            "base_aw_sarp_initial_tax_amount": true,
+            "aw_sarp_initial_grand_total": true,
+            "base_aw_sarp_initial_grand_total": true,
+            "aw_sarp_trial_subtotal": true,
+            "base_aw_sarp_trial_subtotal": true,
+            "aw_sarp_regular_subtotal": true,
+            "base_aw_sarp_regular_subtotal": true,
+            "aw_sarp_trial_subtotal_incl_tax": true,
+            "base_aw_sarp_trial_subtotal_incl_tax": true,
+            "aw_sarp_regular_subtotal_incl_tax": true,
+            "base_aw_sarp_regular_subtotal_incl_tax": true,
+            "aw_sarp_trial_shipping_amount": true,
+            "base_aw_sarp_trial_shipping_amount": true,
+            "aw_sarp_regular_shipping_amount": true,
+            "base_aw_sarp_regular_shipping_amount": true,
+            "aw_sarp_trial_shipping_amount_incl_tax": true,
+            "base_aw_sarp_trial_shipping_amount_incl_tax": true,
+            "aw_sarp_regular_shipping_amount_incl_tax": true,
+            "base_aw_sarp_regular_shipping_amount_incl_tax": true,
+            "aw_sarp_trial_tax_amount": true,
+            "base_aw_sarp_trial_tax_amount": true,
+            "aw_sarp_regular_tax_amount": true,
+            "base_aw_sarp_regular_tax_amount": true,
+            "aw_sarp_trial_shipping_tax_amount": true,
+            "base_aw_sarp_trial_shipping_tax_amount": true,
+            "aw_sarp_regular_shipping_tax_amount": true,
+            "base_aw_sarp_regular_shipping_tax_amount": true,
+            "aw_sarp_trial_grand_total": true,
+            "base_aw_sarp_trial_grand_total": true,
+            "aw_sarp_regular_grand_total": true,
+            "base_aw_sarp_regular_grand_total": true
+        }
+    },
+    "quote_item": {
+        "column": {
+            "aw_sarp_initial_fee": true,
+            "base_aw_sarp_initial_fee": true,
+            "aw_sarp_initial_fee_incl_tax": true,
+            "base_aw_sarp_initial_fee_incl_tax": true,
+            "aw_sarp_initial_row_total": true,
+            "base_aw_sarp_initial_row_total": true,
+            "aw_sarp_initial_row_total_incl_tax": true,
+            "base_aw_sarp_initial_row_total_incl_tax": true,
+            "aw_sarp_initial_fee_tax_amount": true,
+            "base_aw_sarp_initial_fee_tax_amount": true,
+            "aw_sarp_initial_fee_tax_percent": true,
+            "aw_sarp_trial_price": true,
+            "base_aw_sarp_trial_price": true,
+            "aw_sarp_regular_price": true,
+            "base_aw_sarp_regular_price": true,
+            "aw_sarp_trial_price_incl_tax": true,
+            "base_aw_sarp_trial_price_incl_tax": true,
+            "aw_sarp_regular_price_incl_tax": true,
+            "base_aw_sarp_regular_price_incl_tax": true,
+            "aw_sarp_trial_row_total": true,
+            "base_aw_sarp_trial_row_total": true,
+            "aw_sarp_regular_row_total": true,
+            "base_aw_sarp_regular_row_total": true,
+            "aw_sarp_trial_row_total_incl_tax": true,
+            "base_aw_sarp_trial_row_total_incl_tax": true,
+            "aw_sarp_regular_row_total_incl_tax": true,
+            "base_aw_sarp_regular_row_total_incl_tax": true,
+            "aw_sarp_trial_tax_amount": true,
+            "base_aw_sarp_trial_tax_amount": true,
+            "aw_sarp_regular_tax_amount": true,
+            "base_aw_sarp_regular_tax_amount": true,
+            "aw_sarp_trial_tax_percent": true,
+            "aw_sarp_regular_tax_percent": true,
+            "aw_sarp_is_price_incl_initial_fee_amount": true,
+            "aw_sarp_is_price_incl_trial_amount": true,
+            "aw_sarp_is_price_incl_regular_amount": true
+        }
+    },
+    "quote_address_item": {
+        "column": {
+            "aw_sarp_initial_fee": true,
+            "base_aw_sarp_initial_fee": true,
+            "aw_sarp_initial_fee_incl_tax": true,
+            "base_aw_sarp_initial_fee_incl_tax": true,
+            "aw_sarp_initial_row_total": true,
+            "base_aw_sarp_initial_row_total": true,
+            "aw_sarp_initial_row_total_incl_tax": true,
+            "base_aw_sarp_initial_row_total_incl_tax": true,
+            "aw_sarp_initial_fee_tax_amount": true,
+            "base_aw_sarp_initial_fee_tax_amount": true,
+            "aw_sarp_initial_fee_tax_percent": true,
+            "aw_sarp_trial_price": true,
+            "base_aw_sarp_trial_price": true,
+            "aw_sarp_regular_price": true,
+            "base_aw_sarp_regular_price": true,
+            "aw_sarp_trial_price_incl_tax": true,
+            "base_aw_sarp_trial_price_incl_tax": true,
+            "aw_sarp_regular_price_incl_tax": true,
+            "base_aw_sarp_regular_price_incl_tax": true,
+            "aw_sarp_trial_row_total": true,
+            "base_aw_sarp_trial_row_total": true,
+            "aw_sarp_regular_row_total": true,
+            "base_aw_sarp_regular_row_total": true,
+            "aw_sarp_trial_row_total_incl_tax": true,
+            "base_aw_sarp_trial_row_total_incl_tax": true,
+            "aw_sarp_regular_row_total_incl_tax": true,
+            "base_aw_sarp_regular_row_total_incl_tax": true,
+            "aw_sarp_trial_tax_amount": true,
+            "base_aw_sarp_trial_tax_amount": true,
+            "aw_sarp_regular_tax_amount": true,
+            "base_aw_sarp_regular_tax_amount": true,
+            "aw_sarp_trial_tax_percent": true,
+            "aw_sarp_regular_tax_percent": true,
+            "aw_sarp_is_price_incl_initial_fee_amount": true,
+            "aw_sarp_is_price_incl_trial_amount": true,
+            "aw_sarp_is_price_incl_regular_amount": true
+        }
+    }
+}

@@ -1,0 +1,15 @@
+<?php
+/* @var $block \Aheadworks\Sarp2\Block\Email\Profile\Items */
+
+// @codingStandardsIgnoreFile
+?>
+<?php
+    $profile = $block->getProfile();
+?>
+<?php if ($profile): ?>
+    <ul style="list-style: none;">
+    <?php foreach ($profile->getItems() as $item): ?>
+        <?php echo $block->getItemHtml($item) ?>
+    <?php endforeach; ?>
+    </ul>
+<?php endif; ?>

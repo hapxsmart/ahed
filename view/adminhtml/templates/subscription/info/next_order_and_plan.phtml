@@ -1,0 +1,71 @@
+<?php
+/** @var $block \Aheadworks\Sarp2\Block\Adminhtml\Subscription\Info\NextOrderAndPlan */
+
+// @codingStandardsIgnoreFile
+?>
+<?php
+    $profile = $block->getProfile();
+    $planDefinition = $profile->getProfileDefinition();
+?>
+<section class="admin__page-section next-order-and-plan">
+    <?= $block->getNextOrderInfoHtml() ?>
+    <div class="admin__page-section-title">
+        <span class="title"><?php echo $block->escapeHtml(__('Subscription Plan')) ?></span>
+        <a class="change_plan_link" href="<?php echo $block->escapeUrl($block->getProfilePlanEditUrl($profile->getProfileId())) ?>">
+            <?php echo $block->escapeUrl(__('Change')) ?>
+        </a>
+    </div>
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item">
+            <div class="admin__page-section-item-title">
+                <span class="title">
+                    <a href="<?php echo $block->escapeUrl($block->getPlanEditUrl($profile->getPlanId())) ?>"><?php echo $block->escapeHtml($profile->getPlanName()) ?></a>
+                </span>
+            </div>
+            <div class="admin__page-section-item-content">
+                <table class="admin__table-secondary subscription-plan_details">
+                    <tbody>
+                        <tr>
+                            <th><?php echo $block->escapeHtml(__('Number of Payments')) ?>:</th>
+                            <td>
+                                <?php if ($planDefinition->getTotalBillingCycles() > 0): ?>
+                                    <?php /* @noEscape */ echo $planDefinition->getTotalBillingCycles() ?>
+                                <?php else: ?>
+                                    <?php echo $block->escapeHtml(__('Infinite')) ?>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><?php echo $block->escapeHtml(__('Repeat')) ?>:</th>
+                            <td><?php echo $block->escapeHtml($block->formatRegularRepeatValue($planDefinition)) ?></td>
+                        </tr>
+                        <tr>
+                            <?php
+                                $orderAdminDate = $block->formatDate(
+                                    $block->getAdminDate($profile->getStartDate()),
+                                    \IntlDateFormatter::MEDIUM
+                                );
+                            ?>
+                            <th><?php echo $block->escapeHtml(__('Start')) ?>:</th>
+                            <td><?php /* @noEscape */ echo $orderAdminDate ?></td>
+                        </tr>
+                        <tr>
+                            <th><?php echo $block->escapeHtml(__('Each Payment (except Trial Period, excl. tax and shipping)')) ?>:</th>
+                            <td><?php /* @noEscape */ echo $block->formatProfileAmount($profile->getBaseRegularSubtotal(), $profile->getBaseCurrencyCode()) ?></td>
+                        </tr>
+                        <?php if ($planDefinition->getIsTrialPeriodEnabled() && $profile->getTrialSubtotal()): ?>
+                            <tr>
+                                <th><?php echo $block->escapeHtml(__('Trial Period')) ?>:</th>
+                                <td><span><?php echo $block->escapeHtml(__($planDefinition->getTrialTotalBillingCycles() > 1 ? '%1 payments' : '%1 payment', $planDefinition->getTrialTotalBillingCycles())) ?></span>
+                                    <span>(
+                                        <?php echo $block->escapeHtml($block->formatTrialRepeatValue($planDefinition)) ?>
+                                    )</span>
+                                </td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

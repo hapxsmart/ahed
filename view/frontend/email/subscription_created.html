@@ -1,0 +1,35 @@
+<!--@subject {{trans "Subscription #%incrementProfileId created" incrementProfileId=$incrementProfileId}} @-->
+<!--@vars {
+"var profileId":"System Subscription Profile Id",
+"var incrementProfileId":"Subscription Profile Id",
+"var paymentId":"Payment Id",
+"var paymentDetails":"Payment details array",
+"var exceptionMessage":"Exception message"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="email-information">
+        <td>
+            <p>{{trans 'Dear %customerName' customerName=$customerName}}</p>
+            <p>{{trans 'You have successfully subscribed to:'}}</p>
+            {{layout handle='aw_sarp2_email_profile_items_without_plan' profile_id=$profileId area='frontend'}}
+            <p>{{trans 'Your subscription ID is #%incrementProfileId.' incrementProfileId=$incrementProfileId}}</p>
+            {{depend isProfileLinkUnavailable}}
+                <p>{{trans 'You can track your order status by creating an account.'}}</p>
+                <p>{{trans 'Email Address: %customerEmail' customerEmail=$customerEmail}}</p>
+            {{/depend}}
+            {{depend isProfileLinkAvailable}}
+                {{if isFreeTrial}}
+                    <p>{{trans 'Now you only need to input valid payment details to benefit from the subscription offer. You can do that by following the <a href="%secureLink">link</a>.' secureLink=$secureLink|raw}}</p>
+                {{else}}
+                    <p>{{trans 'You can access your subscription by following this <a href="%secureLink">link</a>.' secureLink=$secureLink|raw}}</p>
+                {{/if}}
+            {{/depend}}
+            <p>{{trans 'If you need any assistance, please feel free to contact us at <a href="mailto:%store_email">%store_email</a>' store_email=$store_email |raw}}{{depend store_phone}} {{trans 'or call us at <a href="tel:%store_phone">%store_phone</a>' store_phone=$store_phone |raw}}{{/depend}}.</p>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

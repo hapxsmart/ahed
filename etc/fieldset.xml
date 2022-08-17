@@ -1,0 +1,842 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:DataObject/etc/fieldset.xsd">
+    <scope id="global">
+        <fieldset id="aw_sarp2_convert_quote">
+            <field name="store_id">
+                <aspect name="to_profile" />
+                <aspect name="to_quote" />
+            </field>
+            <field name="customer_id">
+                <aspect name="to_profile" />
+                <aspect name="to_quote" />
+            </field>
+            <field name="customer_group_id">
+                <aspect name="to_profile" />
+                <aspect name="to_quote" />
+            </field>
+            <field name="customer_email">
+                <aspect name="to_profile" />
+                <aspect name="to_quote" />
+            </field>
+            <field name="customer_dob">
+                <aspect name="to_profile" />
+                <aspect name="to_quote" />
+            </field>
+            <field name="customer_fullname">
+                <aspect name="to_profile" />
+                <aspect name="to_quote" />
+            </field>
+            <field name="customer_prefix">
+                <aspect name="to_profile" />
+                <aspect name="to_quote" />
+            </field>
+            <field name="customer_firstname">
+                <aspect name="to_profile" />
+                <aspect name="to_quote" />
+            </field>
+            <field name="customer_middlename">
+                <aspect name="to_profile" />
+                <aspect name="to_quote" />
+            </field>
+            <field name="customer_lastname">
+                <aspect name="to_profile" />
+                <aspect name="to_quote" />
+            </field>
+            <field name="customer_suffix">
+                <aspect name="to_profile" />
+                <aspect name="to_quote" />
+            </field>
+            <field name="customer_is_guest">
+                <aspect name="to_profile" />
+                <aspect name="to_quote" />
+            </field>
+            <field name="remote_ip">
+                <aspect name="to_profile" />
+                <aspect name="to_quote" />
+            </field>
+            <field name="global_currency_code">
+                <aspect name="to_profile" />
+                <aspect name="to_quote" />
+            </field>
+            <field name="base_currency_code">
+                <aspect name="to_profile" />
+                <aspect name="to_quote" />
+            </field>
+            <field name="quote_currency_code">
+                <aspect name="to_profile" targetField="profile_currency_code" />
+            </field>
+            <field name="profile_currency_code">
+                <aspect name="to_quote" targetField="quote_currency_code" />
+            </field>
+            <field name="base_to_global_rate">
+                <aspect name="to_profile" />
+                <aspect name="to_quote" />
+            </field>
+            <field name="base_to_quote_rate">
+                <aspect name="to_profile" targetField="base_to_profile_rate" />
+            </field>
+            <field name="base_to_profile_rate">
+                <aspect name="to_quote" targetField="base_to_quote_rate" />
+            </field>
+            <field name="regular_subtotal">
+                <aspect name="to_quote" targetField="subtotal" />
+            </field>
+            <field name="base_regular_subtotal">
+                <aspect name="to_quote" targetField="base_subtotal" />
+            </field>
+            <field name="regular_grand_total">
+                <aspect name="to_quote" targetField="grand_total" />
+            </field>
+            <field name="base_regular_grand_total">
+                <aspect name="to_quote" targetField="base_grand_total" />
+            </field>
+        </fieldset>
+        <fieldset id="aw_sarp2_convert_quote_item">
+            <field name="store_id">
+                <aspect name="to_profile_item" />
+            </field>
+            <field name="product_id">
+                <aspect name="to_profile_item" />
+            </field>
+            <field name="product_type">
+                <aspect name="to_profile_item" />
+            </field>
+            <field name="is_virtual">
+                <aspect name="to_profile_item" />
+            </field>
+            <field name="sku">
+                <aspect name="to_profile_item" />
+            </field>
+            <field name="name">
+                <aspect name="to_profile_item" />
+            </field>
+            <field name="description">
+                <aspect name="to_profile_item" />
+            </field>
+            <field name="is_qty_decimal">
+                <aspect name="to_profile_item" />
+            </field>
+            <field name="weight">
+                <aspect name="to_profile_item" />
+            </field>
+            <field name="qty">
+                <aspect name="to_profile_item" />
+            </field>
+            <field name="aw_sarp_initial_fee">
+                <aspect name="to_profile_item" targetField="initial_price" />
+            </field>
+            <field name="base_aw_sarp_initial_fee">
+                <aspect name="to_profile_item" targetField="base_initial_price" />
+            </field>
+            <field name="aw_sarp_initial_fee_incl_tax">
+                <aspect name="to_profile_item" targetField="initial_price_incl_tax" />
+            </field>
+            <field name="base_aw_sarp_initial_fee_incl_tax">
+                <aspect name="to_profile_item" targetField="base_initial_price_incl_tax" />
+            </field>
+            <field name="aw_sarp_initial_row_total">
+                <aspect name="to_profile_item" targetField="initial_row_total" />
+            </field>
+            <field name="base_aw_sarp_initial_row_total">
+                <aspect name="to_profile_item" targetField="base_initial_row_total" />
+            </field>
+            <field name="aw_sarp_initial_row_total_incl_tax">
+                <aspect name="to_profile_item" targetField="initial_row_total_incl_tax" />
+            </field>
+            <field name="base_aw_sarp_initial_row_total_incl_tax">
+                <aspect name="to_profile_item" targetField="base_initial_row_total_incl_tax" />
+            </field>
+            <field name="aw_sarp_initial_fee_tax_amount">
+                <aspect name="to_profile_item" targetField="initial_price_tax_amount" />
+            </field>
+            <field name="aw_sarp_initial_fee_tax_percent">
+                <aspect name="to_profile_item" targetField="initial_price_tax_percent" />
+            </field>
+            <field name="base_aw_sarp_initial_fee_tax_amount">
+                <aspect name="to_profile_item" targetField="base_initial_price_tax_amount" />
+            </field>
+            <field name="aw_sarp_trial_price">
+                <aspect name="to_profile_item" targetField="trial_price" />
+            </field>
+            <field name="base_aw_sarp_trial_price">
+                <aspect name="to_profile_item" targetField="base_trial_price" />
+            </field>
+            <field name="aw_sarp_regular_price">
+                <aspect name="to_profile_item" targetField="regular_price" />
+            </field>
+            <field name="base_aw_sarp_regular_price">
+                <aspect name="to_profile_item" targetField="base_regular_price" />
+            </field>
+            <field name="aw_sarp_trial_price_incl_tax">
+                <aspect name="to_profile_item" targetField="trial_price_incl_tax" />
+            </field>
+            <field name="base_aw_sarp_trial_price_incl_tax">
+                <aspect name="to_profile_item" targetField="base_trial_price_incl_tax" />
+            </field>
+            <field name="aw_sarp_regular_price_incl_tax">
+                <aspect name="to_profile_item" targetField="regular_price_incl_tax" />
+            </field>
+            <field name="base_aw_sarp_regular_price_incl_tax">
+                <aspect name="to_profile_item" targetField="base_regular_price_incl_tax" />
+            </field>
+            <field name="aw_sarp_trial_row_total">
+                <aspect name="to_profile_item" targetField="trial_row_total" />
+            </field>
+            <field name="base_aw_sarp_trial_row_total">
+                <aspect name="to_profile_item" targetField="base_trial_row_total" />
+            </field>
+            <field name="aw_sarp_regular_row_total">
+                <aspect name="to_profile_item" targetField="regular_row_total" />
+            </field>
+            <field name="base_aw_sarp_regular_row_total">
+                <aspect name="to_profile_item" targetField="base_regular_row_total" />
+            </field>
+            <field name="aw_sarp_trial_row_total_incl_tax">
+                <aspect name="to_profile_item" targetField="trial_row_total_incl_tax" />
+            </field>
+            <field name="base_aw_sarp_trial_row_total_incl_tax">
+                <aspect name="to_profile_item" targetField="base_trial_row_total_incl_tax" />
+            </field>
+            <field name="aw_sarp_regular_row_total_incl_tax">
+                <aspect name="to_profile_item" targetField="regular_row_total_incl_tax" />
+            </field>
+            <field name="base_aw_sarp_regular_row_total_incl_tax">
+                <aspect name="to_profile_item" targetField="base_regular_row_total_incl_tax" />
+            </field>
+            <field name="aw_sarp_trial_tax_amount">
+                <aspect name="to_profile_item" targetField="trial_tax_amount" />
+            </field>
+            <field name="aw_sarp_trial_tax_percent">
+                <aspect name="to_profile_item" targetField="trial_tax_percent" />
+            </field>
+            <field name="base_aw_sarp_trial_tax_amount">
+                <aspect name="to_profile_item" targetField="base_trial_tax_amount" />
+            </field>
+            <field name="aw_sarp_regular_tax_amount">
+                <aspect name="to_profile_item" targetField="regular_tax_amount" />
+            </field>
+            <field name="aw_sarp_regular_tax_percent">
+                <aspect name="to_profile_item" targetField="regular_tax_percent" />
+            </field>
+            <field name="base_aw_sarp_regular_tax_amount">
+                <aspect name="to_profile_item" targetField="base_regular_tax_amount" />
+            </field>
+            <field name="row_weight">
+                <aspect name="to_profile_item" />
+            </field>
+            <field name="free_shipping">
+                <aspect name="to_profile_item" targetField="is_free_shipping" />
+            </field>
+        </fieldset>
+        <fieldset id="aw_sarp2_convert_quote_address">
+            <field name="address_id">
+                <aspect name="to_profile_address" targetField="quote_address_id" />
+            </field>
+            <field name="customer_address_id">
+                <aspect name="to_profile_address" />
+            </field>
+            <field name="customer_id">
+                <aspect name="to_profile_address" />
+            </field>
+            <field name="address_type">
+                <aspect name="to_profile_address" />
+            </field>
+            <field name="email">
+                <aspect name="to_profile_address" />
+            </field>
+            <field name="prefix">
+                <aspect name="to_profile_address" />
+            </field>
+            <field name="firstname">
+                <aspect name="to_profile_address" />
+            </field>
+            <field name="middlename">
+                <aspect name="to_profile_address" />
+            </field>
+            <field name="lastname">
+                <aspect name="to_profile_address" />
+            </field>
+            <field name="suffix">
+                <aspect name="to_profile_address" />
+            </field>
+            <field name="company">
+                <aspect name="to_profile_address" />
+            </field>
+            <field name="street">
+                <aspect name="to_profile_address" />
+            </field>
+            <field name="city">
+                <aspect name="to_profile_address" />
+            </field>
+            <field name="region">
+                <aspect name="to_profile_address" />
+            </field>
+            <field name="region_id">
+                <aspect name="to_profile_address" />
+            </field>
+            <field name="postcode">
+                <aspect name="to_profile_address" />
+            </field>
+            <field name="country_id">
+                <aspect name="to_profile_address" />
+            </field>
+            <field name="telephone">
+                <aspect name="to_profile_address" />
+            </field>
+            <field name="fax">
+                <aspect name="to_profile_address" />
+            </field>
+            <field name="weight">
+                <aspect name="to_profile_address" />
+            </field>
+        </fieldset>
+        <fieldset id="aw_sarp2_convert_profile">
+            <field name="store_id">
+                <aspect name="to_order" />
+                <aspect name="to_quote_substitute" />
+            </field>
+            <field name="remote_ip">
+                <aspect name="to_order" />
+            </field>
+            <field name="customer_id">
+                <aspect name="to_order" />
+            </field>
+            <field name="customer_email">
+                <aspect name="to_order" />
+            </field>
+            <field name="customer_prefix">
+                <aspect name="to_order" />
+            </field>
+            <field name="customer_firstname">
+                <aspect name="to_order" />
+            </field>
+            <field name="customer_middlename">
+                <aspect name="to_order" />
+            </field>
+            <field name="customer_lastname">
+                <aspect name="to_order" />
+            </field>
+            <field name="customer_suffix">
+                <aspect name="to_order" />
+            </field>
+            <field name="customer_group_id">
+                <aspect name="to_order" />
+                <aspect name="to_quote_substitute" />
+            </field>
+            <field name="customer_tax_class_id">
+                <aspect name="to_order" />
+            </field>
+            <field name="customer_is_guest">
+                <aspect name="to_order" />
+            </field>
+            <field name="customer_dob">
+                <aspect name="to_order" />
+            </field>
+            <field name="global_currency_code">
+                <aspect name="to_order" />
+            </field>
+            <field name="base_currency_code">
+                <aspect name="to_order" />
+            </field>
+            <field name="profile_currency_code">
+                <aspect name="to_order" targetField="order_currency_code" />
+            </field>
+            <field name="base_to_global_rate">
+                <aspect name="to_order" />
+            </field>
+            <field name="base_to_profile_rate">
+                <aspect name="to_order" targetField="base_to_order_rate" />
+            </field>
+            <field name="is_virtual">
+                <aspect name="to_order" />
+            </field>
+            <field name="items_qty">
+                <aspect name="to_order" targetField="total_qty_ordered" />
+            </field>
+
+            <!-- Initial order -->
+            <field name="base_initial_grand_total">
+                <aspect name="to_order_initial" targetField="base_grand_total"/>
+            </field>
+            <field name="initial_grand_total">
+                <aspect name="to_order_initial" targetField="grand_total"/>
+            </field>
+            <field name="initial_subtotal">
+                <aspect name="to_order_initial" targetField="subtotal"/>
+            </field>
+            <field name="base_initial_subtotal">
+                <aspect name="to_order_initial" targetField="base_subtotal"/>
+                <aspect name="to_quote_address_substitute_initial" targetField="base_subtotal"/>
+            </field>
+            <field name="initial_tax_amount">
+                <aspect name="to_order_initial" targetField="tax_amount"/>
+            </field>
+            <field name="base_initial_tax_amount">
+                <aspect name="to_order_initial" targetField="base_tax_amount"/>
+            </field>
+            <field name="initial_subtotal_incl_tax">
+                <aspect name="to_order_initial" targetField="subtotal_incl_tax"/>
+            </field>
+            <field name="base_initial_subtotal_incl_tax">
+                <aspect name="to_order_initial" targetField="base_subtotal_incl_tax"/>
+                <aspect name="to_quote_address_substitute_initial" targetField="base_subtotal_total_incl_tax"/>
+            </field>
+            <field name="base_initial_shipping_amount">
+                <aspect name="to_order_initial" targetField="base_shipping_amount"/>
+            </field>
+            <field name="initial_shipping_amount">
+                <aspect name="to_order_initial" targetField="shipping_amount"/>
+            </field>
+            <field name="base_initial_shipping_tax_amount">
+                <aspect name="to_order_initial" targetField="base_shipping_tax_amount"/>
+            </field>
+            <field name="initial_shipping_tax_amount">
+                <aspect name="to_order_initial" targetField="shipping_tax_amount"/>
+            </field>
+            <field name="initial_shipping_amount_incl_tax">
+                <aspect name="to_order_initial" targetField="shipping_incl_tax"/>
+            </field>
+            <field name="base_initial_shipping_amount_incl_tax">
+                <aspect name="to_order_initial" targetField="base_shipping_incl_tax"/>
+            </field>
+            <field name="initial_shipping_method">
+                <aspect name="to_order_initial" targetField="shipping_method"/>
+            </field>
+            <field name="initial_shipping_description">
+                <aspect name="to_order_initial" targetField="shipping_description"/>
+            </field>
+
+            <!-- Trial order -->
+            <field name="base_trial_grand_total">
+                <aspect name="to_order_trial" targetField="base_grand_total"/>
+            </field>
+            <field name="trial_grand_total">
+                <aspect name="to_order_trial" targetField="grand_total"/>
+            </field>
+            <field name="trial_subtotal">
+                <aspect name="to_order_trial" targetField="subtotal"/>
+            </field>
+            <field name="base_trial_subtotal">
+                <aspect name="to_order_trial" targetField="base_subtotal"/>
+                <aspect name="to_quote_address_substitute_trial" targetField="base_subtotal"/>
+            </field>
+            <field name="trial_tax_amount">
+                <aspect name="to_order_trial" targetField="tax_amount"/>
+            </field>
+            <field name="base_trial_tax_amount">
+                <aspect name="to_order_trial" targetField="base_tax_amount"/>
+            </field>
+            <field name="trial_subtotal_incl_tax">
+                <aspect name="to_order_trial" targetField="subtotal_incl_tax"/>
+            </field>
+            <field name="base_trial_subtotal_incl_tax">
+                <aspect name="to_order_trial" targetField="base_subtotal_incl_tax"/>
+                <aspect name="to_quote_address_substitute_trial" targetField="base_subtotal_total_incl_tax"/>
+            </field>
+            <field name="base_trial_shipping_amount">
+                <aspect name="to_order_trial" targetField="base_shipping_amount"/>
+            </field>
+            <field name="trial_shipping_amount">
+                <aspect name="to_order_trial" targetField="shipping_amount"/>
+            </field>
+            <field name="base_trial_shipping_tax_amount">
+                <aspect name="to_order_trial" targetField="base_shipping_tax_amount"/>
+            </field>
+            <field name="trial_shipping_tax_amount">
+                <aspect name="to_order_trial" targetField="shipping_tax_amount"/>
+            </field>
+            <field name="trial_shipping_amount_incl_tax">
+                <aspect name="to_order_trial" targetField="shipping_incl_tax"/>
+            </field>
+            <field name="base_trial_shipping_amount_incl_tax">
+                <aspect name="to_order_trial" targetField="base_shipping_incl_tax"/>
+            </field>
+            <field name="trial_shipping_method">
+                <aspect name="to_order_trial" targetField="shipping_method"/>
+            </field>
+            <field name="trial_shipping_description">
+                <aspect name="to_order_trial" targetField="shipping_description"/>
+            </field>
+
+            <!-- Regular order -->
+            <field name="base_regular_grand_total">
+                <aspect name="to_order_regular" targetField="base_grand_total"/>
+            </field>
+            <field name="regular_grand_total">
+                <aspect name="to_order_regular" targetField="grand_total"/>
+            </field>
+            <field name="regular_subtotal">
+                <aspect name="to_order_regular" targetField="subtotal"/>
+            </field>
+            <field name="base_regular_subtotal">
+                <aspect name="to_order_regular" targetField="base_subtotal"/>
+                <aspect name="to_quote_address_substitute_regular" targetField="base_subtotal"/>
+            </field>
+            <field name="regular_tax_amount">
+                <aspect name="to_order_regular" targetField="tax_amount"/>
+            </field>
+            <field name="base_regular_tax_amount">
+                <aspect name="to_order_regular" targetField="base_tax_amount"/>
+            </field>
+            <field name="regular_subtotal_incl_tax">
+                <aspect name="to_order_regular" targetField="subtotal_incl_tax"/>
+            </field>
+            <field name="base_regular_subtotal_incl_tax">
+                <aspect name="to_order_regular" targetField="base_subtotal_incl_tax"/>
+                <aspect name="to_quote_address_substitute_regular" targetField="base_subtotal_total_incl_tax"/>
+            </field>
+            <field name="base_regular_shipping_amount">
+                <aspect name="to_order_regular" targetField="base_shipping_amount"/>
+            </field>
+            <field name="regular_shipping_amount">
+                <aspect name="to_order_regular" targetField="shipping_amount"/>
+            </field>
+            <field name="base_regular_shipping_tax_amount">
+                <aspect name="to_order_regular" targetField="base_shipping_tax_amount"/>
+            </field>
+            <field name="regular_shipping_tax_amount">
+                <aspect name="to_order_regular" targetField="shipping_tax_amount"/>
+            </field>
+            <field name="regular_shipping_amount_incl_tax">
+                <aspect name="to_order_regular" targetField="shipping_incl_tax"/>
+            </field>
+            <field name="base_regular_shipping_amount_incl_tax">
+                <aspect name="to_order_regular" targetField="base_shipping_incl_tax"/>
+            </field>
+            <field name="regular_shipping_method">
+                <aspect name="to_order_regular" targetField="shipping_method"/>
+            </field>
+            <field name="regular_shipping_description">
+                <aspect name="to_order_regular" targetField="shipping_description"/>
+            </field>
+        </fieldset>
+        <fieldset id="aw_sarp2_convert_profile_address">
+            <field name="weight">
+                <aspect name="to_order" />
+                <aspect name="to_quote_address_substitute" />
+            </field>
+            <field name="customer_id">
+                <aspect name="to_order" />
+            </field>
+            <field name="prefix">
+                <aspect name="to_order" targetField="customer_prefix"/>
+                <aspect name="to_order_address" />
+            </field>
+            <field name="firstname">
+                <aspect name="to_order" targetField="customer_firstname"/>
+                <aspect name="to_order_address"/>
+            </field>
+            <field name="middlename">
+                <aspect name="to_order" targetField="customer_middlename"/>
+                <aspect name="to_order_address"/>
+            </field>
+            <field name="lastname">
+                <aspect name="to_order" targetField="customer_lastname"/>
+                <aspect name="to_order_address"/>
+            </field>
+            <field name="suffix">
+                <aspect name="to_order" targetField="customer_suffix"/>
+                <aspect name="to_order_address"/>
+            </field>
+            <field name="company">
+                <aspect name="to_order_address" />
+            </field>
+            <field name="street">
+                <aspect name="to_order_address" />
+                <aspect name="to_quote_address_substitute" />
+            </field>
+            <field name="city">
+                <aspect name="to_order_address" />
+                <aspect name="to_quote_address_substitute" />
+            </field>
+            <field name="region">
+                <aspect name="to_order_address" />
+                <aspect name="to_quote_address_substitute" />
+            </field>
+            <field name="region_id">
+                <aspect name="to_order_address" />
+                <aspect name="to_quote_address_substitute" />
+            </field>
+            <field name="postcode">
+                <aspect name="to_order_address" />
+                <aspect name="to_quote_address_substitute" />
+            </field>
+            <field name="country_id">
+                <aspect name="to_order_address" />
+                <aspect name="to_quote_address_substitute" />
+            </field>
+            <field name="telephone">
+                <aspect name="to_order_address" />
+            </field>
+            <field name="fax">
+                <aspect name="to_order_address" />
+            </field>
+            <field name="vat_id">
+                <aspect name="to_order_address" />
+                <aspect name="to_customer_address" />
+            </field>
+            <field name="vat_is_valid">
+                <aspect name="to_order_address" />
+                <aspect name="to_customer_address" />
+            </field>
+            <field name="vat_request_id">
+                <aspect name="to_order_address" />
+                <aspect name="to_customer_address" />
+            </field>
+            <field name="vat_request_date">
+                <aspect name="to_order_address" />
+                <aspect name="to_customer_address" />
+            </field>
+            <field name="vat_request_success">
+                <aspect name="to_order_address" />
+                <aspect name="to_customer_address" />
+            </field>
+            <field name="email">
+                <aspect name="to_order" targetField="customer_email"/>
+                <aspect name="to_order_address" />
+            </field>
+            <field name="customer_address_id">
+                <aspect name="to_order_address" />
+            </field>
+            <field name="is_free_shipping">
+                <aspect name="to_quote_address_substitute" targetField="free_shipping"/>
+            </field>
+        </fieldset>
+        <fieldset id="aw_sarp2_convert_customer_address">
+            <field name="id">
+                <aspect name="to_profile_address" targetField="customer_address_id" />
+            </field>
+            <field name="region_id">
+                <aspect name="to_profile_address" />
+                <aspect name="to_quote_address" />
+            </field>
+            <field name="customer_id">
+                <aspect name="to_profile_address" />
+                <aspect name="to_quote_address" />
+            </field>
+            <field name="fax">
+                <aspect name="to_profile_address" />
+                <aspect name="to_quote_address" />
+            </field>
+            <field name="region">
+                <aspect name="to_profile_address" />
+                <aspect name="to_quote_address" />
+            </field>
+            <field name="postcode">
+                <aspect name="to_profile_address" />
+                <aspect name="to_quote_address" />
+            </field>
+            <field name="lastname">
+                <aspect name="to_profile_address" />
+                <aspect name="to_quote_address" />
+            </field>
+            <field name="street">
+                <aspect name="to_profile_address" />
+                <aspect name="to_quote_address" />
+            </field>
+            <field name="city">
+                <aspect name="to_profile_address" />
+                <aspect name="to_quote_address" />
+            </field>
+            <field name="telephone">
+                <aspect name="to_profile_address" />
+                <aspect name="to_quote_address" />
+            </field>
+            <field name="country_id">
+                <aspect name="to_profile_address" />
+                <aspect name="to_quote_address" />
+            </field>
+            <field name="firstname">
+                <aspect name="to_profile_address" />
+                <aspect name="to_quote_address" />
+            </field>
+            <field name="prefix">
+                <aspect name="to_profile_address" />
+                <aspect name="to_quote_address" />
+            </field>
+            <field name="middlename">
+                <aspect name="to_profile_address" />
+                <aspect name="to_quote_address" />
+            </field>
+            <field name="suffix">
+                <aspect name="to_profile_address" />
+                <aspect name="to_quote_address" />
+            </field>
+            <field name="company">
+                <aspect name="to_profile_address" />
+                <aspect name="to_quote_address" />
+            </field>
+        </fieldset>
+        <fieldset id="aw_sarp2_convert_profile_item">
+            <field name="store_id">
+                <aspect name="to_order_item" />
+            </field>
+            <field name="product_id">
+                <aspect name="to_order_item" />
+            </field>
+            <field name="product_type">
+                <aspect name="to_order_item" />
+            </field>
+            <field name="sku">
+                <aspect name="to_order_item" />
+                <aspect name="to_quote_address_item_substitute" />
+            </field>
+            <field name="name">
+                <aspect name="to_order_item" />
+                <aspect name="to_quote_address_item_substitute" />
+            </field>
+            <field name="description">
+                <aspect name="to_order_item" />
+                <aspect name="to_quote_address_item_substitute" />
+            </field>
+            <field name="weight">
+                <aspect name="to_order_item" />
+                <aspect name="to_quote_address_item_substitute" />
+            </field>
+            <field name="row_weight">
+                <aspect name="to_order_item" />
+                <aspect name="to_quote_address_item_substitute" />
+            </field>
+            <field name="is_qty_decimal">
+                <aspect name="to_order_item" />
+                <aspect name="to_quote_address_item_substitute" />
+            </field>
+            <field name="qty">
+                <aspect name="to_order_item" targetField="qty_ordered" />
+                <aspect name="to_quote_address_item_substitute" />
+            </field>
+            <field name="is_free_shipping">
+                <aspect name="to_quote_address_item_substitute" targetField="free_shipping" />
+            </field>
+            <field name="is_virtual">
+                <aspect name="to_order_item" />
+            </field>
+
+            <!-- Initial order item -->
+            <field name="base_initial_price">
+                <aspect name="to_order_item_initial" targetField="base_price" />
+            </field>
+            <field name="initial_price">
+                <aspect name="to_order_item_initial" targetField="price" />
+            </field>
+            <field name="base_initial_price_tax_amount">
+                <aspect name="to_order_item_initial" targetField="base_tax_amount"/>
+            </field>
+            <field name="initial_price_tax_amount">
+                <aspect name="to_order_item_initial" targetField="tax_amount"/>
+            </field>
+            <field name="initial_price_tax_percent">
+                <aspect name="to_order_item_initial" targetField="tax_percent"/>
+            </field>
+            <field name="base_initial_row_total">
+                <aspect name="to_order_item_initial" targetField="base_row_total"/>
+            </field>
+            <field name="initial_row_total">
+                <aspect name="to_order_item_initial" targetField="row_total"/>
+            </field>
+            <field name="base_initial_price_incl_tax">
+                <aspect name="to_order_item_initial" targetField="base_price_incl_tax"/>
+            </field>
+            <field name="initial_price_incl_tax">
+                <aspect name="to_order_item_initial" targetField="price_incl_tax"/>
+            </field>
+            <field name="base_initial_row_total_incl_tax">
+                <aspect name="to_order_item_initial" targetField="base_row_total_incl_tax"/>
+            </field>
+            <field name="initial_row_total_incl_tax">
+                <aspect name="to_order_item_initial" targetField="row_total_incl_tax"/>
+            </field>
+
+            <!-- Trial order item -->
+            <field name="base_trial_price">
+                <aspect name="to_order_item_trial" targetField="base_price" />
+                <aspect name="to_quote_address_item_substitute_trial" targetField="base_price" />
+            </field>
+            <field name="trial_price">
+                <aspect name="to_order_item_trial" targetField="price" />
+                <aspect name="to_quote_address_item_substitute_trial" targetField="price" />
+            </field>
+            <field name="base_trial_tax_amount">
+                <aspect name="to_order_item_trial" targetField="base_tax_amount"/>
+                <aspect name="to_quote_address_item_substitute_trial" targetField="base_tax_amount" />
+            </field>
+            <field name="trial_tax_amount">
+                <aspect name="to_order_item_trial" targetField="tax_amount"/>
+                <aspect name="to_quote_address_item_substitute_trial" targetField="tax_amount" />
+            </field>
+            <field name="trial_tax_percent">
+                <aspect name="to_order_item_trial" targetField="tax_percent"/>
+            </field>
+            <field name="base_trial_row_total">
+                <aspect name="to_order_item_trial" targetField="base_row_total"/>
+                <aspect name="to_quote_address_item_substitute_trial" targetField="base_row_total" />
+            </field>
+            <field name="trial_row_total">
+                <aspect name="to_order_item_trial" targetField="row_total"/>
+                <aspect name="to_quote_address_item_substitute_trial" targetField="row_total" />
+            </field>
+            <field name="base_trial_price_incl_tax">
+                <aspect name="to_order_item_trial" targetField="base_price_incl_tax"/>
+                <aspect name="to_quote_address_item_substitute_trial" targetField="base_price_incl_tax" />
+            </field>
+            <field name="trial_price_incl_tax">
+                <aspect name="to_order_item_trial" targetField="price_incl_tax"/>
+                <aspect name="to_quote_address_item_substitute_trial" targetField="price_incl_tax" />
+            </field>
+            <field name="base_trial_row_total_incl_tax">
+                <aspect name="to_order_item_trial" targetField="base_row_total_incl_tax"/>
+                <aspect name="to_quote_address_item_substitute_trial" targetField="base_row_total_incl_tax" />
+            </field>
+            <field name="trial_row_total_incl_tax">
+                <aspect name="to_order_item_trial" targetField="row_total_incl_tax"/>
+                <aspect name="to_quote_address_item_substitute_trial" targetField="row_total_incl_tax" />
+            </field>
+
+            <!-- Regular order item -->
+            <field name="base_regular_price">
+                <aspect name="to_order_item_regular" targetField="base_price" />
+                <aspect name="to_quote_address_item_substitute_regular" targetField="base_price" />
+            </field>
+            <field name="regular_price">
+                <aspect name="to_order_item_regular" targetField="price" />
+                <aspect name="to_quote_address_item_substitute_regular" targetField="price" />
+            </field>
+            <field name="base_regular_tax_amount">
+                <aspect name="to_order_item_regular" targetField="base_tax_amount"/>
+                <aspect name="to_quote_address_item_substitute_regular" targetField="base_tax_amount" />
+            </field>
+            <field name="regular_tax_amount">
+                <aspect name="to_order_item_regular" targetField="tax_amount"/>
+                <aspect name="to_quote_address_item_substitute_regular" targetField="tax_amount" />
+            </field>
+            <field name="regular_tax_percent">
+                <aspect name="to_order_item_regular" targetField="tax_percent"/>
+            </field>
+            <field name="base_regular_row_total">
+                <aspect name="to_order_item_regular" targetField="base_row_total"/>
+                <aspect name="to_quote_address_item_substitute_regular" targetField="base_row_total" />
+            </field>
+            <field name="regular_row_total">
+                <aspect name="to_order_item_regular" targetField="row_total"/>
+                <aspect name="to_quote_address_item_substitute_regular" targetField="row_total" />
+            </field>
+            <field name="base_regular_price_incl_tax">
+                <aspect name="to_order_item_regular" targetField="base_price_incl_tax"/>
+                <aspect name="to_quote_address_item_substitute_regular" targetField="base_price_incl_tax" />
+            </field>
+            <field name="regular_price_incl_tax">
+                <aspect name="to_order_item_regular" targetField="price_incl_tax"/>
+                <aspect name="to_quote_address_item_substitute_regular" targetField="price_incl_tax" />
+            </field>
+            <field name="base_regular_row_total_incl_tax">
+                <aspect name="to_order_item_regular" targetField="base_row_total_incl_tax"/>
+                <aspect name="to_quote_address_item_substitute_regular" targetField="base_row_total_incl_tax" />
+            </field>
+            <field name="regular_row_total_incl_tax">
+                <aspect name="to_order_item_regular" targetField="row_total_incl_tax"/>
+                <aspect name="to_quote_address_item_substitute_regular" targetField="row_total_incl_tax" />
+            </field>
+        </fieldset>
+    </scope>
+</config>

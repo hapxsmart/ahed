@@ -1,0 +1,284 @@
+@import "components/_tooltip.less";
+
+& when (@media-common = true) {
+    .aw-sarp2-product-subscription-options {
+        .options-margin {
+            margin-top: 20px;
+        }
+
+        .subscription-details {
+            display: none;
+            padding: 5px 0;
+
+            .block-title {
+                margin-bottom: 15px;
+                margin-top: 30px;
+            }
+
+            .subscription-details_inner {
+                .subscription-details-list {
+                    list-style: none;
+                    margin: 0;
+                    padding: 0 0 0 15px;
+
+                    li {
+                        display: table;
+                        margin-bottom: 1rem;
+                        width: 100%;
+
+                        .details-field,
+                        .details-value {
+                            display: table-cell;
+                        }
+
+                        .details-field {
+                            text-align: left;
+                        }
+
+                        .details-value {
+                            text-align: right;
+
+                            .starting-from {
+                                color: #999;
+                                display: block;
+                            }
+                            .initial {
+                                color: #999;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .aw-sarp2-subscription__dropdown-switcher {
+            margin-bottom: 15px;
+
+            .subscribe-and-save {
+                display: inline-block;
+                margin: 0;
+
+                .title {
+                    font-weight: normal;
+                }
+            }
+        }
+
+        .subscribe-and-save {
+            margin: 15px 0 15px 0;
+
+            .title {
+                font-weight: bold;
+            }
+
+            .tooltip {
+                .lib-tooltip(right);
+            }
+
+            .icon {
+                display: inline-block;
+                position: relative;
+                text-decoration: none;
+                z-index: 2;
+                color: #333333;
+
+                .lib-icon-font(
+                    '\e623',
+                    @_icon-font-size: 18px,
+                    @_icon-font-line-height: 19px,
+                    @_icon-font-text-hide: true,
+                    @_icon-font-margin: -3px 0 0 3px,
+                    @_icon-font-position: after
+                );
+            }
+        }
+    }
+
+    .aw-sarp2-customer-subscriptions {
+        .col.products {
+            margin: 0 0 1rem;
+
+            ul {
+                > li {
+                    margin-bottom: 0;
+                }
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+        }
+
+        .col.next-payment-date {
+            white-space: nowrap;
+        }
+
+        .payment-details {
+            .wrapper {
+                .card-type, .payment-type {
+                    padding-top: 8px;
+                }
+            }
+        }
+
+        .right {
+            float: right;
+        }
+
+        .started {
+            color: #777;
+        }
+
+        .highlight {
+            color: #c76666 !important;
+        }
+
+        th {
+            .tooltip-toggle {
+                font-size: 20px;
+            }
+        }
+
+        .payment-token-fail {
+            .lib-tooltip(right);
+
+            .tooltip-toggle {
+                display: inline-block;
+                text-decoration: none;
+                .lib-icon-font(
+                    '\e602',
+                    @_icon-font-text-hide: true,
+                    @_icon-font-margin: -2px 0 0 3px,
+                    @_icon-font-position: after
+                );
+            }
+        }
+
+        th.trial-payment-due-date {
+            min-width: 95px;
+        }
+    }
+
+    .aw-sarp2-subscription-label {
+        .lib-css(background-color, #dde9ee);
+        .lib-css(border-radius, 4px);
+        display: inline-block;
+        font-size: 0.8em;
+        line-height: 1.5em;
+        margin: 0 0 10px;
+        padding: 0 10px;
+        text-transform: uppercase;
+    }
+
+    .product-item-details {
+        .product-item-name {
+            &.with-subscription-label {
+                margin: 0;
+            }
+        }
+    }
+
+    .cart-totals {
+        .totals {
+            &.grand {
+                .mark,
+                .amount {
+                    padding-bottom: 11px;
+                    vertical-align: bottom;
+                }
+
+                .mark {
+                    .aw-sarp2-subscription-label {
+                        font-size: 0.6em;
+                        margin: 10px 0 0 0;
+                    }
+                }
+            }
+        }
+    }
+
+    .page-product-downloadable {
+        .aw-sarp2-product-subscription-options {
+            clear: left;
+        }
+
+        .product-add-form {
+            clear: right !important;
+        }
+    }
+
+    .aw-sarp2__title {
+        .page-title {
+            float: left;
+        }
+    }
+
+    .aw-sarp2__actions {
+        text-align: right;
+        margin-bottom: 10px;
+
+        .action:not(:last-child) {
+            margin-right: 10px;
+        }
+    }
+
+    .aw-sarp2__footer-actions {
+        text-align: right;
+    }
+
+    .aw-sarp2__address-form {
+        clear: both;
+
+        .customer-address {
+            width: 70%;
+            float: left;
+            margin-right: 10px;
+        }
+    }
+
+    .aw-sarp2__next-payment-date-form {
+        .next-payment-date input {
+            width: 23rem;
+            margin-right: 5px;
+        }
+    }
+
+    .aw-sarp2__payment-edit-form {
+        .actions-toolbar {
+            display: none;
+        }
+    }
+
+    .aw-sarp2__subscription-confirm {
+        .modal-inner-wrap {
+            max-width: 750px;
+        }
+    }
+
+    #aw-sarp2-update-subscription-button {
+        width: 63%;
+    }
+
+    .product-options-bottom {
+        .box-tocart {
+            clear: both;
+        }
+    }
+
+    #aw-sarp2-subscription-update {
+        display: flex;
+        flex-direction: column;
+
+        .subscription-update {
+            text-align: center;
+            margin-top: 8px;
+            margin-bottom: 8px;
+            background-color: #343434;
+            border-color: #343434;
+        }
+
+        .subscription-update:hover {
+            background-color: #444444;
+            border-color: #444444;
+        }
+    }
+}

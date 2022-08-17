@@ -1,0 +1,30 @@
+<!--@subject {{trans "Subscription #%incrementProfileId failed" incrementProfileId=$incrementProfileId}} @-->
+<!--@vars {
+"var profileId":"System Subscription Profile Id",
+"var incrementProfileId":"Subscription Profile Id",
+"var paymentId":"Payment Id",
+"var paymentDetails":"Payment details array",
+"var exceptionMessage":"Exception message",
+"var secureLink":"Secure Link"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="email-intro">
+        <td>
+            <p class="greeting">{{trans "Hello,"}}</p>
+        </td>
+    </tr>
+    <tr class="email-information">
+        <td>
+            <p>{{trans "There was a problem with subscription profile #%incrementProfileId" incrementProfileId=$incrementProfileId}}</p>
+            <p>{{trans "Payment #%paymentId failed." paymentId=$paymentId}}</p>
+            <p>{{trans "Error: %exceptionMessage" exceptionMessage=$exceptionMessage}}</p>
+            {{layout handle="aw_sarp2_email_payment_deatils" details=$paymentDetails area="frontend"}}
+            <p>{{trans "Have a nice day."}}</p>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

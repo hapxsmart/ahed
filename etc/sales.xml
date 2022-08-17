@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Sales:etc/sales.xsd">
+    <section name="quote">
+        <group name="totals">
+            <!-- Subtotal -->
+            <item name="aw_sarp2_initial_subtotal" instance="Aheadworks\Sarp2\Model\Sales\Total\Quote\Subtotal\Initial" sort_order="700"/>
+            <item name="aw_sarp2_trial_subtotal" instance="Aheadworks\Sarp2\Model\Sales\Total\Quote\Subtotal\Trial" sort_order="710"/>
+            <item name="aw_sarp2_regular_subtotal" instance="Aheadworks\Sarp2\Model\Sales\Total\Quote\Subtotal\Regular" sort_order="720"/>
+
+            <!-- Shipping -->
+            <item name="aw_sarp2_trial_shipping" instance="Aheadworks\Sarp2\Model\Sales\Total\Quote\Shipping\Trial" sort_order="730"/>
+            <item name="aw_sarp2_regular_shipping" instance="Aheadworks\Sarp2\Model\Sales\Total\Quote\Shipping\Regular" sort_order="740"/>
+
+            <!-- Tax -->
+            <item name="aw_sarp2_initial_tax_subtotal" instance="Aheadworks\Sarp2\Model\Sales\Total\Quote\Tax\Subtotal\Initial" sort_order="750"/>
+            <item name="aw_sarp2_trial_tax_subtotal" instance="Aheadworks\Sarp2\Model\Sales\Total\Quote\Tax\Subtotal\Trial" sort_order="760"/>
+            <item name="aw_sarp2_regular_tax_subtotal" instance="Aheadworks\Sarp2\Model\Sales\Total\Quote\Tax\Subtotal\Regular" sort_order="770"/>
+            <item name="aw_sarp2_trial_tax_shipping" instance="Aheadworks\Sarp2\Model\Sales\Total\Quote\Tax\Shipping\Trial" sort_order="780"/>
+            <item name="aw_sarp2_regular_tax_shipping" instance="Aheadworks\Sarp2\Model\Sales\Total\Quote\Tax\Shipping\Regular" sort_order="790"/>
+
+            <!-- Grand -->
+            <item name="aw_sarp2_initial_grand_total" instance="Aheadworks\Sarp2\Model\Sales\Total\Quote\Grand\Initial" sort_order="900"/>
+            <item name="aw_sarp2_trial_grand_total" instance="Aheadworks\Sarp2\Model\Sales\Total\Quote\Grand\Trial" sort_order="910"/>
+            <item name="aw_sarp2_regular_grand_total" instance="Aheadworks\Sarp2\Model\Sales\Total\Quote\Grand\Regular" sort_order="920"/>
+        </group>
+    </section>
+</config>

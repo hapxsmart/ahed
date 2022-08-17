@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Sales::sales">
+                    <resource id="Aheadworks_Sarp2::sarp" title="SARP 2 by AheadWorks">
+                        <resource id="Aheadworks_Sarp2::plans" title="Plans" translate="title" sortOrder="10"/>
+                        <resource id="Aheadworks_Sarp2::subscriptions" title="Subscriptions" translate="title" sortOrder="20"/>
+                    </resource>
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Aheadworks_Sarp2::config_aw_sarp" title="SARP 2 by AheadWorks" />
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

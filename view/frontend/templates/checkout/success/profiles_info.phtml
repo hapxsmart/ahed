@@ -1,0 +1,25 @@
+<?php
+/* @var $block \Aheadworks\Sarp2\Block\Checkout\Onepage\Success */
+
+// @codingStandardsIgnoreFile
+?>
+<?php
+    $profiles = $block->getProfiles();
+    $profilesCount = count($profiles);
+?>
+<?php if ($profilesCount > 0): ?>
+    <p>
+    <?= $block->escapeHtml($block->getPhrase($profiles) . ':') ?>
+    <?php $counter = 0; ?>
+    <?php foreach ($profiles as $profile): ?>
+        <?php $isLast = ++$counter >= $profilesCount; ?>
+        <?php if ($block->getCanViewProfiles()): ?>
+            <a href="<?= $block->escapeUrl($block->getViewProfileUrl($profile)) ?>">
+                <strong><?= $block->escapeHtml($profile->getIncrementId()) ?></strong>
+            </a>
+        <?php else :?>
+            <?= ' ' . $block->escapeHtml($profile->getIncrementId()) . ($isLast ? '.' : ',') ?>
+        <?php endif; ?>
+    <?php endforeach; ?>
+    </p>
+<?php endif; ?>

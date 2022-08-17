@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" label="Email Profile Items List" design_abstraction="custom">
+    <body>
+        <block class="Aheadworks\Sarp2\Block\Email\Profile\Items" name="items" cacheable="false">
+            <arguments>
+                <argument name="profile_view_model" xsi:type="object">Aheadworks\Sarp2\ViewModel\Profile</argument>
+            </arguments>
+            <block class="Magento\Framework\View\Element\RendererList" name="aw_sarp2.email.profile.item.renders" as="renderer.list">
+                <block class="Aheadworks\Sarp2\Block\Email\Profile\Items\DefaultItems" name="aw_sarp2.email.profile.item.renders.default" as="default" template="email/profile/items/default.phtml"/>
+            </block>
+        </block>
+    </body>
+</page>

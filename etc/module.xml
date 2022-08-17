@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Aheadworks_Sarp2">
+        <sequence>
+            <module name="Aheadworks_BamboraApac"/>
+            <module name="Aheadworks_Nmi"/>
+            <module name="Magento_AuthorizenetAcceptjs"/>
+            <module name="Magento_Checkout"/>
+            <module name="Magento_Tax"/>
+            <module name="Magento_Customer"/>
+            <module name="Magento_ConfigurableProduct"/>
+            <module name="Magento_Bundle"/>
+        </sequence>
+    </module>
+</config>

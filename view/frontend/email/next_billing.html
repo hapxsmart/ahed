@@ -1,0 +1,30 @@
+<!--@subject {{trans "A Reminder About Upcoming Billing"}} @-->
+<!--@vars {
+"layout handle=\"aw_sarp2_email_profile_items\" profile_id=$profileId area=\"frontend\"":"Subscription Items Grid",
+"var extendLink":"Extend Subscription Link",
+"var secureLink":"Secure Link"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="email-intro">
+        <td>
+            <p class="greeting">{{trans "Hello, %customerName," customerName=$customerName}}</p>
+        </td>
+    </tr>
+    <tr class="email-information">
+        <td>
+            <p>{{trans "The next billing date for the products listed below is %nextPaymentDate" nextPaymentDate=$nextPaymentDate}}</p>
+            {{layout handle="aw_sarp2_email_profile_items" profile_id=$profileId area="frontend"}}
+            <p>{{trans "Total amount (including shipping) will be %totalScheduled" totalScheduled=$totalScheduled|raw}}</p>
+            {{if isFreeTrial}}
+                <p>{{trans 'Please do not forget to input valid payment details to continue enjoying the benefits of the subscription offer. You can do so by following this secure <a href="%secureLink">link</a>.' secureLink=$secureLink|raw}}</p>
+                <p>{{trans 'Feel free to contact us for more information on the matter at <a href="mailto:%store_email">%store_email</a>' store_email=$store_email |raw}}{{depend store_phone}} {{trans 'or call us at <a href="tel:%store_phone">%store_phone</a>' store_phone=$store_phone |raw}}{{/depend}}.</p>
+            {{/if}}
+            <p>{{trans "Thank you for being our subscriber."}}</p>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

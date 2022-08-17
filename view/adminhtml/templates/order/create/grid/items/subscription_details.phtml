@@ -1,0 +1,14 @@
+<?php /* @var $block \Aheadworks\Sarp2\Block\Adminhtml\Order\Create\Grid\Items\SubscriptionDetailsBlock */
+
+$options = $block->getSubscriptionDetails(); ?>
+
+<div class="product-subscription-details-block">
+    <?php $block->getBeforeHtml();
+    foreach ($options as $option): ?>
+        <div class="product-subscription-details-option">
+            <span><?= $block->escapeHtml($option['label']) ?>:</span>
+            <?= $block->escapeHtml($option['value']) ?>
+        </div>
+    <?php endforeach; ?>
+    <?= $block->getAfterHtml() ?>
+</div>

@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <body>
+        <referenceBlock name="page.main.title">
+            <action method="setCssClass">
+                <argument name="cssClass" xsi:type="string">aw-sarp2__title</argument>
+            </action>
+            <block class="Aheadworks\Sarp2\Block\BackLink"
+                   name="customer.account.link.back"
+                   cacheable="false"/>
+        </referenceBlock>
+        <referenceBlock name="customer_account_navigation">
+            <action method="setActive">
+                <argument name="path" xsi:type="string">aw_sarp2/profile</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block class="Aheadworks\Sarp2\Block\Customer\Subscriptions\Edit\View"
+                   name="aw_sarp2.customer.subscriptions.edit.view"
+                   template="customer/subscriptions/edit/view.phtml"
+                   cacheable="false">
+                <arguments>
+                    <argument name="details_view_model" xsi:type="object">\Aheadworks\Sarp2\ViewModel\Subscription\Details\ForProfile</argument>
+                </arguments>
+                <block class="Aheadworks\Sarp2\Block\Customer\Subscriptions\Edit\View\PaymentDetails"
+                       name="aw_sarp2.customer.subscriptions.edit.view.payment.details"
+                       template="Aheadworks_Sarp2::customer/subscriptions/edit/view/payment_details.phtml"
+                       cacheable="false">
+                    <block class="Magento\Framework\View\Element\RendererList"
+                           name="aw_sarp2.customer.subscriptions.edit.view.payment.details.renderer.list"
+                           as="renderer.list">
+                        <block class="Aheadworks\Sarp2\Block\Customer\Subscriptions\Edit\View\PaymentDetails\Type\DefaultCreditCardRenderer"
+                               name="aw_sarp2.customer.subscriptions.edit.view.payment.details.aw_nmi"
+                               cacheable="false"/>
+                        <block class="Aheadworks\Sarp2\Block\Customer\Subscriptions\Edit\View\PaymentDetails\Type\DefaultCreditCardRenderer"
+                               name="aw_sarp2.customer.subscriptions.edit.view.payment.details.aw_bambora_apac"
+                               cacheable="false"/>
+                        <block class="Aheadworks\Sarp2\Block\Customer\Subscriptions\Edit\View\PaymentDetails\Type\AuthorizenetAcceptjs"
+                               name="aw_sarp2.customer.subscriptions.edit.view.payment.details.authorizenet_acceptjs"
+                               cacheable="false"/>
+                        <block class="Aheadworks\Sarp2\Block\Customer\Subscriptions\Edit\View\PaymentDetails\Type\DefaultOfflinePaymentRenderer"
+                               name="aw_sarp2.customer.subscriptions.edit.view.payment.details.cashondelivery"
+                               cacheable="false"/>
+                    </block>
+                </block>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

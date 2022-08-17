@@ -1,0 +1,36 @@
+<!--@subject {{trans "Your Subscription #%profileId has been cancelled" profileId=$incrementProfileId}} @-->
+<!--@vars {
+"layout handle=\"aw_sarp2_email_profile_items_without_plan\" profile_id=$profileId area=\"frontend\"":"Subscription Items Grid",
+"var extendLink":"Extend Subscription Link",
+"var secureLink":"Secure Link"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="email-intro">
+        <td>
+            <p class="greeting">{{trans "Hello, %customerName," customerName=$customerName}}</p>
+            {{if displayAsInstallment}}
+                <p>{{trans "your Installment #%profileId has been successfully cancelled." profileId=$incrementProfileId}}</p>
+            {{else}}
+                <p>{{trans "your Subscription #%profileId has been successfully cancelled." profileId=$incrementProfileId}}</p>
+            {{/if}}
+        </td>
+    </tr>
+    <tr class="email-information">
+        <td>
+            {{if displayAsInstallment}}
+                <p>{{trans "Installment product(s):"}}</p>
+                {{layout handle="aw_sarp2_email_profile_items_without_plan" profile=$profile area="frontend"}}
+                <p>{{trans "Installment Plan: %planName" planName=$planName}}</p>
+            {{else}}
+                <p>{{trans "Subscription product(s):"}}</p>
+                {{layout handle="aw_sarp2_email_profile_items_without_plan" profile=$profile area="frontend"}}
+                <p>{{trans "Subscription Plan: %planName" planName=$planName}}</p>
+            {{/if}}
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

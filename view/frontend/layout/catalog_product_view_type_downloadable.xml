@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <move element="product.info.options.wrapper" destination="product.info.options.wrapper.bottom" before="-" />
+        <referenceBlock name="product.info.options.wrapper.bottom">
+            <block class="Aheadworks\Sarp2\Block\Product\SubscriptionOptions" name="aw_sarp2.product.subscription-options" as="aw_sarp2_product_subscription_options" before="product.info.addtocart.additional"/>
+        </referenceBlock>
+    </body>
+</page>

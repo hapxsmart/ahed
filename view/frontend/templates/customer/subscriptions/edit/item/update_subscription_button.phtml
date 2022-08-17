@@ -1,0 +1,61 @@
+<?php
+/** @var $block \Magento\Catalog\Block\Product\View */
+
+/** @var \Aheadworks\Sarp2\ViewModel\Customer\Subscription\Edit\Item\UpdateButton $viewModel */
+$viewModel = $block->getData('viewModel');
+$product = $block->getProduct();
+$buttonTitle = __('Update');
+
+if ($product->isSaleable()) :?>
+    <div class="box-tocart update">
+        <fieldset class="fieldset">
+            <input id="aw-sarp2-is-one-time-flag" type="hidden" name="is_one_time_only">
+            <?php if ($block->shouldRenderQuantity()) :?>
+            <div class="field qty">
+                <label class="label" for="qty"><span><?= $block->escapeHtml(__('Qty')) ?></span></label>
+                <div class="control">
+                    <input type="number"
+                           name="qty"
+                           id="qty"
+                           min="0"
+                           value=""
+                           title="<?= $block->escapeHtmlAttr(__('Qty')) ?>"
+                           class="input-text qty"
+                           data-validate="<?= $block->escapeHtmlAttr(json_encode($block->getQuantityValidators())) ?>"/>
+                </div>
+            </div>
+            <?php endif; ?>
+            <div class="actions">
+                <button type="submit"
+                        id="aw-sarp2-update-subscription-button"
+                        class="action primary tocart"
+                        title="<?= $block->escapeHtmlAttr($buttonTitle) ?>">
+                    <span><?= $block->escapeHtml($buttonTitle) ?></span>
+                </button>
+            </div>
+        </fieldset>
+    </div>
+    <script type="text/x-magento-init">
+        {
+            "#product_addtocart_form": {
+                "validation": {},
+                "awSarp2UpdateSubscriptionButton": {
+                    "cartButtonId": "#aw-sarp2-update-subscription-button",
+                    "cartForm": "#product_addtocart_form",
+                    "updateModeModal": {
+                        "isEnable": <?= /* @noEscape */ $viewModel->canOneTimeEditing() ?>,
+                        "title": "<?= $block->escapeHtml(__('How would you like to apply the changes?')) ?>",
+                        "buttons": {
+                            "permanently": {
+                                "text": "<?= $block->escapeHtml(__('Permanently')) ?>"
+                            },
+                            "oneTime": {
+                                "text": "<?= $block->escapeHtml(__('For the next order only')) ?>"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+<?php endif; ?>

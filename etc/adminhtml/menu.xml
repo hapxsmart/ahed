@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Aheadworks_Sarp2::sarp" title="SARP 2 by AheadWorks" translate="title" module="Aheadworks_Sarp2" parent="Magento_Sales::sales" sortOrder="31" resource="Aheadworks_Sarp2::sarp"/>
+        <add id="Aheadworks_Sarp2::plans" title="Plans" translate="title" module="Aheadworks_Sarp2" sortOrder="10" parent="Aheadworks_Sarp2::sarp" action="aw_sarp2/plan/index" resource="Aheadworks_Sarp2::plans"/>
+        <add id="Aheadworks_Sarp2::subscriptions" title="Subscriptions" translate="title" module="Aheadworks_Sarp2" sortOrder="20" parent="Aheadworks_Sarp2::sarp" action="aw_sarp2/subscription/index" resource="Aheadworks_Sarp2::subscriptions"/>
+    </menu>
+</config>

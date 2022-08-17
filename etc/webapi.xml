@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <!-- Plan -->
+    <route url="/V1/awSarp2/plan/:planId" method="GET">
+        <service class="Aheadworks\Sarp2\Api\PlanRepositoryInterface" method="get"/>
+        <resources>
+            <resource ref="Aheadworks_Sarp2::plans"/>
+        </resources>
+    </route>
+    <route url="/V1/awSarp2/plan/search" method="GET">
+        <service class="Aheadworks\Sarp2\Api\PlanRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Aheadworks_Sarp2::plans"/>
+        </resources>
+    </route>
+    <route url="/V1/awSarp2/plan" method="POST">
+        <service class="Aheadworks\Sarp2\Api\PlanRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Aheadworks_Sarp2::plans"/>
+        </resources>
+    </route>
+    <route url="/V1/awSarp2/plan/:id" method="PUT">
+        <service class="Aheadworks\Sarp2\Api\PlanRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Aheadworks_Sarp2::plans"/>
+        </resources>
+    </route>
+    <route url="/V1/awSarp2/plan/:planId" method="DELETE">
+        <service class="Aheadworks\Sarp2\Api\PlanRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Aheadworks_Sarp2::plans"/>
+        </resources>
+    </route>
+
+    <!-- Profile -->
+    <route url="/V1/awSarp2/profile/search" method="GET">
+        <service class="Aheadworks\Sarp2\Api\ProfileRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Aheadworks_Sarp2::subscriptions"/>
+        </resources>
+    </route>
+    <route url="/V1/awSarp2/profile/:profileId" method="GET">
+        <service class="Aheadworks\Sarp2\Api\ProfileRepositoryInterface" method="get"/>
+        <resources>
+            <resource ref="Aheadworks_Sarp2::subscriptions"/>
+        </resources>
+    </route>
+    <route url="/V1/awSarp2/profile/:profileId/status" method="PUT">
+        <service class="Aheadworks\Sarp2\Api\ProfileManagementInterface" method="changeStatusAction"/>
+        <resources>
+            <resource ref="Aheadworks_Sarp2::subscriptions"/>
+        </resources>
+    </route>
+    <route url="/V1/awSarp2/profile/:profileId/extend" method="PUT">
+        <service class="Aheadworks\Sarp2\Api\ProfileManagementInterface" method="extend"/>
+        <resources>
+            <resource ref="Aheadworks_Sarp2::subscriptions"/>
+        </resources>
+    </route>
+    <route url="/V1/awSarp2/profile/:profileId/renew" method="PUT">
+        <service class="Aheadworks\Sarp2\Api\ProfileManagementInterface" method="renew"/>
+        <resources>
+            <resource ref="Aheadworks_Sarp2::subscriptions"/>
+        </resources>
+    </route>
+    <route url="/V1/awSarp2/profile/:profileId/shipping-address" method="PUT">
+        <service class="Aheadworks\Sarp2\Api\ProfileManagementInterface" method="changeShippingAddress"/>
+        <resources>
+            <resource ref="Aheadworks_Sarp2::subscriptions"/>
+        </resources>
+    </route>
+    <route url="/V1/awSarp2/profile/:profileId/plan" method="PUT">
+        <service class="Aheadworks\Sarp2\Api\ProfileManagementInterface" method="changeSubscriptionPlan"/>
+        <resources>
+            <resource ref="Aheadworks_Sarp2::subscriptions"/>
+        </resources>
+    </route>
+    <route url="/V1/awSarp2/profile/:profileId/next-payment-date" method="PUT">
+        <service class="Aheadworks\Sarp2\Api\ProfileManagementInterface" method="changeNextPaymentDate"/>
+        <resources>
+            <resource ref="Aheadworks_Sarp2::subscriptions"/>
+        </resources>
+    </route>
+    <route url="/V1/awSarp2/profile/:profileId/item/:itemId" method="DELETE">
+        <service class="Aheadworks\Sarp2\Api\ProfileManagementInterface" method="removeItem"/>
+        <resources>
+            <resource ref="Aheadworks_Sarp2::subscriptions"/>
+        </resources>
+    </route>
+    <route url="/V1/awSarp2/profile/nearest/:customerId/store/:storeId" method="POST">
+        <service class="Aheadworks\Sarp2\Api\ProfileManagementInterface" method="addItemsFromQuoteToNearestProfile"/>
+        <resources>
+            <resource ref="Aheadworks_Sarp2::subscriptions"/>
+        </resources>
+    </route>
+    <route url="/V1/awSarp2/profile/:profileId/item/:itemId" method="PUT">
+        <service class="Aheadworks\Sarp2\Api\ProfileManagementInterface" method="changeProductItem"/>
+        <resources>
+            <resource ref="Aheadworks_Sarp2::subscriptions"/>
+        </resources>
+    </route>
+    <route url="/V1/awSarp2/profile/:profileId/next-payment-info" method="GET">
+        <service class="Aheadworks\Sarp2\Api\ProfileManagementInterface" method="getNextPaymentInfo"/>
+        <resources>
+            <resource ref="Aheadworks_Sarp2::subscriptions"/>
+        </resources>
+    </route>
+    <route url="/V1/awSarp2/profile/:profileId/allowed-statuses" method="GET">
+        <service class="Aheadworks\Sarp2\Api\ProfileManagementInterface" method="getAllowedStatuses"/>
+        <resources>
+            <resource ref="Aheadworks_Sarp2::subscriptions"/>
+        </resources>
+    </route>
+
+    <!-- Checkout -->
+    <route url="/V1/awSarp2/guest-carts/:cartId/payment-information" method="POST">
+        <service class="Aheadworks\Sarp2\Api\GuestPaymentInfoManagementInterface" method="savePaymentInfoAndSubmitCart"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/awSarp2/carts/mine/payment-information" method="POST">
+        <service class="Aheadworks\Sarp2\Api\PaymentInfoManagementInterface" method="savePaymentInfoAndSubmitCart"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/awSarp2/carts/mine/payment-information" method="GET">
+        <service class="Aheadworks\Sarp2\Api\PaymentInfoManagementInterface" method="getPaymentInfoForSubscription"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+    </route>
+</routes>

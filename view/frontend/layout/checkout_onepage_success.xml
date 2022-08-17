@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="page.main.title">
+            <block class="Aheadworks\Sarp2\Block\Checkout\Onepage\Success" name="checkout.success.print.button" template="Magento_Checkout::button.phtml"/>
+            <action method="setPageTitle">
+                <argument translate="true" name="title" xsi:type="string">Thank you for your purchase!</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block class="Aheadworks\Sarp2\Block\Checkout\Onepage\Success" name="checkout.success" template="Magento_Checkout::success.phtml" cacheable="false">
+                <container name="order.success.additional.info" label="Order Success Additional Info">
+                    <block class="Aheadworks\Sarp2\Block\Checkout\Onepage\Success" name="onepage.success.aw_sarp2_profiles_info" template="Aheadworks_Sarp2::checkout/success/profiles_info.phtml"/>
+                </container>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

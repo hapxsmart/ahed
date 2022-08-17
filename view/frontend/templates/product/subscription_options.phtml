@@ -1,0 +1,98 @@
+<?php
+/* @var $block \Aheadworks\Sarp2\Block\Product\SubscriptionOptions */
+// @codingStandardsIgnoreFile
+
+$optionsRenderer = $block->getOptionsListRenderer();
+$config = $block->getConfigData();
+?>
+<div class="aw-sarp2-product-subscription-options">
+    <div class="fieldset">
+        <div class="field subscription-type<?= $block->hasOptions() ? ' options-margin' : ''; ?>">
+            <div class="control">
+                <div class="nested options-list"
+                     data-role="aw-sarp2-subscription-type"
+                     data-mage-init='
+                     {"awSarp2SubscriptionOptionList":{
+                        "initialValue":<?= /* @noEscape */ $block->getSelectedOptionId($config) ?>,
+                        "elementChangeEvent":<?= /* @noEscape */ $block->jsonEncode($optionsRenderer->getChangeEvent()) ?>
+                     }}'>
+
+                    <?= /* @noEscape */ $block->getOptionsListHtml() ?>
+
+                    <div class="block subscription-details"
+                         data-role="aw-sarp2-subscription-details"
+                         data-mage-init='{"awSarp2SubscriptionDetails":{}}'
+                    >
+                        <div class="block block-title">
+                            <strong id="subscription-detail_label"></strong>
+                        </div>
+                        <div class="block block-content">
+                            <div class="subscription-details_inner">
+                                <ul data-role="aw-sarp2-subscription-details-list" class="subscription-details-list">
+
+                                </ul>
+                            </div>
+                        </div>
+                        <script type="text/x-magento-template" data-role="details-item-template" data-item-type="first_payment">
+                            <li>
+                                <div class="details-field"><%- label %></div>
+                                <div class="details-value">
+                                    <span data-role="details-price-box" data-price-type="finalPrice" data-handler="firstPayment"
+                                          data-initial-fee="<%= finalFee %>"
+                                          data-trial-payment="<%= finalTrialAmount %>"><%= formattedAmount %></span>
+                                    <span class="initial">
+                                        <?php echo $block->escapeHtml(__('(inc. <%= formattedFee %> initial fee)')) ?>
+                                    </span>
+                                </div>
+                            </li>
+                        </script>
+                        <script type="text/x-magento-template" data-role="details-item-template" data-item-type="trial_payment">
+                            <li>
+                                <div class="details-field"><%- label %></div>
+                                <div class="details-value">
+                                    <%- formattedCyclesBefore %>
+                                    <span data-role="details-price-box" data-price-type="finalPrice" data-handler="trialPayment"
+                                          data-value="<%= finalAmount %>"><%= formattedAmount %></span>
+                                    <%- formattedCyclesAfter %>
+                                    <span class="starting-from"><?php echo $block->escapeHtml(__('starting')) ?> <%= startingFrom %></span>
+                                </div>
+                            </li>
+                        </script>
+                        <script type="text/x-magento-template" data-role="details-item-template" data-item-type="regular_payment">
+                            <li>
+                                <div class="details-field"><%- label %></div>
+                                <div class="details-value">
+                                    <%- formattedCyclesBefore %>
+                                    <span data-role="details-price-box" data-price-type="finalPrice" data-handler="default"><%= formattedAmount %></span>
+                                    <%- formattedCyclesAfter %>
+                                    <span class="starting-from"><?php echo $block->escapeHtml(__('starting')) ?> <%= startingFrom %></span>
+                                </div>
+                            </li>
+                        </script>
+                        <script type="text/x-magento-template" data-role="details-item-template" data-item-type="subscription_ends">
+                            <li>
+                                <div class="details-field"><%- label %></div>
+                                <div class="details-value"><%- date %></div>
+                            </li>
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        "#product_addtocart_form": {
+            "Aheadworks_Sarp2/js/product/config/provider": {
+                "config": <?= /* @noEscape */ $block->jsonEncode($config) ?>
+            },
+            "awSarp2RegularPrice": {},
+            "awSarp2ElementVisibility": {
+                "elementSelector": "[data-role=aw-sarp-product-subscribe-button]",
+                "eventName": "updateSubscriptionOptionValue",
+                "eventTarget": "[data-role=aw-sarp2-subscription-type]"
+            }
+        }
+    }
+</script>

@@ -1,0 +1,90 @@
+<?php
+/** @var $block \Aheadworks\Sarp2\Block\Adminhtml\Subscription\Info\Addresses */
+
+// @codingStandardsIgnoreFile
+?>
+<?php
+    $profile = $block->getProfile();
+    $shippingAddress = $profile->getShippingAddress();
+    $billingAddress = $profile->getBillingAddress();
+?>
+<section class="admin__page-section addresses-shipping-payment">
+    <div class="admin__page-section-title">
+        <span class="title"><?php echo $block->escapeHtml(__('Addresses, Shipping And Payment Methods')) ?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <?php if ($billingAddress): ?>
+            <div class="admin__page-section-item billing-address">
+                <div class="admin__page-section-item-title">
+                    <span class="title"><?php echo $block->escapeHtml(__('Billing Address')) ?></span>
+                </div>
+                <!-- todo: consider use \Aheadworks\Sarp2\Model\Profile\Address\Renderer, M2SARP-382 -->
+                <div class="admin__page-section-item-content">
+                    <div>
+                        <?= /* @noEscape */ $block->getCustomerNameHtml(
+                            $billingAddress->getCustomerId(),
+                            $block->getFullName($billingAddress)
+                        ) ?>
+                    </div>
+                    <div><?php echo $block->escapeHtml($billingAddress->getStreet()) ?></div>
+                    <div>
+                        <?php echo $block->escapeHtml($billingAddress->getRegion()) ?>&nbsp;
+                        <?php echo $block->escapeHtml($billingAddress->getCity()) ?>&nbsp;
+                        <?php echo $block->escapeHtml($billingAddress->getPostcode()) ?>
+                    </div>
+                    <div><?php echo $block->escapeHtml($block->getCountryName($billingAddress->getCountryId())) ?></div>
+                    <?php if ($billingAddress->getTelephone()): ?>
+                        <div>T: <a href="tel:<?php /* @noEscape */ echo $billingAddress->getTelephone() ?>"><?php echo $block->escapeHtml($billingAddress->getTelephone()) ?></a></div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        <?php endif; ?>
+        <div class="admin__page-section-item payment-method">
+            <div class="admin__page-section-item-title">
+                <span class="title"><?php echo $block->escapeHtml(__('Payment Method')) ?></span>
+            </div>
+            <div class="admin__page-section-item-content">
+                <?php echo $block->escapeHtml(__($block->getPaymentMethodTitle())) ?>
+            </div>
+        </div>
+        <?php if ($shippingAddress && !$profile->getIsVirtual()): ?>
+            <div class="admin__page-section-item shipping-address">
+                <div class="admin__page-section-item-title">
+                    <span class="title"><?php echo $block->escapeHtml(__('Shipping Address')) ?></span>
+                    <a href="<?php /* @noEscape */ echo $block->escapeUrl($block->getEditAddressUrl()) ?>"><?php /* @noEscape */ echo __('Edit') ?></a>
+                </div>
+                <!-- todo: consider use \Aheadworks\Sarp2\Model\Profile\Address\Renderer, M2SARP-382 -->
+                <div class="admin__page-section-item-content">
+                    <div>
+                        <?= /* @noEscape */ $block->getCustomerNameHtml(
+                            $shippingAddress->getCustomerId(),
+                            $block->getFullName($shippingAddress)
+                        ) ?>
+                    </div>
+                    <div><?php echo $block->escapeHtml($shippingAddress->getStreet()) ?></div>
+                    <div>
+                        <?php echo $block->escapeHtml($shippingAddress->getRegion()) ?>&nbsp;
+                        <?php echo $block->escapeHtml($shippingAddress->getCity()) ?>&nbsp;
+                        <?php echo $block->escapeHtml($shippingAddress->getPostcode()) ?>
+                    </div>
+                    <div><?php echo $block->escapeHtml($block->getCountryName($shippingAddress->getCountryId())) ?></div>
+                    <?php if ($shippingAddress->getTelephone()): ?>
+                        <div>T: <a href="tel:<?php /* @noEscape */ echo $shippingAddress->getTelephone() ?>"><?php echo $block->escapeHtml($shippingAddress->getTelephone()) ?></a></div>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <div class="admin__page-section-item shipping-method">
+                <div class="admin__page-section-item-title">
+                    <span class="title"><?php echo $block->escapeHtml(__('Shipping Method')) ?></span>
+                </div>
+                <div class="admin__page-section-item-content">
+                    <?php if ($profile->getCheckoutShippingDescription()): ?>
+                        <?php echo $block->escapeHtml(__($profile->getCheckoutShippingDescription())) ?>
+                    <?php else: ?>
+                        <?php echo $block->escapeHtml(__('No shipping information available.')) ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
+</section>

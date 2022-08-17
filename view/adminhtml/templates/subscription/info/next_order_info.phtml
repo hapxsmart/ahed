@@ -1,0 +1,33 @@
+<?php
+/** @var $block \Aheadworks\Sarp2\Block\Adminhtml\Subscription\Info\NextOrderInfo */
+
+// @codingStandardsIgnoreFile
+?>
+<div class="next-order-info">
+    <table class="admin__table-secondary next-order_details">
+        <tbody>
+            <tr>
+                <th class="next-order_title">
+                    <span class="title"><?= $block->escapeHtml(__('Next Order')) ?></span>
+                </th>
+                <td><?= /* @noEscape */ $block->getNextOrderDateInfo() ?></td>
+            <?php if ($block->isNextOrderInfoAvailable()): ?>
+                <td>
+                    <a href="<?= /* @noEscape */ $block->getNextOrderDateEditUrl() ?>">
+                        <?= /* @noEscape */ __('Edit') ?>
+                    </a>
+                </td>
+            <?php endif; ?>
+                <td><?= $block->getNextOrderAmountHtml() ?></td>
+            </tr>
+            <?php if ($block->isMembershipModelEnabled()): ?>
+                <tr>
+                    <th class="membership-paid-until">
+                        <span class="title"><?= $block->escapeHtml(__('Membership is Paid Until')) ?></span>
+                    </th>
+                    <td colspan="2"><?= /* @noEscape */ $block->getMembershipPaidDateInfo() ?></td>
+                </tr>
+            <?php endif; ?>
+        </tbody>
+    </table>
+</div>

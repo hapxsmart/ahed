@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <body>
+        <referenceBlock name="page.main.title">
+            <action method="setCssClass">
+                <argument name="cssClass" xsi:type="string">aw-sarp2__title</argument>
+            </action>
+            <block class="Aheadworks\Sarp2\Block\BackLink"
+                   name="customer.account.link.back"
+                   cacheable="false"/>
+        </referenceBlock>
+        <referenceBlock name="customer_account_navigation">
+            <action method="setActive">
+                <argument name="path" xsi:type="string">aw_sarp2/profile</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block class="Aheadworks\Sarp2\Block\Customer\Subscriptions\Edit\Payment\Nmi"
+                   name="aw_sarp2.customer.subscriptions.edit.payment.nmi"/>
+
+            <block class="Aheadworks\Sarp2\Block\Customer\Subscriptions\Edit\Payment"
+                   name="aw_sarp2.customer.subscriptions.edit.payment"
+                   template="customer/subscriptions/edit/payment.phtml" cacheable="false">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="types" xsi:type="array"/>
+                        <item name="components" xsi:type="array">
+                            <item name="payment" xsi:type="array">
+                                <item name="component" xsi:type="string">Aheadworks_Sarp2/js/customer/subscriptions/edit-payment/view/payment</item>
+                                <item name="children" xsi:type="array">
+                                    <item name="renders" xsi:type="array">
+                                        <item name="component" xsi:type="string">uiComponent</item>
+                                        <item name="children" xsi:type="array">
+                                        </item>
+                                    </item>
+                                    <item name="payments-list" xsi:type="array">
+                                        <item name="component" xsi:type="string">Magento_Checkout/js/view/payment/list</item>
+                                        <item name="displayArea" xsi:type="string">payment-methods-list</item>
+                                        <item name="config" xsi:type="array">
+                                            <item name="deps" xsi:type="array">
+                                                <item name="0" xsi:type="string">payment.renders</item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                    <item name="actions-toolbar" xsi:type="array">
+                                        <item name="component" xsi:type="string">Aheadworks_Sarp2/js/customer/subscriptions/edit-payment/view/actions-toolbar</item>
+                                        <item name="config" xsi:type="array">
+                                            <item name="deps" xsi:type="array">
+                                                 <item name="0" xsi:type="string">payment.payments-list</item>
+                                            </item>
+                                        </item>
+                                        <item name="rendererList" xsi:type="array">
+                                            <item name="aw_bambora_apac" xsi:type="string">Aheadworks_Sarp2/js/customer/subscriptions/edit-payment/view/actions-toolbar/renderer/aw-bambora-apac</item>
+                                            <item name="aw_nmi" xsi:type="string">Aheadworks_Sarp2/js/customer/subscriptions/edit-payment/view/actions-toolbar/renderer/aw-nmi</item>
+                                            <item name="authorizenet_acceptjs" xsi:type="string">Aheadworks_Sarp2/js/customer/subscriptions/edit-payment/view/actions-toolbar/renderer/authorizenet-acceptjs</item>
+                                            <item name="cashondelivery" xsi:type="string">Aheadworks_Sarp2/js/customer/subscriptions/edit-payment/view/actions-toolbar/renderer/default</item>
+                                        </item>
+                                        <item name="displayArea" xsi:type="string">actions-toolbar</item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

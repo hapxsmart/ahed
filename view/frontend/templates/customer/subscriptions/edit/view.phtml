@@ -1,0 +1,233 @@
+<?php
+/* @var $block \Aheadworks\Sarp2\Block\Customer\Subscriptions\Edit\View */
+/* @var \Aheadworks\Sarp2\ViewModel\Subscription\Details\ForProfile $detailsViewModel */
+
+// @codingStandardsIgnoreFile
+$detailsViewModel = $block->getDetailsViewModel();
+$profile = $block->getProfile();
+$shippingAddress = $profile->getShippingAddress();
+$planDefinition = $profile->getPlanDefinition();
+?>
+
+<div class="aw-sarp2__actions">
+    <?php if ($block->isCancelActionAvailable($profile->getProfileId())): ?>
+        <a data-role="aw-sarp2-cancel-button" href="#" class="action"
+           title="<?php echo $block->escapeHtml($detailsViewModel->getCancelSubscriptionLabel($planDefinition)) ?>">
+            <span><?php echo $block->escapeHtml($detailsViewModel->getCancelSubscriptionLabel($planDefinition)) ?></span>
+        </a>
+        <script type="text/x-magento-init">
+        {
+            "[data-role=aw-sarp2-cancel-button]": {
+                "awSarp2ButtonControl": {
+                    "newLocation": "<?php echo $block->escapeUrl($block->getCancelUrl($profile->getProfileId())) ?>",
+                    "confirm": {
+                        "enabled": true,
+                        "message": "<?php echo $block->escapeHtml($detailsViewModel->getCancelSubscriptionMessage($planDefinition)) ?>"
+                    }
+                }
+            }
+        }
+        </script>
+    <?php endif; ?>
+
+    <?php if ($block->isExtendActionAvailable($profile->getProfileId())): ?>
+        <button data-role="aw-sarp2-extend-button" type="button" class="action primary"
+                title="<?php echo $block->escapeHtml($detailsViewModel->getExtendSubscriptionLabel($planDefinition)) ?>">
+            <span><?php echo $block->escapeHtml($detailsViewModel->getExtendSubscriptionLabel($planDefinition)) ?></span>
+        </button>
+        <script type="text/x-magento-init">
+        {
+            "[data-role=aw-sarp2-extend-button]": {
+                "awSarp2ButtonControl": {
+                    "newLocation": "<?php echo $block->escapeUrl($block->getExtendUrl($profile->getProfileId())) ?>",
+                    "confirm": {
+                        "enabled": true,
+                        "message": "<?php echo $block->escapeHtml($detailsViewModel->getExtendSubscriptionMessage($planDefinition)) ?>"
+                    }
+                }
+            }
+        }
+        </script>
+    <?php endif; ?>
+</div>
+
+<div class="table-wrapper aw-sarp2-customer-subscriptions">
+    <table class="data table">
+        <tbody>
+            <tr>
+                <th><?php echo $block->escapeHtml(__('Product(s)')) ?></th>
+                <td class="col products">
+                    <ul>
+                        <?php foreach ($profile->getItems() as $item): ?>
+                            <?php if (!$item->getParentItemId()): ?>
+                                <li>
+                                    <?php if ($block->isProductExists($item->getProductId()) && $block->hasProductUrl($item->getProductId())): ?>
+                                        <a href="<?php echo $block->escapeUrl($block->getProductUrl($item->getProductId())) ?>">
+                                            <span><?php echo $block->escapeHtml($block->getItemName($item)) ?></span>
+                                        </a>
+                                    <?php else: ?>
+                                        <?php echo $block->escapeHtml($block->getItemName($item)) ?>
+                                    <?php endif; ?>
+                                </li>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </ul>
+                </td>
+                <td class="col products actions">
+                    <ul>
+                        <?php foreach ($profile->getItems() as $item): ?>
+                            <?php if (!$item->getParentItemId()): ?>
+                                <li class="actions">
+                                    <?php if ($block->isEditItemActionAvailable($profile)): ?>
+                                        <a data-role="aw-sarp2-product-edit-button-<?php echo $block->escapeHtml($item->getItemId()) ?>"
+                                           href="<?php echo $block->escapeUrl($block->getEditItemUrl($profile->getProfileId(), $item->getItemId())) ?>"
+                                           class="action edit"
+                                           title="<?php echo $block->escapeHtml(__('Edit Item')) ?>"
+                                        >
+                                            <span><?php echo $block->escapeHtml(__('Edit')) ?></span>
+                                        </a>
+                                    <?php endif; ?>
+                                    <?php if ($block->isRemoveActionAvailable($profile, $item)): ?>
+                                        <a data-role="aw-sarp2-product-remove-button-<?php echo $block->escapeHtml($item->getItemId()) ?>"
+                                            href="#"
+                                            class="action remove"
+                                            title="<?php echo $block->escapeHtml(__('Remove Item')) ?>"
+                                        >
+                                            <span><?php echo $block->escapeHtml(__('Remove')) ?></span>
+                                        </a>
+                                        <script type="text/x-magento-init">
+                                        {
+                                            "[data-role=aw-sarp2-product-remove-button-<?php echo $block->escapeHtml($item->getItemId()) ?>]": {
+                                                "awSarp2ButtonControl": {
+                                                    "newLocation": "<?php echo $block->escapeUrl($block->getRemoveItemUrl($profile->getProfileId(), $item->getItemId())) ?>",
+                                                    "confirm": {
+                                                        "enabled": true,
+                                                        "message": "<?php echo $block->escapeHtml($detailsViewModel->getRemoveItemMessage($planDefinition)) ?>"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        </script>
+                                    <?php endif; ?>
+                                </li>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <th><?php echo $block->escapeHtml($detailsViewModel->getSubscriptionPlanLabel($planDefinition)) ?></th>
+                <td><?php echo $block->escapeHtml($block->getPlanName($profile)) ?></td>
+                <td>
+                    <?php if ($block->isEditPlanActionAvailable($profile->getProfileId())): ?>
+                        <a href="<?php echo $block->escapeUrl($block->getSubscriptionPlanEditUrl($profile->getProfileId())) ?>"
+                           class="action aw-sarp2__subscription-plan">
+                            <span><?php echo $block->escapeHtml(__('Edit')) ?></span>
+                        </a>
+                    <?php endif; ?>
+                </td>
+            </tr>
+            <tr>
+                <th><?php echo $block->escapeHtml($detailsViewModel->getSubscriptionCreatedOnLabel($planDefinition)) ?></th>
+                <td></td>
+                <td><?php echo $block->escapeHtml($detailsViewModel->getCreatedDate($profile)) ?></td>
+            </tr>
+            <?php if ($detailsViewModel->isShowInitialDetails($profile)) : ?>
+                <tr>
+                    <th><?php echo $block->escapeHtml($detailsViewModel->getInitialLabel($profile)) ?></th>
+                    <td><?php echo $block->escapeHtml($detailsViewModel->getInitialPaymentPrice($profile)) ?></td>
+                    <td><?php echo $block->escapeHtml($detailsViewModel->getInitialStartDate($profile)) ?></td>
+                </tr>
+            <?php endif; ?>
+            <?php if ($detailsViewModel->isShowTrialDetails($profile)) : ?>
+            <tr>
+                <th><?php echo $block->escapeHtml($detailsViewModel->getTrialLabel($profile)) ?></th>
+                <td><?php echo $block->escapeHtml($detailsViewModel->getTrialPriceAndCycles($profile)) ?></td>
+                <td>
+                    <div class="started">
+                        <span class="label"><?php echo $block->escapeHtml(__('Starting')) ?></span>
+                        <span class="date"><?php echo $block->escapeHtml($detailsViewModel->getTrialStartDate($profile)) ?></span>
+                    </div>
+                    <!--<div class="ended">
+                        <span class="label"><?php /*echo $block->escapeHtml(__('End Date:')) */?></span>
+                        <span class="date"><?php /*echo $block->escapeHtml($detailsViewModel->getTrialStopDate($profile)) */?></span>
+                    </div>-->
+                </td>
+            </tr>
+            <?php endif; ?>
+            <?php if ($detailsViewModel->isShowRegularDetails($profile)) : ?>
+            <tr>
+                <th><?php echo $block->escapeHtml($detailsViewModel->getRegularLabel($profile)) ?></th>
+                <td><?php echo $block->escapeHtml($detailsViewModel->getRegularPriceAndCycles($profile)) ?></td>
+                <td>
+                    <div class="started">
+                        <span class="label"><?php echo $block->escapeHtml(__('Starting')) ?></span>
+                        <span class="date"><?php echo $block->escapeHtml($detailsViewModel->getRegularStartDate($profile)) ?></span>
+                    </div>
+                    <!--<div class="ended">
+                        <span class="label"><?php /*echo $block->escapeHtml(__('End Date:')) */?></span>
+                        <span class="date"><?php /*echo $block->escapeHtml($detailsViewModel->getRegularStopDate($profile)) */?></span>
+                    </div>-->
+                </td>
+            </tr>
+            <?php endif; ?>
+            <tr>
+                <th><?php echo $block->escapeHtml($detailsViewModel->getSubscriptionEndLabel($planDefinition)) ?></th>
+                <td></td>
+                <td><?php echo $block->escapeHtml($detailsViewModel->getRegularStopDate($profile)) ?></td>
+            </tr>
+            <tr>
+                <th><?php echo $block->escapeHtml(__('Next Payment Date')) ?></th>
+                <td><?php /* @noEscape */ echo $block->getNextPaymentDateInfo($profile) ?></td>
+                <td>
+                    <?php if ($block->isEditNextPaymentDateActionAvailable($profile->getProfileId())): ?>
+                        <a href="<?php echo $block->escapeUrl($block->getNextPaymentDateEditUrl($profile->getProfileId())) ?>"
+                           class="action aw-sarp2__next-payment-date">
+                            <span><?php echo $block->escapeHtml(__('Edit')) ?></span>
+                        </a>
+                    <?php endif; ?>
+                </td>
+            </tr>
+            <tr>
+                <th><?php echo $block->escapeHtml(__('Shipping Address')) ?></th>
+                <td>
+                    <?php if ($shippingAddress && !$profile->getIsVirtual()): ?>
+                        <?= /* @noEscape */ $block->getFormattedAddress($shippingAddress) ?>
+                    <?php endif; ?>
+                </td>
+                <td>
+                    <?php if ($block->isEditAddressActionAvailable($profile)): ?>
+                        <a href="<?php echo $block->escapeUrl($block->getShippingAddressEditUrl($profile->getProfileId())) ?>"
+                           class="action aw-sarp2__shipping-address">
+                            <span><?php echo $block->escapeHtml(__('Edit')) ?></span>
+                        </a>
+                    <?php endif; ?>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <?php echo $block->escapeHtml(__('Payment Details')) ?>
+                    <?php if ($block->isShowInvalidTokenTooltip($profile)): ?>
+                        <span class="payment-token-fail">
+                                <a href="#" class="tooltip-toggle highlight"></a>
+                                <span class="tooltip-content highlight">
+                                    <?php echo $block->escapeHtml(__('Please update payment details.')) ?>
+                                </span>
+                            </span>
+                    <?php endif; ?>
+                </th>
+                <td>
+                    <?= /* @noEscape */ $block->getPaymentDetailsHtml($profile) ?>
+                </td>
+                <td>
+                    <?php if ($block->isEditPaymentMethodActionAvailable($profile)): ?>
+                        <a href="<?php echo $block->escapeUrl($block->getPaymentDetailsEditUrl($profile->getProfileId())) ?>"
+                           class="action aw-sarp2__payment-details">
+                            <span><?php echo $block->escapeHtml(__('Edit')) ?></span>
+                        </a>
+                    <?php endif; ?>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

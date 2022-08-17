@@ -1,0 +1,27 @@
+<?php
+// @codingStandardsIgnoreFile
+
+/* @var $block \Aheadworks\Sarp2\Block\BackLink */
+
+$title = $block->getTitle() ? : __('Back');
+$actionClass = $block->getActionClass() ? : 'secondary';
+?>
+<?php if ($block->isDisplay()): ?>
+    <div class="aw-sarp2__actions">
+        <button data-role="aw-sarp2-back-link"
+                type="button"
+                class="action <?= /* @noEscape */ $actionClass ?>"
+                title="<?= $block->escapeHtml($title) ?>">
+            <span><?= $block->escapeHtml($title) ?></span>
+        </button>
+    </div>
+    <script type="text/x-magento-init">
+    {
+        "[data-role=aw-sarp2-back-link]": {
+            "awSarp2ButtonControl": {
+                "newLocation": <?php /* @noEscape */ echo $block->jsonEncode($block->getBackUrl()) ?>
+            }
+        }
+    }
+    </script>
+<?php endif; ?>

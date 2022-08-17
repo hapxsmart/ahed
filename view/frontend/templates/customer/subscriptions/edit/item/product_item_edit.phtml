@@ -1,0 +1,36 @@
+<?php
+/** @var $block \Aheadworks\Sarp2\Block\Customer\Subscriptions\Edit\ProductItem */
+
+$product = $block->getProduct();
+$subscriptionOptionId = $block->getSubscriptionOptionId();
+$isOneOffItem = $block->isOneOffItem();
+if ($product->isSaleable()) :?>
+    <?php if (!$isOneOffItem): ?>
+        <div data-role="aw-sarp2-subscription-type">
+            <input type="hidden" name="aw_sarp2_subscription_type" value="<?= /* @noEscape */ $subscriptionOptionId ?>">
+        </div>
+    <?php endif; ?>
+
+    <script type="text/x-magento-init">
+        {
+            "*": {
+                "Aheadworks_Sarp2/js/product/config/provider": {
+                    "config": <?= /* @noEscape */ $block->getSubscriptionConfigData() ?>
+                }
+            },
+            "#product_addtocart_form": {
+                "awSarp2RegularPrice": {},
+                "awSarp2ProfileProductItemEdit": {
+                    "qty": <?= /* @noEscape */ $block->escapeHtml($block->getQty()) ?>,
+                    "configurableOptions": <?= /* @noEscape */ $block->getSerializedConfigurableOptions() ?>,
+                    "subscriptionOptionId": <?= /* @noEscape */ $subscriptionOptionId ?>
+                }
+            },
+            "[data-role=aw-sarp2-subscription-type]": {
+                "awSarp2SubscriptionOptionList":{
+                    "initialValue": "<?= /* @noEscape */ $subscriptionOptionId ?>"
+                }
+            }
+        }
+    </script>
+<?php endif; ?>

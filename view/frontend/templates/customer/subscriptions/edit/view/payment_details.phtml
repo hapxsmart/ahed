@@ -1,0 +1,16 @@
+<?php
+// @codingStandardsIgnoreFile
+/* @var $block \Aheadworks\Sarp2\Block\Customer\Subscriptions\Edit\View\PaymentDetails */
+/* @var $profile \Aheadworks\Sarp2\Api\Data\ProfileInterface */
+$paymentToken = $block->getPaymentToken($profile);
+?>
+
+<?php if ($paymentToken): ?>
+    <div class="payment-details">
+        <?= /* @noEscape */ $block->renderPaymentToken($paymentToken) ?>
+    </div>
+<?php else: ?>
+    <div class="payment-details">
+        <?= /* @noEscape */ $block->renderOfflinePaymentDetails($profile) ?>
+    </div>
+<?php endif ?>

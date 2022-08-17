@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="aw_sarp2_payments">
+        <job name="aw_sarp2_process_payments" instance="Aheadworks\Sarp2\Cron\ProcessPayments" method="execute">
+            <schedule>0 * * * *</schedule>
+        </job>
+        <job name="aw_sarp2_process_sample_payments" instance="Aheadworks\Sarp2\Cron\ProcessSamplePayments" method="execute">
+            <schedule>*/10 * * * *</schedule>
+        </job>
+    </group>
+    <group id="aw_sarp2_notifications">
+        <job name="aw_sarp2_process_notifications" instance="Aheadworks\Sarp2\Cron\ProcessNotifications" method="execute">
+            <schedule>*/15 * * * *</schedule>
+        </job>
+    </group>
+    <group id="aw_sarp2_daily_jobs">
+        <job name="aw_sarp2_process_offers" instance="Aheadworks\Sarp2\Cron\ProcessOffers" method="execute">
+            <schedule>0 0 * * *</schedule>
+        </job>
+    </group>
+</config>

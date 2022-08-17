@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Checkout\CustomerData\Cart">
+        <plugin name="awSarp2CartCustomerData" type="Aheadworks\Sarp2\CustomerData\Plugin\Cart" sortOrder="100"/>
+    </type>
+    <type name="Magento\InstantPurchase\Controller\Button\PlaceOrder">
+        <plugin name="awSarp2InstantPurchasePlaceOrder" type="Aheadworks\Sarp2\Controller\Plugin\InstantPurchase\Button\PlaceOrder"/>
+    </type>
+    <type name="Magento\Paypal\Observer\AddPaypalShortcutsObserver">
+        <plugin name="awSarp2PaypalShortcuts" type="Aheadworks\Sarp2\Model\Payment\Paypal\Plugin\PaypalShortcuts" sortOrder="100"/>
+    </type>
+    <type name="Magento\Customer\Block\Address\Edit">
+        <plugin name="awSarp2" type="Aheadworks\Sarp2\Plugin\Block\AddressEditPlugin"/>
+    </type>
+    <type name="Magento\Customer\Controller\Address\FormPost">
+        <plugin name="awSarp2" type="Aheadworks\Sarp2\Plugin\Controller\AddressFormPostPlugin"/>
+    </type>
+    <type name="Magento\Framework\Pricing\Render">
+        <plugin name="awSarp2PriceRender" type="Aheadworks\Sarp2\Plugin\Block\PriceRenderPlugin"/>
+    </type>
+
+    <type name="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle\Option">
+        <plugin name="awSarp2BlockBundleOption" type="Aheadworks\Sarp2\Plugin\Block\Product\Type\Bundle\OptionPlugin"/>
+    </type>
+
+    <type name="Magento\Checkout\Model\CompositeConfigProvider">
+        <arguments>
+            <argument name="configProviders" xsi:type="array">
+                <item name="aw_sarp2_checkout_config_provider_magento_version" xsi:type="object">Aheadworks\Sarp2\Model\Checkout\ConfigProvider\MagentoVersion</item>
+                <item name="aw_sarp2_checkout_config_provider_mixed_quote" xsi:type="object">Aheadworks\Sarp2\Model\Checkout\ConfigProvider\MixedQuote</item>
+                <item name="aw_sarp2_checkout_config_provider_mixed_payment_list" xsi:type="object">Aheadworks\Sarp2\Model\Checkout\ConfigProvider\MixedPaymentMethodList</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!--  Delete saved vault  -->
+    <type name="Magento\Vault\Api\PaymentTokenRepositoryInterface">
+        <plugin name="AwSarp2DeleteStoredPaymentPlugin" type="Aheadworks\Sarp2\Plugin\Vault\DeleteStoredPaymentPlugin" />
+    </type>
+    <type name="Magento\Framework\View\Element\Message\MessageConfigurationsPool">
+        <arguments>
+            <argument name="configurationsMap" xsi:type="array">
+                <item name="awSarp2DeleteSavedCardWarningMessage" xsi:type="array">
+                    <item name="renderer" xsi:type="const">\Magento\Framework\View\Element\Message\Renderer\BlockRenderer::CODE</item>
+                    <item name="data" xsi:type="array">
+                        <item name="template" xsi:type="string">Aheadworks_Sarp2::messages/profilesSuspendedWarningMessage.phtml</item>
+                    </item>
+                </item>
+                <item name="awSarp2NearestProfileUpdateSuccessMessage" xsi:type="array">
+                    <item name="renderer" xsi:type="const">\Magento\Framework\View\Element\Message\Renderer\BlockRenderer::CODE</item>
+                    <item name="data" xsi:type="array">
+                        <item name="template" xsi:type="string">Aheadworks_Sarp2::messages/profileUpdatedSuccessMessage.phtml</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+</config>

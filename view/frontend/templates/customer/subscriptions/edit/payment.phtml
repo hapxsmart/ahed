@@ -1,0 +1,21 @@
+<?php
+/* @var $block \Aheadworks\Sarp2\Block\Customer\Subscriptions\Edit\Payment */
+
+// @codingStandardsIgnoreFile
+?>
+<div id="checkout" data-bind="scope:'payment'" class="aw-sarp2__payment-list">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <script type="text/x-magento-init">
+        {
+            "#checkout": {
+                "Magento_Ui/js/core/app": <?= /* @escapeNotVerified */ $block->getJsLayout() ?>
+            }
+        }
+    </script>
+    <script>
+        window.checkoutConfig = <?= /* @escapeNotVerified */ $block->getSerializedCheckoutConfig() ?>;
+        window.isCustomerLoggedIn = window.checkoutConfig.isCustomerLoggedIn;
+        window.customerData = window.checkoutConfig.customerData;
+        window.FORM_KEY = window.checkoutConfig.formKey;
+    </script>
+</div>

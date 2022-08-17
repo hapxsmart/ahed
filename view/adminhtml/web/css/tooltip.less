@@ -1,0 +1,80 @@
+//
+//  Tooltip
+//  _____________________________________________
+
+.aw-sarp2-tooltip {
+    display: inline-block;
+    overflow: visible;
+
+    .aw-sarp2-tooltip-action {
+        display: inline-block;
+        font-size: 16px;
+        margin-left: 1rem;
+        position: relative;
+        text-decoration: none;
+        z-index: 2;
+
+        &:before {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            color: #514943;
+            content: '\e633';
+            display: inline-block;
+            font-family: 'Admin Icons';
+            font-size: 1.9rem;
+            font-weight: normal;
+            line-height: 1;
+            overflow: hidden;
+            speak: none;
+            text-align: center;
+            vertical-align: middle;
+        }
+    }
+}
+
+.aw-sarp2-tooltip-content {
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.3);
+    background: #fffbbb;
+    border: 1px solid #afadac;
+    border-radius: 1px;
+    padding: 1.5rem 2.5rem;
+    position: absolute;
+    width: 32rem;
+    z-index: 100;
+
+    &:after,
+    &:before {
+        border: 1.6rem solid transparent;
+        border-top-color: #afadac;
+        content: '';
+        display: block;
+        height: 0;
+        position: absolute;
+        right: 2rem;
+        top: 100%;
+        width: 0;
+        z-index: 3;
+    }
+
+    &:after {
+        border-top-color: #fffbbb;
+        margin-top: -1px;
+        z-index: 4;
+    }
+}
+
+.data-grid-th_with-tooltip {
+    & > span {
+        width: auto;
+    }
+
+    .aw-sarp2-tooltip {
+        .aw-sarp2-tooltip-action {
+            &:before {
+                color: #fff;
+                font-size: 1.6rem;
+                vertical-align: inherit;
+            }
+        }
+    }
+}

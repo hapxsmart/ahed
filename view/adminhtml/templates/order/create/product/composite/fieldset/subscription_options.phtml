@@ -1,0 +1,34 @@
+<?php /* @var $block \Aheadworks\Sarp2\Block\Adminhtml\Order\Create\Product\Composite\Fieldset\SubscriptionOptions */
+
+$product = $block->getProduct();
+$options = $block->getSubscriptionOptions();
+$selectedOption = $block->getSelectedSubscriptionOption();
+
+if ($product->isSaleable()) :?>
+<fieldset id="catalog_product_composite_configure_fields_subscription_options" class="fieldset admin__fieldset">
+    <legend class="legend admin__legend">
+        <span><?= $block->escapeHtml(__('Subscription')) ?></span>
+    </legend>
+    <div class="fieldset admin__fieldset">
+        <div class="field admin__field _required required">
+            <label class="label admin__field-label"><?= $block->escapeHtml(__('Subscription Plan')) ?></label>
+            <div class="control admin__field-control">
+                <select name="aw_sarp2_subscription_type"
+                        id="aw_sarp2_subscription_type"
+                        class="admin__control-select required-entry">
+                    <?php foreach ($options as $optionId => $optionLabel): ?>
+                        <?php $htmlId = 'aw-sarp2-subscription-option-' . $optionId ?>
+                        <option value="<?= /* @noEscape */ $optionId ?>" id="<?= /* @noEscape */ $htmlId ?>"
+                            <?php if ($optionId == $selectedOption) :?>
+                                selected="selected"
+                            <?php endif;?>>
+                            <?= $block->escapeHtml($optionLabel) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+<?php endif;?>

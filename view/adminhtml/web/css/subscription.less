@@ -1,0 +1,195 @@
+//
+//  Subscription page
+//  _____________________________________________
+
+.aw-sarp2_subscription_page {
+    .subscription-page_title_wrapper {
+        margin-bottom: 25px;
+    }
+
+    .subscription-page_title_title,
+    .subscription-page_title_status {
+        line-height: 2.5em;
+    }
+
+    .subscription-page_title_title {
+        float: left;
+
+        h1 {
+            font-size: 2.2em;
+            margin: 0;
+        }
+    }
+
+    .subscription-page_title_status {
+        -moz-border-radius: 5px;
+        -khtml-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        behavior: url(border-radius.htc);
+        border: 1px #ccc solid;
+        border-radius: 5px;
+        display: inline-block;
+        font-size: 1.1em;
+        line-height: 1.5em;
+        margin: 6px 0 0 10px;
+        padding: 0 15px;
+        text-transform: uppercase;
+    }
+
+    .subscription-page_content_wrapper {
+        display: ~'-webkit-flex';
+        display: ~'-ms-flexbox';
+        display: flex;
+        -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row;
+        -webkit-flex-wrap: wrap;
+        flex-wrap: wrap;
+
+        & > section {
+            width: 100%;
+        }
+
+        .addresses-shipping-payment {
+            & > .admin__page-section-content {
+                display: ~'-webkit-flex';
+                display: ~'-ms-flexbox';
+                display: flex;
+                -webkit-flex-direction: row;
+                -ms-flex-direction: row;
+                flex-direction: row;
+                -webkit-flex-wrap: wrap;
+                flex-wrap: wrap;
+
+                & > .admin__page-section-item {
+                    margin-bottom: 2.5rem;
+                    width: 50%;
+                }
+            }
+        }
+
+        .next-order-info {
+            margin-bottom: 2.5rem;
+
+            .next-order_title {
+                font-size: 1.8rem;
+                font-weight: 400;
+                line-height: 1.2;
+                width: 60%;
+            }
+        }
+
+        .admin__page-section-title {
+            .title {
+                float: none;
+            }
+            .change_plan_link {
+                margin-left: 20px;
+            }
+        }
+
+        .subscription-orders {
+            .no-orders-found {
+                text-align: center;
+                line-height: 2.5em;
+            }
+
+            .admin__data-grid-pager {
+                float: right;
+
+                .action-previous,
+                .action-next {
+                    width: 1.5rem;
+                }
+            }
+
+            .next-order_details {
+                display: inline-block;
+                margin-left: 40px;
+
+                td {
+                    text-indent: 15px;
+                }
+
+                .next-order_title {
+                    background: #f1f1f1;
+                    padding: 2px 10px 2px 10px;
+                    display: flex;
+
+                    .title {
+                        font-size: 1.4rem;
+                        font-weight: 600;
+                        line-height: 1.36;
+                    }
+
+                    &:after {
+                        content: '';
+                        display: block;
+                        position: absolute;
+                        border-style: solid;
+                        border-color: transparent transparent transparent #f1f1f1;
+                        border-width: 12px;
+                        margin: -2px 86px 0;
+                    }
+                }
+
+                .next-order_date {
+                    padding-left: 10px;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .aw-sarp2_subscription_page {
+        .subscription-page_content_wrapper {
+            .addresses-shipping-payment {
+                width: 50%;
+            }
+
+            .next-order-and-plan {
+                margin-right: 30px;
+                width: calc(~'50% - 30px');
+            }
+        }
+    }
+}
+
+.aw_sarp2-subscription-index {
+    .action-select-wrap {
+        .action-menu {
+            overflow-y: inherit;
+        }
+    }
+}
+
+.admin__fieldset {
+    .aw-sarp2-admin_field-comment {
+        margin-left: -30px;
+
+        .aw-sarp2-admin__field-indent {
+            width: ~'calc( (100%) * .25 - 30px )';
+            float: left;
+            margin-left: 30px;
+
+            &:before {
+                opacity: 0;
+                visibility: hidden;
+                content: '.';
+                margin-left: -7px;
+                overflow: hidden;
+            }
+        }
+        .aw-sarp2-address-comment {
+            float: left;
+            margin-left: 30px;
+            width: ~'calc( (100%) * .5 - 30px )';
+        }
+        &:after {
+            clear: both;
+            content: '';
+            display: table;
+        }
+    }
+}

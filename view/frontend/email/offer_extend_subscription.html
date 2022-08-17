@@ -1,0 +1,30 @@
+<!--@subject{{if displayAsInstallment}}{{trans "Extend your installment #%profileId" profileId=$incrementProfileId}}{{else}}{{trans "Extend your subscription #%profileId" profileId=$incrementProfileId}}{{/if}}@-->
+<!--@vars {
+"layout handle=\"aw_sarp2_email_profile_items_without_plan\" profile_id=$profileId area=\"frontend\"":"Subscription Items Grid",
+"var extendLink":"Extend Subscription Link",
+"var profileId":"Profile Id",
+"var incrementProfileId":"Increment Profile Id",
+"var planName":"Subscription plan Name",
+"var secureLink":"Secure Link"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="email-intro">
+        <td>
+            <p class="greeting">{{trans "Hello, %customerName," customerName=$customerName}}</p>
+            {{if displayAsInstallment}}
+                <p>{{trans "we hope you enjoyed a installment on our site."}}</p>
+                <p>{{trans "Click the link below to extend it."}}</p>
+                <p>{{trans '<a href="%extendLink">Extend installment</a>' extendLink=$extendLink |raw}}</p>
+            {{else}}
+                <p>{{trans "we hope you enjoyed a subscription on our site."}}</p>
+                <p>{{trans "Click the link below to extend it."}}</p>
+                <p>{{trans '<a href="%extendLink">Extend subscription</a>' extendLink=$extendLink |raw}}</p>
+            {{/if}}
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}
